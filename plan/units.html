@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> Delhi Government, Department of Planning</title>    
+<noscript><meta http-equiv="refresh" content="0; URL=/badbrowser.html"></noscript>
+<meta http-equiv="X-Frame-Options" content="deny">
+	<link rel="stylesheet" href="assets/css/animate.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/login_check.js"></script>
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+</head>
+<body>
+<div id="antiClickjack" style="position: fixed;top: 0; left: 0;right: 0;bottom: 0;z-index: 1234565433456432345464; background: #FFF;"></div>
+<script type="text/javascript">
+   if (self === top) {
+       var antiClickjack = document.getElementById("antiClickjack");
+       antiClickjack.parentNode.removeChild(antiClickjack);
+   } else {
+       top.location = self.location;
+   }
+</script>
+<div class="error-content">
+	
+</div>
+<nav class="head-nav" w3-include-html="parts/head-nav-in.html"></nav>
+<nav class="sidebar" id="sidebar" w3-include-html="sidelist.html"></nav>
+<div class="modal fade" id="addUnitModal" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Add New Unit</h4>
+			</div>
+			<div class="modal-body">
+				<form autocomplete="off" id="addUnitForm" onsubmit="event.preventDefault(); addunitsave();">
+					<div class="form-row">
+						<input type="text" autocomplete="off" class="form-control" name="unitName" placeholder="Enter Unit name" required="required" pattern="[A-Za-z0-9_ ]+" oninvalid="setCustomValidity('Only letters, numbers and _ allowed')" onchange="try{setCustomValidity('')}catch(e){}" />
+					</div>
+					
+					<div class="form-row">
+						<button type="submit" class="btn btn-primary">Add</button>
+					</div>
+				</form>
+			</div>
+			<!-- <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div> -->
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="editUnitModal" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Edit New Unit</h4>
+			</div>
+			<div class="modal-body">
+				<form autocomplete="off" id="editUnitForm">
+					<input type="hidden" id="unitId" value="">
+					<div class="form-row">
+						<input type="text" autocomplete="off" class="form-control" name="unitName"
+						placeholder="Enter Unit name" id="unitname" required="required" pattern="[A-Za-z0-9_ ]+" oninvalid="setCustomValidity('Only letters, numbers and _ allowed')" onchange="try{setCustomValidity('')}catch(e){}" />
+					</div>
+					
+					<div class="form-row">
+						<button type="submit" class="btn btn-primary">Edit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="content">
+	<div class="row">
+		<ol class="breadcrumb">
+		    <li><a href="dashboard.html">Home</a></li>
+		    <li><a href="#">Units</a></li>
+	  	</ol>
+	</div>
+	<div class="row section">
+		<div class="col-md-12">
+			<div class="row section-title">
+				<div class="col-md-8">
+					<span class="section-title-text">All Units</span>
+				</div>
+				<div class="col-md-4 text-right">
+					<div class="section-btn-wrap">
+						<a class="btn btn-primary" data-toggle="modal" data-target="#addUnitModal"><span class="text">Add New Unit</span></a>
+					</div>
+				</div>
+			</div>
+			<div class="row section-content">
+				<div class="col-md-12">
+					<table class="table table-hover" id="unitsTab">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/wow.js"></script>
+<script src="assets/js/scrollify.js"></script>
+<script src="assets/js/nicescroll.js"></script>
+<script src="assets/js/particle.min.js"></script>
+<script src="//cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+	<script src="assets/js/validatr.min.js"></script>
+<script src="assets/js/brain.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+<script src="assets/js/notify.min.js"></script>
+<script src="assets/js/dept_list.js"></script>
+<script src="assets/js/page/units.js"></script>
+<script>
+function addunitsave() {
+
+     
+     var param = $('#addUnitForm').serialize();
+     if($.validatr.validateForm($('#addUnitForm'))){
+      $.ajax({async: true,
+                url: siteUrl + "/api/indunits",
+                type: "post",
+                headers: {
+			        'Accept': 'application/json',
+			        'Authorization': 'Bearer ' + localStorage.token
+			      },
+                data: param,
+                success: function(result) {
+                    // console.log(result);
+                    alert("Unit added successfully !");
+                    location.reload();
+                },
+	            error:function (error) {
+	          		console.log(error.status);
+	              	if(error.status == 422){
+	                	$('.error-content').html('');
+	                	var errorMsg = '<div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Duplicate Entry. Please enter a different unit name.</div>'
+	                	$('.error-content').append(errorMsg);
+	              	}
+	            }
+            });
+  		}
+
+}
+</script>
+<script>$( document ).ajaxStop(function() {
+$('body').css('display', 'block');
+});</script><script src="assets/js/load-menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> Delhi Government, Department of Planning</title>    
+<noscript><meta http-equiv="refresh" content="0; URL=/badbrowser.html"></noscript>
+<meta http-equiv="X-Frame-Options" content="deny">
+	<link rel="stylesheet" href="assets/css/animate.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/login_check.js"></script>
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+</head>
+<body>
+<div id="antiClickjack" style="position: fixed;top: 0; left: 0;right: 0;bottom: 0;z-index: 1234565433456432345464; background: #FFF;"></div>
+<script type="text/javascript">
+   if (self === top) {
+       var antiClickjack = document.getElementById("antiClickjack");
+       antiClickjack.parentNode.removeChild(antiClickjack);
+   } else {
+       top.location = self.location;
+   }
+</script>
+
+
+<nav class="head-nav" w3-include-html="parts/head-nav-in.html"></nav>
+<nav class="sidebar" id="sidebar" w3-include-html="sidelist.html"></nav>
+<div class="content">
+	<div class="row">
+		<ol class="breadcrumb">
+		    <li><a href="dashboard.html">Home</a></li>
+		    <li><a href="all-schemes.html">Input  Achievements</a></li>
+	  	</ol>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="row section">
+				<div class="col-md-12">
+					<div class="row section-title">
+						<div class="col-md-8">
+							<span class="section-title-text">Select Scheme</span>
+						</div>
+					</div>
+					<div class="row section-content">
+						<div class="col-md-12">
+							<div class="row subsection">
+								<div class="col-md-12">
+									<div class="row subsection-content">
+										<form id="showIndicators">
+											<div class="col-md-12">
+												<div class="form-row">
+													<select class="form-control" id="dept-select" name="dept_id" required>
+														<option>Select a department</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-row">
+													<select class="form-control" id="financial_year" name="year" required>
+														<option value="2017-18">2017-18</option>
+														<option value="2018-19">2018-19</option>
+														<option value="2019-20">2019-20</option>
+														<!-- <option value="2020-21">2020-21</option> -->
+													</select>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-row">
+													<select class="form-control" id="financial_quarter" name="quarter" required>
+														<option value="q1">Upto Q1</option>
+														<option value="q2">Upto Q2</option>
+														<option value="q3">Upto Q3</option>
+														<option value="q4">Upto Q4</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-row">
+													<button name="show" value="1" class="btn btn-primary" type="submit">show indicators</button>
+												</div>
+											</div>
+										</form>
+										<div class="col-md-4">
+											<div class="form-row">
+												<button id="expExcel" class="btn btn-primary" type="submit">Export as Excel</button>
+												<a class="hidden" id="linkForExp"></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="row section">
+				<div class="col-md-12">
+					<div class="row section-title">
+						<div class="col-md-8">
+							<span class="section-title-text">Upload Excel Sheet</span>
+						</div>
+					</div>
+					<div class="row section-content">
+						<div class="col-md-12">
+							<form autocomplete="off" id="uploadSchemeForm" name="uploadSchemeForm" enctype="multipart/form-data">
+								<div class="row subsection">
+									<div class="col-md-12">
+										<div class="row subsection-content">
+											<div class="col-md-12">
+												<div class="form-row">
+													<select class="form-control" id="dept-select1" name="dept_id" required>
+														<option>Select a department</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-row">
+													<select class="form-control" id="financial_year1" name="year" required>
+														<option value="2017-18">2017-18</option>
+														<option value="2018-19">2018-19</option>
+														<option value="2019-20">2019-20</option>
+														<option value="2020-21">2020-21</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-row">
+													<select class="form-control" id="financial_quarter1" name="quarter" required>
+														<option value="q1">Upto Q1</option>
+														<option value="q2">Upto Q2</option>
+														<option value="q3">Upto Q3</option>
+														<option value="q4">Upto Q4</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<label>Upload Excel file</label>
+												<input type="file" name="excel"/>
+											</div>
+											<div class="col-md-4">
+												<div class="form-row">
+													<button class="btn btn-primary" type="submit">Upload</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row section">
+		<div class="col-md-12">
+			<div class="row section-title">
+				<div class="col-md-8">
+					<span class="section-title-text">Add Indicator Achievements </span>
+				</div>
+			</div>
+			<div class="row section-content">
+				<div class="col-md-12">
+					<div class="row subsection">
+						<div class="col-md-12">
+							<div class="row">
+								<form autocomplete="off" id="add-achievement">
+									<div class="row" id="IndList" style="display: none;">
+										<div class="col-md-12" id="outpIndList" style="display: none;">
+											<h3 class="inner-title">Output Indicators</h3>
+											<div class="row text-center" style="font-weight: 700;">
+												<div class="col-md-2">Target Name</div>
+												<div class="col-md-1">Target Value</div>
+												<div class="col-md-2">Achievement Value</div>
+												<div class="col-md-2">Start Date</div>
+												<div class="col-md-2">End Date</div>
+												<div class="col-md-2">Remarks</div>
+											</div>
+											<hr>
+										</div>
+										<div class="col-md-12" id="outputIndicatorsList"></div>
+										<div class="col-md-12" id="outcIndList" style="display: none;">
+											<h3 class="inner-title">Outcome Indicators</h3>
+											<div class="row text-center" style="font-weight: 700;">
+												<div class="col-md-2">Target Name</div>
+												<div class="col-md-1">Target Value</div>
+												<div class="col-md-2">Achievement Value</div>
+												<div class="col-md-2">Start Date</div>
+												<div class="col-md-2">End Date</div>
+												<div class="col-md-2">Remarks</div>
+											</div>
+											<hr>
+										</div>
+										<div class="col-md-12" id="outcomeIndicatorsList"></div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/wow.js"></script>
+<script src="assets/js/scrollify.js"></script>
+<script src="assets/js/nicescroll.js"></script>
+<script src="assets/js/particle.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+	<script src="assets/js/validatr.min.js"></script>
+<script src="assets/js/brain.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+<script src="assets/js/notify.min.js"></script>
+<script src="assets/js/dept_list.js"></script>
+<!-- <script src="assets/js/page/add-targets.js"></script> -->
+<script src="assets/js/page/add-achievements.js"></script>
+<script>$( document ).ajaxStop(function() {
+$('body').css('display', 'block');
+});</script><script src="assets/js/load-menu.js"></script>
+</body>
+</html>
