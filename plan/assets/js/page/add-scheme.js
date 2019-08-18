@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	
 	checkDadmin();
 	$('body').on('click', '#capital-check', function(){
 		var checkBox = document.getElementById("capital-check");
@@ -76,6 +75,95 @@ $(document).ready(function(){
 
 
 	$('#add-scheme-form').on('submit', function(e){
+		var sec = document.getElementById("sector-select");
+        var selsector= sec.options[sec.selectedIndex].value;
+        if(selsector == "Select a Sector"){
+        	alert("Please select sector");
+        	 document.getElementById("sector-select").focus();
+        	return false;
+        }
+
+        var subsec = document.getElementById("sub-sector-select");
+        var subsector= subsec.options[subsec.selectedIndex].value;
+        if(subsector =="Select a Subsector"){
+        	alert("Please select Subsector");
+        	document.getElementById("sub-sector-select").focus();
+        	return false;
+        }
+
+       var dept = document.getElementById("dept-select");
+       var department= dept.options[dept.selectedIndex].value;
+        if(department =="Select a Department"){
+        	alert("Please select Department");
+        	document.getElementById("dept-select").focus();
+        	return false;
+        }
+
+        
+        var unitval = document.getElementById("unit-select");
+        var unitvalues= unitval.options[unitval.selectedIndex].value;
+        if(unitvalues == "Select a Unit"){
+        	 alert("Please select Unit");
+        	document.getElementById("unit-select").focus();
+        	return false;
+        }
+
+        var scheme_name = document.getElementById("scheme_name").value;
+        if(scheme_name==""){
+        	alert("Please Enter Scheme Name!");
+        	document.getElementById("scheme_name").focus();
+        	return false;
+        }
+
+        var code = document.getElementById("code").value;
+        if(code==""){
+        	alert("Please Enter Object Head!");
+        	document.getElementById("code").focus();
+        	return false;
+        }
+
+        var schemetype = document.getElementById("scheme_type_select");
+        var schmealltype= schemetype.options[schemetype.selectedIndex].value;
+        if(schmealltype =="Select a Scheme type"){
+        	alert("Please select Scheme!");
+        	document.getElementById("scheme_type_select").focus();
+        	return false;
+        }
+
+        var schtypesvalues = document.getElementById("montype-select");
+        var schtypesall= schtypesvalues.options[schtypesvalues.selectedIndex].value;
+        if(schtypesall =="Scheme Monitoring types"){
+        	alert("Please select Monitoring type!");
+        	document.getElementById("montype-select").focus();
+        	return false;
+        }
+
+        var tagvalues = document.getElementById("tag-select");
+        var tagall= tagvalues.options[tagvalues.selectedIndex].value;
+        if(tagall =="Select Tags"){
+        	alert("Please select Tags!");
+        	document.getElementById("tag-select").focus();
+        	return false;
+        }
+
+        var accounthead = document.getElementById("account_head").value;
+        if(accounthead==""){
+        	alert("Please Enter Accounthead!");
+        	document.getElementById("account_head").focus();
+        	return false;
+        }
+
+        var demandno= document.getElementById("demand_no").value;
+        if(demandno==""){
+        	alert("Please Enter Demand no!");
+        	document.getElementById("demand_no").focus();
+        	return false;
+        }
+
+
+
+
+       
 		e.preventDefault();
 		if($.validatr.validateForm($('#add-scheme-form'))){
 			$(this).find('button[type=submit]').addClass('loading');

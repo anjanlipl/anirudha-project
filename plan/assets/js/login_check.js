@@ -19,8 +19,8 @@ window.onload = function () {
     }
 };
 
-var frontUrl = "http://192.168.1.136/plan/";
-var siteUrl = "http://192.168.1.136/planapi/public";
+var frontUrl = "http://103.92.47.157/plan/";
+var siteUrl = "http://103.92.47.157/planapi/public";
 if (null == localStorage.token) {
     // 
     // alert('You do not have access to this page. Click ok to login again');

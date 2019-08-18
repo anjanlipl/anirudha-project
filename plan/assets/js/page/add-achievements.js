@@ -231,7 +231,7 @@ $(document).ready(function(){
 			'type': type
 		};
 		bootbox.confirm({
-              title: "Delete?",
+              //title: "Delete?",
               message: "Are you sure you want to delete this Indicator?",
               buttons: {
                   cancel: {

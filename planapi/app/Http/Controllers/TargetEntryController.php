@@ -926,28 +926,28 @@ public function addAchievementSubmit(Request $request) {
 	$ind_unit = $request->input('ind_unit');
 	$evaluation_types = $request->input('evaluation_types');
 	// print_r($evaluation_types); die;
-	foreach($ind_ids as $key1=>$value1){
-	  	if($ind_types[$key1] == 'output'){
-			$indic = Outputindicator::find($value1);
-			if(!empty($ind_unit[$key1])){
-		  		$indic->unit_id = $ind_unit[$key1];
-			}
-			if(!empty($evaluation_types[$key1])){
-		  		$indic->respond_to_criteria = $evaluation_types[$key1];
-			}
-			$indic->save();
-	  	}
-	  	else if($ind_types[$key1] == 'outcome'){
-			$indic = Outcomeindicator::find($value1);
-			if(!empty($ind_unit[$key1])){
-		  		$indic->unit_id = $ind_unit[$key1];
-			}
-			if(!empty($evaluation_types[$key1])){
-		  		$indic->respond_to_criteria = $evaluation_types[$key1];
-			}
-			$indic->save();
-	  	}
-	}
+	// foreach($ind_ids as $key1=>$value1){
+	//   	if($ind_types[$key1] == 'output'){
+	// 		$indic = Outputindicator::find($value1);
+	// 		if(!empty($ind_unit[$key1])){
+	// 	  		$indic->unit_id = $ind_unit[$key1];
+	// 		}
+	// 		if(!empty($evaluation_types[$key1])){
+	// 	  		$indic->respond_to_criteria = $evaluation_types[$key1];
+	// 		}
+	// 		$indic->save();
+	//   	}
+	//   	else if($ind_types[$key1] == 'outcome'){
+	// 		$indic = Outcomeindicator::find($value1);
+	// 		if(!empty($ind_unit[$key1])){
+	// 	  		$indic->unit_id = $ind_unit[$key1];
+	// 		}
+	// 		if(!empty($evaluation_types[$key1])){
+	// 	  		$indic->respond_to_criteria = $evaluation_types[$key1];
+	// 		}
+	// 		$indic->save();
+	//   	}
+	// }
 
 
 	foreach ($target_ids as $key => $value) {

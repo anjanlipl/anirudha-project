@@ -21,6 +21,10 @@
    } else {
        top.location = self.location;
    }
+
+   $(document).ready(function() {
+	$('select').selectpicker();
+	});
 </script>
 <nav class="head-nav" w3-include-html="parts/head-nav-in.html"></nav>
 <nav class="sidebar" id="sidebar" w3-include-html="sidelist.html"></nav>
@@ -86,13 +90,13 @@
 							</div>
 							<div class="col-md-5">
 								<label>Sector</label>
-								<select class="form-control" id="sector-select" required="required">
+								<select class="form-control" id="sector-select">
 									<option selected="selected" disabled="disabled">Select a Sector</option>
 								</select>
 							</div>
 							<div class="col-md-5">
 								<label>Subsector</label>
-								<select class="form-control" id="sub-sector-select" required="required">
+								<select class="form-control" id="sub-sector-select">
 									<option selected="selected" disabled="disabled">Select a Subsector</option>
 								</select>
 							</div>
@@ -100,13 +104,13 @@
 						<div class="row form-row">
 							<div class="col-md-6">
 								<label>Department</label>
-								<select class="form-control" id="dept-select" name="department_id" required="required">
+								<select class="form-control" id="dept-select" name="department_id">
 									<option selected="selected" disabled="disabled">Select a Department</option>
 								</select>
 							</div>
 							<div class="col-md-6">
 								<label>Implementing Agency</label>
-								<select class="form-control" id="unit-select" name="unit_id" required="required">
+								<select class="form-control" id="unit-select" name="unit_id">
 									<option selected="selected" disabled="disabled">Select Implementing Agency</option>
 								</select>
 							</div>
@@ -114,17 +118,17 @@
 						<div class="row form-row">
 							<div class="col-md-12">
 								<label>Scheme Name</label>
-								<input type="text" autocomplete="off" name="scheme_name" class="form-control" required="required" />
+								<input type="text" autocomplete="off" name="scheme_name" class="form-control" id="scheme_name" />
 							</div>
 						</div>
 						<div class="row form-row">
 							<div class="col-md-6">
 								<label>Object Head</label>
-								<input type="text" autocomplete="off" class="form-control" name="code" required="required">
+								<input type="text" autocomplete="off" class="form-control" name="code" id="code">
 							</div>
 							<div class="col-md-6">
 								<label>Scheme Type</label>
-								<select class="form-control" id="scheme_type_select" name="scheme_type" required="required">
+								<select class="form-control" id="scheme_type_select" name="scheme_type">
 									<option selected="selected" disabled="disabled">Select a Scheme type</option>
 									<option value="1">State</option>
 									<option value="2">Central</option>
@@ -172,13 +176,13 @@
 						<div class="row form-row">
 							<div class="col-md-6">
 								<label>Scheme Monitoring types <span class="light">(Press Ctrl to select multiple)</span></label>
-								<select multiple="multiple" class="form-control" id="montype-select" name="mon_type[]" required="required">
+								<select multiple="multiple" class="form-control selectpicker" id="montype-select" name="mon_type[]" data-live-search="true">
 									<option selected="selected" disabled="disabled">Scheme Monitoring types</option>
 								</select>
 							</div>
 							<div class="col-md-6">
 								<label>Tags <span class="light">(Press Ctrl to select multiple)</span></label>
-								<select multiple="multiple" class="form-control" id="tag-select" name="tag[]" required="required">
+								<select multiple="multiple" class="form-control" id="tag-select" name="tag[]">
 									<option selected="selected" disabled="disabled">Select Tags</option>
 								</select>
 							</div>
@@ -186,11 +190,11 @@
 						<div class="row form-row">
 							<div class="col-md-6">
 								<label>Account Head</label>
-								<input type="text" autocomplete="off" name="account_head" class="form-control" placeholder="Account Head" required="required" pattern="[A-Za-z0-9_ ]+" oninvalid="setCustomValidity('Only letters, numbers and underscores allowed')" onchange="try{setCustomValidity('')}catch(e){}">
+								<input type="text" autocomplete="off" name="account_head" class="form-control" placeholder="Account Head" pattern="[A-Za-z0-9_ ]+" oninvalid="setCustomValidity('Only letters, numbers and underscores allowed')" onchange="try{setCustomValidity('')}catch(e){}" id="account_head">
 							</div>
 							<div class="col-md-6">
 								<label>Demand Number</label>
-								<input type="text" autocomplete="off" name="demand_no" class="form-control" placeholder="Demand Number" required="required">
+								<input type="text" autocomplete="off" name="demand_no" class="form-control" placeholder="Demand Number" id="demand_no">
 							</div>
 						</div>
 						<div class="row form-row">
@@ -206,12 +210,15 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-md-12 section-main-btn">
+						<button type="submit" class="btn btn-primary">Save &amp; proceed to add Financials</button>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row section-main-btn">
+		<!-- <div class="row section-main-btn">
 			<button type="submit" class="btn btn-primary">Save &amp; proceed to add Financials</button>
-		</div>
+		</div> -->
 	</form>
 </div>
 <script src="https://js.pusher.com/4.3/pusher.min.js"></script>

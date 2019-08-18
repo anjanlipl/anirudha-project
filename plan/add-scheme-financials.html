@@ -60,7 +60,7 @@
 											</select>
 										</div>
 										<div class="col-md-4">
-											<button class="btn btn-primary" type="submit">Submit</button>
+											<button class="btn btn-lg btn-primary" type="submit">Submit</button>
 										</div>
 									</div>
 								</form>
@@ -82,7 +82,11 @@
 					<div class="col-md-12">
 						<div class="row subsection">
 							<div class="col-md-12">
-								<div class="row subsection-title">Estimates ( in Lakhs)</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class=" subsection-title">Estimates ( in Lakhs)</div>
+									</div>
+								</div>
 								<form autocomplete="off" id="addEstimateForm">
 								<div class="row subsection-content">
 									<div class="col-md-12">
@@ -123,7 +127,7 @@
 										<div class="row">
 											<div class="col-md-12" id="addEstimate">
 												<div class="row">
-													<div class="col-md-6">
+													<div class="col-md-6 col-md-offset-3">
 														<div class="row">
 															<div class="form-row">
 																<div class="col-md-6">
@@ -147,26 +151,30 @@
 														</div>
 														<div class="row">
 															<div class="form-row">
-																<div class="col-md-4">
+																<div class="col-md-6">
 																	<label>Revenue</label>
 																	<input type="number" min="0" step=".01" autocomplete="off" class="form-control be_rev be_rcl" name="estrevenue[]" placeholder="Rs." />
 																</div>
-																<div class="col-md-4">
+																<div class="col-md-6">
 																	<label>Capital</label>
 																	<input type="number" min="0" step=".01" autocomplete="off" class="form-control be_cap be_rcl" name="estcapital[]" placeholder="Rs." />
 																</div>
-																<div class="col-md-4">
+																<div class="col-md-6">
 																	<label>Loan</label>
 																	<input type="number" min="0" step=".01" autocomplete="off" class="form-control be_loan be_rcl" name="estloan[]" placeholder="Rs." />
 																</div>
+																<div class="col-md-6">
+																	<label>Total BE</label>
+																	<input type="text" autocomplete="off" class="form-control be_total"  name="total_be[]" readonly  placeholder="Rs." />
+																</div>
 															</div>
 														</div>
-														<div class="row">
+														<!-- <div class="row">
 															<div class="col-md-4">
 																	<label>Total BE</label>
 																	<input type="text" autocomplete="off" class="form-control be_total"  name="total_be[]" readonly  placeholder="Rs." />
 																</div>
-														</div>
+														</div> -->
 													</div>
 													<div class="col-md-6">
 														<div class="row">
@@ -176,26 +184,30 @@
 														</div>
 														<div class="row">
 															<div class="form-row">
-																<div class="col-md-4">
+																<div class="col-md-6">
 																	<label>Revenue</label>
 																	<input type="number" min="0" step=".01" autocomplete="off" class="form-control re_rev re_rcl" name="revest_revenue[]" placeholder="Rs." />
 																</div>
-																<div class="col-md-4">
+																<div class="col-md-6">
 																	<label>Capital</label>
 																	<input type="number" min="0" step=".01" autocomplete="off" class="form-control re_cap re_rcl" name="revest_capital[]" placeholder="Rs." />
 																</div>
-																<div class="col-md-4">
+																<div class="col-md-6">
 																	<label>Loan</label>
 																	<input type="number" min="0" step=".01" autocomplete="off" class="form-control re_loan re_rcl" name="revest_loan[]" placeholder="Rs." />
 																</div>
+																<div class="col-md-6">
+																	<label>Total RE</label>
+																	<input type="text" autocomplete="off" class="form-control re_total"  name="total_re[]" readonly  placeholder="Rs."  pattern="[0-9]+" />
+																</div>
 															</div>
 														</div>
-														<div class="row">
+														<!-- <div class="row">
 															<div class="col-md-4">
 																	<label>Total RE</label>
 																	<input type="text" autocomplete="off" class="form-control re_total"  name="total_re[]" readonly  placeholder="Rs."  pattern="[0-9]+" />
 																</div>
-														</div>
+														</div> -->
 													</div>
 												</div>
 												<hr>
@@ -215,7 +227,11 @@
 						</div>
 						<div class="row subsection">
 							<div class="col-md-12">
-								<div class="row subsection-title">Expenditures (in Lakhs)</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="subsection-title">Expenditures (in Lakhs)</div>
+									</div>
+								</div>
 								<div class="row subsection-content">
 									<div class="col-md-12 plain-table">
 										<div class="table-title">Expenditure History (in Lakhs)</div>
@@ -290,11 +306,11 @@
 												</div>
 											</div>
 											<div class="row">
-															<div class="col-md-4">
-																	<label>TOTAL EXPENDITURE(Rupees in Lakhs)</label>
-																	<input type="text" autocomplete="off" class="form-control exp_total"  name="total_be[]" readonly  placeholder="Rs."  pattern="[0-9]+" />
-																</div>
-														</div>
+												<div class="col-md-4 col-md-offset-4">
+														<label>TOTAL EXPENDITURE(Rupees in Lakhs)</label>
+														<input type="text" autocomplete="off" class="form-control exp_total"  name="total_be[]" readonly  placeholder="Rs."  pattern="[0-9]+" />
+													</div>
+											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-12 text-right section-form-btn-wrap">

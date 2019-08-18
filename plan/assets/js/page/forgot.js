@@ -1,5 +1,5 @@
-var frontUrl = "http://192.168.1.136/plan/";
-var siteUrl = "http://192.168.1.136/planapi/public";
+var frontUrl = "http://103.92.47.157/plan/";
+var siteUrl = "http://103.92.47.157/planapi/public";
 $( document ).ready(function() {
 	$('#reset-pass').on('submit', function(e){
 		e.preventDefault();

@@ -99,18 +99,19 @@ class SchemeController extends Controller
                           
                           
                          if(isset($sectorName) && isset($deptName)){
-                               $actionBtn = '<a class="btn btn-sm btn-primary" id="editScheme" data-id="'. $scheme->id .'">
+                               $actionBtn = '<ul class="btn-group">
+                                                <li><a class="btn btn-sm btn-primary" id="editScheme" data-id="'. $scheme->id .'">
                                                     <span class="text">Edit</span>
-                                                </a>
-                                                <a href="add-scheme-financials.html?scheme_id='.$scheme->id.'" class="btn btn-sm btn-green">
+                                                </a></li>
+                                                <li><a href="add-scheme-financials.html?scheme_id='.$scheme->id.'" class="btn btn-sm btn-green">
                                                     <span class="text">Financials</span>
-                                                </a>
-                                                <a href="scheme-objectives.html?scheme_id='.$scheme->id.'"  class="btn btn-sm btn-red">
+                                                </a></li>
+                                                <li><a href="scheme-objectives.html?scheme_id='.$scheme->id.'"  class="btn btn-sm btn-red">
                                                     <span class="text">Objectives</span>
-                                                </a>
-                                                <a class="btn btn-sm btn-danger delScheme" data-id="'. $scheme->id .'">
+                                                </a></li>
+                                                <li><a class="btn btn-sm btn-danger delScheme" data-id="'. $scheme->id .'">
                                                     <span class="text">Delete</span>
-                                                </a>';
+                                                </a></li></ul>';
 
                                 $createdDate = 'NA';
 
@@ -162,18 +163,19 @@ class SchemeController extends Controller
                 $sectorName = $sector->name;
             }
 
-            $actionBtn = '<a class="btn btn-sm btn-primary" id="editScheme" data-id="'. $scheme->id .'">
+            $actionBtn = '<ul class="btn-group">
+                                    <li><a class="btn btn-sm btn-primary" id="editScheme" data-id="'. $scheme->id .'">
                                         <span class="text">Edit</span>
-                                    </a>
-                                    <a href="add-scheme-financials.html?scheme_id='.$scheme->id.'" class="btn btn-sm btn-green">
+                                    </a></li>
+                                    <li><a href="add-scheme-financials.html?scheme_id='.$scheme->id.'" class="btn btn-sm btn-green">
                                         <span class="text">Financials</span>
-                                    </a>
-                                    <a href="scheme-objectives.html?scheme_id='.$scheme->id.'"  class="btn btn-sm btn-red">
+                                    </a></li>
+                                    <li><a href="scheme-objectives.html?scheme_id='.$scheme->id.'"  class="btn btn-sm btn-red">
                                         <span class="text">Objectives</span>
-                                    </a>
-                                    <a class="btn btn-sm btn-danger delScheme" data-id="'. $scheme->id .'">
+                                    </a></li>
+                                    <li><a class="btn btn-sm btn-danger delScheme" data-id="'. $scheme->id .'">
                                         <span class="text">Delete</span>
-                                    </a>';
+                                    </a></li></ul>';
 
             $createdDate = 'NA';
 

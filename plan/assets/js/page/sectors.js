@@ -34,7 +34,7 @@ $( document ).ready(function() {
      	}
       if(actionClass.indexOf('delete') >= 0){
           bootbox.confirm({
-              title: "Delete?",
+              //title: "Delete?",
               message: "Are you sure you want to delete this sector?",
               buttons: {
                   cancel: {

@@ -266,10 +266,10 @@ class DepartmentController extends Controller
                     $department->update();
                 }
         }
-        // $department->departAssign()->create([
-        //     'user_id'=>$user_id,
-        //     'dept_id'=>$department_id
-        // ]);
+         $department->departAssign()->create([
+            'user_id'=>$user_id,
+            'dept_id'=>$department_id
+         ]);
         $user->department_id = $department_id;
         $user->update();
          $allRequests = RaisedRequest::where('user_id',$user->id)->get();

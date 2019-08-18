@@ -25,8 +25,8 @@ class ObjectiveController extends Controller
 
     			 	$createdDate = 'NA';
 
-    			 	$actionBtn = '<a class="btn btn-small btn-primary">
-										<span class="text editObjectiveBtn" data-toggle="modal" data-target="#editobjModal" data-id="'.$objective->id .'" >Edit</span>
+    			 	$actionBtn = '<a class="btn btn-small btn-primary text editObjectiveBtn" data-toggle="modal" data-target="#editobjModal" data-id="'.$objective->id .'">
+										<span class="text editObjectiveBtn"   data-id="'.$objective->id .'" >Edit</span>
 									</a>
 									<a href="scheme-objectives-outputs.html?objective_id=' . $objective->id .'" class="btn btn-small btn-green">
 										<span class="text">Outputs</span>

@@ -10,6 +10,7 @@ use App\EstablishmentExp;
 use App\Establishment;
 use App\Scheme;
 use App\Sector;
+use DB;
 
 
 class EstablishmentController extends Controller
@@ -519,7 +520,19 @@ class EstablishmentController extends Controller
 	 		if(isset($deptId) && $deptId != null){
     			$department = Department::find($deptId);
 
+
+
     			if(isset($department) && $department != null){
+
+            $count = DB::table('establishments')
+                        ->where('department_id', '=', $deptId)
+                        ->count();
+
+            if($count == 0){
+              $estbl = new Establishment;
+              $estbl->department_id = $deptId;
+              $estbl->save();
+            }
 
     				$establishmentExpenditure = $department->establishmentExpenditure()->first();
 
@@ -547,8 +560,8 @@ class EstablishmentController extends Controller
 			 				'wages'=>$bewages,
 			 				'machinery'=>$bemachinery,
 			 				'office_exp'=>$beoffice,
-			 				'start_date'=>$start_year,
-			 				'end_date'=>$end_year,
+			 				'start_date'=>date('Y-m-d', strtotime($start_year)),
+			 				'end_date'=>date('Y-m-d', strtotime($end_year)),
 
 			 			]);
 			 		}
@@ -561,8 +574,8 @@ class EstablishmentController extends Controller
 			 				'wages'=>$rewages,
 			 				'machinery'=>$remachinery,
 			 				'office_exp'=>$reoffice,
-			 				'start_date'=>$start_year,
-			 				'end_date'=>$end_year,
+              'start_date'=>date('Y-m-d', strtotime($start_year)),
+              'end_date'=>date('Y-m-d', strtotime($end_year))
 
 			 			]);
 			 		}//add be

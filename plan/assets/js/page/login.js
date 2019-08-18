@@ -18,8 +18,8 @@ window.onload = function () {
         };
     }
 };
-var frontUrl = "http://192.168.1.136/plan/";
-var siteUrl = "http://192.168.1.136/planapi/public";
+var frontUrl = "http://103.92.47.157/plan/";
+var siteUrl = "http://103.92.47.157/planapi/public";
 
 $( document ).ready(function() {
 
@@ -31,12 +31,14 @@ $( document ).ready(function() {
   }
 
 	$('#login-form, #login_guest').on('submit', function(e){
+
     $.notify('Trying to login. Please Wait..', 'info');
     e.preventDefault();
     $(this).find('button[type=submit]').addClass('loading');
     var email = encryp($('input[name="email"').val());
     var password = encryp($('input[name="password"').val());
     var guest = encryp($(this).find('input[name="guest"]').val());
+
     $.ajax({
       async: true,
       url: siteUrl + "/api/login",
@@ -58,10 +60,12 @@ $( document ).ready(function() {
             'Authorization': 'Bearer ' + localStorage.token
           },
           success: function(result) {
+
             userRole = result.role_name;
             localStorage.user_role = userRole;
             localStorage.username = result.user.name;
             // setCookie('username', result.user.name, 10);
+          
             if (result.myrole == 'super-admin') {
               window.location.href = frontUrl + 'dashboard.html';
 

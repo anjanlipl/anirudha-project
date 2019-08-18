@@ -83,7 +83,8 @@ class UserController extends Controller
         // echo $guest; die;
         if($guest && $guest == 1){
             $email = "guest@user.com";
-            $password = "september6";
+            //$password = "september6";
+            $password = "Password@123";
         }
         else{
             $email_enc = $request->input('email');
@@ -1453,18 +1454,27 @@ class UserController extends Controller
         # code...
         $audits = DB::table('activity_log as a')
                         ->join('users as u', 'a.causer_id', '=', 'u.id')
-                        ->select('a.*', 'u.name as user_name')
+                        ->select('a.*', 'u.name as user_name')                        ->limit(100)
+
                         ->orderBy('created_at', 'desc')
-                        ->limit(100)
                         ->get();
         // $final_arr['audits'] = array();
         $htm="";
+        $i=0;
         foreach($audits as $key=>$value){
+            $i++;
             $subject_type_arr = explode("\\", $value->subject_type);
 
             $audits_text = $value->user_name." added ".$subject_type_arr[1]." with id#".$value->subject_id." on ".date('d M, Y', strtotime($value->created_at));
+           if($subject_type_arr[1] == "Unit"){
+                $subjectype = "Implementing Agency";
+            }else{
+                $subjectype = $subject_type_arr[1];
+            }
+
+
             // array_push($final_arr, $audits_text);
-            $htm.="<tr><td>".$audits_text."</td></tr>";
+            $htm.="<tr><td>".$i."</td><td>".$value->user_name."</td><td>".$subjectype."</td><td>".$value->subject_id."</td><td>".date('d M, Y', strtotime($value->created_at))."</td><td>".$value->description."</td></tr>";
         }
 
         return response()->json(['audits' => $htm], 200);

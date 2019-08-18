@@ -32,7 +32,7 @@ $( document ).ready(function() {
      	}
       if(actionClass.indexOf('delete') >= 0){
           bootbox.confirm({
-              title: "Delete?",
+              //title: "Delete?",
               message: "Are you sure you want to delete this subsector?",
               buttons: {
                   cancel: {
@@ -125,8 +125,9 @@ $( document ).ready(function() {
                 type: "PUT",
                 data: formData,
                 success: function(result) {
+                    alert("Sector successfully added");
                     $('#editSubSectorModal').modal('toggle');
-                    $.notify("Subsector Updated successfully !", 'success');
+                    //$.notify("Subsector Updated successfully !", 'success');
                     location.reload();
                 },
                 error:function (error) {
