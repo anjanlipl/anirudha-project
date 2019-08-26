@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> Delhi Government, Department of Planning</title>    
+<noscript><meta http-equiv="refresh" content="0; URL=/badbrowser.html"></noscript>
+<meta http-equiv="X-Frame-Options" content="deny">
+	<link rel="stylesheet" href="assets/css/animate.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/login_check.js"></script>
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+</head>
+<body>
+<div id="antiClickjack" style="position: fixed;top: 0; left: 0;right: 0;bottom: 0;z-index: 1234565433456432345464; background: #FFF;"></div>
+<script type="text/javascript">
+   if (self === top) {
+       var antiClickjack = document.getElementById("antiClickjack");
+       antiClickjack.parentNode.removeChild(antiClickjack);
+   } else {
+       top.location = self.location;
+   }
+</script>
+<div class="modal fade" id="addSectorModal" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Add Scheme Indicator</h4>
+			</div>
+			<div class="modal-body">
+				<form autocomplete="off" id="scheme-indicator-add">
+					<div class="form-row">
+						<input type="text" autocomplete="off" class="form-control" name="name" placeholder="Enter Indicator name" required="required" />
+					</div>
+					<div class="form-row">
+						<label>Status</label>
+						<select class="form-control" name="status_id">
+						<option value="1">NA</option>
+						<option value="2">On Track</option>
+						<option value="3">Off Track</option>
+						<option value="4">NR</option>
+
+					</select>
+					</div>
+					<div class="form-row">
+						<select class="form-control indicator_units_list" name="unit_id" required="required">
+							<option selected="selected" disabled="disabled">Select a unit</option>
+						</select>
+					</div>
+					<div class="form-row">
+						<select class="form-control output_indicator_list" name="output_indicator_id" required="required">
+							<option selected="selected" disabled="disabled">Select Output Indicator</option>
+						</select>
+					</div>
+					<div class="form-row">
+						<select class="form-control evaluation_type" name="evaluation_type" required="required">
+							<option selected="selected" disabled="disabled"> Indicator On track when </option>
+							<option value="1">Greater than Evaluation criteria</option>
+							<option value="2">Less than Evaluation criteria</option>
+
+						</select>
+					</div>
+
+					<div class="form-row">
+						<textarea class="form-control remark" name="remarks" placeholder="Enter Remarks here"></textarea>
+					</div>
+
+					<div class="form-row">
+						<button type="submit" class="btn btn-primary">Add</button>
+					</div>
+				</form>
+			</div>
+			<!-- <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div> -->
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="editIndicatorModal" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Edit Indicator</h4>
+			</div>
+			<div class="modal-body">
+				<form autocomplete="off" id="edit-outcome-ind">
+					<input type="hidden" class="id" name="id">
+					<div class="form-row">
+						<input type="text" autocomplete="off" class="form-control ind_name" name="name" placeholder="Enter Indicator name" required="required" oninvalid="setCustomValidity('Only letters, numbers and _ allowed')" onchange="try{setCustomValidity('')}catch(e){}" />
+					</div>
+					<div class="form-row">
+
+					<label>status</label>
+					<select class="form-control" name="status_id">
+						<option value="1">NA</option>
+						<option value="2">On Track</option>
+						<option value="3">Off Track</option>
+						<option value="4">NR</option>
+
+					</select>
+				</div>
+					<div class="form-row">
+						<select class="form-control indicator_units_list" id="unit_id" name="unit_id" required="required">
+							<option selected="selected" disabled="disabled">Select a unit</option>
+						</select>
+					</div>
+					<div class="form-row">
+						<select class="form-control output_indicator_list" name="output_indicator_id" required="required">
+							<option selected="selected" disabled="disabled">Select Output Indicator</option>
+						</select>
+					</div>
+					<div class="form-row">
+						<select class="form-control evaluation_type" name="evaluation_type" required="required">
+							<option selected="selected" disabled="disabled"> Indicator On track when </option>
+							<option value="1">Greater than Evaluation criteria</option>
+							<option value="2">Less than Evaluation criteria</option>
+
+						</select>
+					</div>
+
+					<div class="form-row">
+						<textarea class="form-control remark" name="remark" placeholder="Enter Remarks here"></textarea>
+					</div>
+
+					<div class="form-row">
+						<button type="submit" class="btn btn-primary">update</button>
+					</div>
+				</form>
+			</div>
+			<!-- <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div> -->
+		</div>
+	</div>
+</div>
+<nav class="head-nav" w3-include-html="parts/head-nav-in.html"></nav>
+<nav class="sidebar" id="sidebar" w3-include-html="sidelist.html"></nav>
+<div class="content">
+	<div class="row">
+		<ol class="breadcrumb">
+		    <li><a href="dashboard.html">Home</a></li>
+		    <li><a href="all-schemes.html">Schemes</a></li>
+		    <li><a class="objectiveBread" href="scheme-objectives.html">Objectives</a></li>
+		    <li><a class="outputBread" href="scheme-objectives-outputs.html">Outputs</a></li>
+		    <li><a class="outcomeBread" href="scheme-objectives-outputs-outcome.html">Outcomes</a></li>
+		    <li><a href="#">Indicators</a></li>
+	  	</ol>
+	</div>
+	<div class="row head-info"></div>
+	<div class="row section">
+		<div class="col-md-12">
+			<div class="row section-title">
+				<div class="col-md-8">
+					<span class="section-title-text">Scheme Objective Outputs - Outcomes Indicators</span>
+				</div>
+				<div class="col-md-4 text-right">
+					<div class="section-btn-wrap">
+						<a class="btn btn-primary" data-toggle="modal" data-target="#addSectorModal"><span class="text">Add Indicator</span></a>
+					</div>
+				</div>
+			</div>
+			<div class="row section-content">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table table-hover" id="indicatorTab">
+								<thead>
+									<th>Id</th>
+									<th>Indicator name</th>
+									<th>Parent Indicator</th>
+									<th>Unit</th>
+									<th>Status</th>
+									<th>Critical</th>
+									<th>Target</th>
+									<th>Achievement</th>
+									<th>Actions</th>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/wow.js"></script>
+<script src="assets/js/scrollify.js"></script>
+<script src="assets/js/nicescroll.js"></script>
+<script src="assets/js/particle.min.js"></script>
+<script src="//cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+	<script src="assets/js/validatr.min.js"></script>
+<script src="assets/js/brain.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+<script src="assets/js/notify.min.js"></script>
+<script src="assets/js/dept_list.js"></script>
+<script src="assets/js/page/scheme-obj-output-out-ind.js"></script>
+<script>$( document ).ajaxStop(function() {
+$('body').css('display', 'block');
+});</script><script src="assets/js/load-menu.js"></script>
+</body>
+</html>
