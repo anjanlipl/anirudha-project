@@ -244,7 +244,7 @@ label{
 }
 .form-row{
 	position: relative;
-	margin: 15px 0px;
+	margin: 15px 0px 25px;
 }
 .validatr-message{
 	background-color: transparent !important;
@@ -1570,7 +1570,7 @@ table.dataTable.no-footer{
 	margin-bottom: 10px;
 }
 .dash-sec-thumb.active .anch .title{
-	/*color: #FFF;*/
+	color: #23527c;
 }
 .dash-sec-thumb .sub-anchor{
 	/*position: absolute;*/
@@ -1738,7 +1738,7 @@ table.dataTable.no-footer{
     line-height: 20px;
 }
 .sub-anchor-drop-in > a:after{
-	content: "\279D";
+	content: "....";
 	margin-left: 2px;
 	margin-right: 5px;
 }
@@ -2358,7 +2358,7 @@ table {
 	height: auto;
 }
 #cri_ind .section-scroll {
-	height: 410px;
+	height: 500px;
 }
 #myChartEst {
 	height: 479px;
@@ -2406,12 +2406,17 @@ table {
 @media (min-width: 1281px) {
   
   .num-indicator-item .value {
-  	font-size: 24px;
-  	font-weight: 800;
+  	/* font-size: 24px;
+  	font-weight: 800; */
+  	font-size: 26px;
+	font-weight: 600;
   }
   .num-indicator-item .icon-main svg {
-  	height: 50px;
-  	width: 50px;
+  	/* height: 50px;
+  	width: 50px; */
+  	height: 30px;
+	width: 30px;
+	margin: 20px;
   }
 
 
@@ -2507,3 +2512,33 @@ table {
   min-height: 500px;
 }
 .side-list {display: none;}
+#schemeObjectives_wrapper .btn {
+  margin: 5px 0;
+}
+.indi {
+    padding: 10px 0;
+}
+.sub-anchor-drop-in > a {
+	text-decoration: none;
+	font-weight: 700;
+}
+.sub-anchor-drop-in > a:hover {
+	color: #f0ad4e;
+}
+#schemeListCustom .scheme_dets_block.title, #schemeListCustom .collapse-btn {
+	background: #4eafb7;
+	color: #FFF;
+}
+.scheme_dets_block.inprogress {
+    background: #999999;
+    color: #FFF;
+}
+.scheme_dets_block.offtrack {
+    background: #bd2828;
+    color: #FFF;
+}
+.main-dash .dash-sec-thumb .anch .title {
+	height: 60px;
+}
+.right {text-align: right;}
+.right .btn {padding: 10px;}

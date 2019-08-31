@@ -34,7 +34,6 @@ class ReportController extends Controller
 
     public function getSchemeRep(Request $request)
     {
-
         # code...
 
         if(date('m') > 3){
@@ -86,6 +85,7 @@ class ReportController extends Controller
                         ->select('s.*', 'd.name as dept_name')
                         ->orderBy('sno', 'asc')
                         ->get();
+
             if(count($schemes)){
                 $head = $schemes[0]->name;
                 $dept_name=$schemes[0]->dept_name;
@@ -175,48 +175,50 @@ class ReportController extends Controller
             $objectives = DB::table('objectives as o')
                             ->where('scheme_id', '=', $value1->id)
                             ->get();
-        
+            
             foreach($objectives as $key2=>$value2){
 
                 $outputs = DB::table('outputs as op')
                                 ->where('objective_id', '=', $value2->id)
                                 ->get();
-        
+                //print_r($outputs);
                 foreach($outputs as $key3=>$value3){
-
+                    //print_r($value3);
                     $output_inds = DB::table('outputindicators as opi')
 
                                     ->where([
                                         ['output_id', '=', $value3->id]
                                     ])
                                     ->get();
-
-                    $output_inds = $this->getOutputIndMetrics($output_inds);
-                    foreach ($output_inds as $key4 => $value4) {
-        
+                    if(count($output_inds) > 0){
+                        $output_inds1 = $this->getOutputIndMetrics($output_inds);
+                    }
+                    //print_r($output_inds1);
+                    foreach ($output_inds1 as $key4 => $value4) {
                         # code...
-                    
+                        
                         $outcome_inds = DB::table('outcomeindicators as oci')
                                             ->where([
                                                 ['output_indicator_id', '=', $value4->id]
                                             ])
                                             ->get();
+
                         $outcome_inds = $this->getOutcomeIndMetrics($outcome_inds);
-                    
-                        $output_inds[$key4]->outcome_inds = $outcome_inds;
-                    
+                        
+                        $output_inds1[$key4]->outcome_inds = $outcome_inds;
+                        
                     }
                     
-                    $objectives[$key2]->output_inds= $output_inds;
-                
+                    $objectives[$key2]->output_inds= $output_inds1;
+                    //print_r($objectives);
                 }
-
+                //print_r($objectives);die();
             }
 
             $schemes[$key1]->objectives = $objectives;
-        
+            
         }
-
+//print_r($schemes);die();
         // $allObjectiveOutputIndicators[$key2]->status = $status_new;
         // $allObjectiveOutputIndicators[$key2]->status_last = $status_last_new;
         // $allObjectiveOutputIndicators[$key2]->targ_last = $targ_last_new;
@@ -234,14 +236,15 @@ class ReportController extends Controller
         $row_arr = array();
      
         $dept_namng = $schemes[0]->dept_name;
-        
+        //return $schemes;
         foreach($schemes as $key5=>$value5){
             $row_arr[0]['dept_namng']=$dept_namng;
             $j=0;
+            
             foreach ($value5->objectives as $key6 => $value6) {
                 # code...
                 $k=0;
-                // print_r($value6);
+                //print_r($value6);
                 if(empty($value6->output_inds)){
                     continue;
                 }
@@ -348,7 +351,8 @@ class ReportController extends Controller
                 }
             }
         }
-
+        //die();
+        //return $row_arr;die();
         //echo "<pre>";
         // var_dump($row_arr);
          //echo "<pre>";

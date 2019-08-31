@@ -382,7 +382,7 @@ $.ajax({
 			    perf = 0;
 			}
 			if(result.totalExp[key]){
-			   	var htm = '<div class="col-md-4 dash-sec-thumb-main" data-perf="'+perf+'"><div class="dash-sec-thumb '+cls+'"><a class="anch" data-target="#chartDrop2_'+key+'"><div class="title">'+sector.name+'</div><div class="thumb-ind-wrap"><span class="thumb-ind-item">'+result.totalEst[key]+'</span> Allocation<span class="thumb-ind-item green">'+result.totalExp[key]+'</span> Expenditure</div></a><span class="sub-anchor"></span><div class="sub-anchor-drop"><div class="sub-anchor-drop-in"><a href="dept_dashboard.html?dept_id='+sector.id+'">Dashboard</a></div></div><div class="dash-sec-thumb-dets" id="chartDrop2_'+key+'"><div id="chartCan2_'+key+'" width="400"></div></div></div></div>';
+			   	var htm = '<div class="col-md-4 dash-sec-thumb-main" data-perf="'+perf+'"><div class="dash-sec-thumb active"><div class="anch"><div class="title">'+sector.name+'</div></div><div class="dash-sec-thumb-dets" id="chartDrop2_'+key+'"><div id="chartCan2_'+key+'" width="400"></div></div><div class="thumb-ind-wrap"><div class="row"><div class="col-md-6"><div class="indi"><span class="thumb-ind-item">'+result.totalEst[key]+'</span> Allocation<span class="thumb-ind-item green">'+result.totalExp[key]+'</span></div></div><div class="col-md-6"><div class="sub-anchor-drop-in"><a href="dept_dashboard.html?dept_id='+sector.id+'">More</a></div></div></div></div><span class="sub-anchor"></span><div class="sub-anchor-drop"></div></div></div>';
 				$('#sectorDashList1').append(htm);
 				includeHTML();
 				data = {
@@ -436,12 +436,12 @@ $.ajax({
 		$('.total-indicators .value').html(result.indicatorsCount);
 		$('.on-track .value').html(result.ontrack);
 		$('.off-track .value').html(result.offtrack);
-		$('.inprogress .value').html(result.inProgess);
-		$('.notapplicable .value').html(result.na);
+		$('.inprogress .value').html(result.na);
+		$('.notapplicable .value').html(result.inProgess);
 		data = {
 		    datasets: [{
 		        data: [result.ontrack, result.offtrack, result.inProgess, result.na],
-		        backgroundColor:['#5cb85c', '#b70000', '#FFFF00','#999']
+		        backgroundColor:['#9bbb58', '#c0504e', '#4f81bc','#4aacc5']
 		    }],
 		    labels: [
 		        'On track ('+result.ontrack+')',
@@ -451,10 +451,10 @@ $.ajax({
 		    ]
 		};
 		var data = [
-			{ label: "On track", y: result.ontrack, color: "#5cb85c" },
-			{ label: "Off track", y: result.offtrack, color: '#b70000' },
-			{ label: "Not Applicable", y: result.inProgess, color: '#FFFF00' },
-			{ label: "Not Reported", y: result.na, color: '#999' }
+			{ label: "On track", y: result.ontrack, color: "#9bbb58" },
+			{ label: "Off track", y: result.offtrack, color: '#c0504e' },
+			{ label: "Not Applicable", y: result.inProgess, color: '#4f81bc' },
+			{ label: "Not Reported", y: result.na, color: '#4aacc5' }
 		];
 		drawPieChartNew('myPieChart', data);
 		drawPolarChart('myPolarChart', data);
@@ -600,7 +600,7 @@ $.ajax({
 			}
 
 			if(total_ind){
-			   	var htm = '<div class="col-md-4 dash-sec-thumb-main" data-perf="'+perf+'"><div class="dash-sec-thumb '+cls+'"><a class="anch" data-target="#chartDrop_'+sector.id+'"><div class="title">'+sector.name+'</div></a><div class="dash-sec-thumb-dets" id="chartDrop_'+sector.id+'"><div style="width: 100%;" id="chartCan_'+sector.id+'"></div></div><div class="thumb-ind-wrap"><div class="row"><div class="col-md-6"><a class="anch" data-target="#chartDrop_'+sector.id+'"><span class="thumb-ind-item">'+result.xtotalNa[sector.id]+'</span><span class="thumb-ind-item green">'+result.xontrack[sector.id]+'</span><span class="thumb-ind-item red">'+result.xofftrack[sector.id]+'</span><span class="thumb-ind-item yellow">'+result.xinprogress[sector.id]+'</span></a></div><div class="col-md-6"><div class="sub-anchor-drop-in"><a href="dept_dashboard.html?dept_id='+sector.id+'">View Departments</a></div></div></div></div><span class="sub-anchor"></span><div class="sub-anchor-drop"></div></div></div>';
+			   	var htm = '<div class="col-md-4 dash-sec-thumb-main main-dash" data-perf="'+perf+'"><div class="dash-sec-thumb active"><div class="anch"><div class="title">'+sector.name+'</div></div><div class="dash-sec-thumb-dets" id="chartDrop_'+sector.id+'"><div style="width: 100%;" id="chartCan_'+sector.id+'"></div></div><div class="thumb-ind-wrap"><div class="row"><div class="col-md-6"><div class="indi"><span class="thumb-ind-item">'+result.xtotalNa[sector.id]+'</span><span class="thumb-ind-item green">'+result.xontrack[sector.id]+'</span><span class="thumb-ind-item red">'+result.xofftrack[sector.id]+'</span><span class="thumb-ind-item yellow">'+result.xinprogress[sector.id]+'</span></div></div><div class="col-md-6"><div class="sub-anchor-drop-in"><a href="dept_dashboard.html?dept_id='+sector.id+'">More</a></div></div></div></div><span class="sub-anchor"></span><div class="sub-anchor-drop"></div></div></div>';
 				
 				// var htm2 = '<div class="dash-sec-thumb-dets-in" id="chartDrop_'+sector.id+'"><canvas id="chartCan_'+sector.id+'" width="500"></canvas></div>';
 				$('#sectorDashList').append(htm);
@@ -831,7 +831,7 @@ $.ajax({
 					    perf = 0;
 					}
 					if(total_ind){
-					   	var htm = '<div class="col-md-4 dash-sec-thumb-main" data-perf="'+perf+'"><div class="dash-sec-thumb '+cls+'"><a class="anch" data-target="#chartDrop5_'+sector.id+'"><div class="title">'+sector.name+'</div><div class="thumb-ind-wrap"><span class="thumb-ind-item">'+result.xtotalNa[sector.id]+'</span> NR <span class="thumb-ind-item green">'+result.xontrack[sector.id]+'</span> On Track<span class="thumb-ind-item red">'+result.xofftrack[sector.id]+'</span> Off Track<span class="thumb-ind-item yellow">'+result.xinprogress[sector.id]+'</span> NA </div></a><span class="sub-anchor"></span><div class="sub-anchor-drop"><div class="sub-anchor-drop-in"><a href="dept_dashboard.html?dept_id='+sector.id+'">View Departments</a></div></div><div class="dash-sec-thumb-dets" id="chartDrop5_'+sector.id+'"><div id="chartCan5_'+sector.id+'" width="500"></div></div></div></div>';
+					   	var htm = '<div class="col-md-4 dash-sec-thumb-main" data-perf="'+perf+'"><div class="dash-sec-thumb active"><div class="anch"><div class="title">'+sector.name+'</div></div><div class="dash-sec-thumb-dets" id="chartDrop5_'+sector.id+'"><div id="chartCan5_'+sector.id+'" width="500"></div></div><div class="thumb-ind-wrap"><div class="row"><div class="col-md-6"><div class="indi"><span class="thumb-ind-item">'+result.xtotalNa[sector.id]+'</span><span class="thumb-ind-item green">'+result.xontrack[sector.id]+'</span><span class="thumb-ind-item red">'+result.xofftrack[sector.id]+'</span><span class="thumb-ind-item yellow">'+result.xinprogress[sector.id]+'</span></div></div><div class="col-md-6"><div class="sub-anchor-drop-in"><a href="dept_dashboard.html?dept_id='+sector.id+'">More</a></div></div></div><span class="sub-anchor"></span><div class="sub-anchor-drop"></div></div></div>';
 						
 						// var htm2 = '<div class="dash-sec-thumb-dets-in" id="chartDrop_'+sector.id+'"><canvas id="chartCan_'+sector.id+'" width="500"></canvas></div>';
 						$('#sectorDashList5').append(htm);
@@ -1152,6 +1152,8 @@ function drawPieChartNew(target, dataPoints){
 		legend:{
 			fontSize: 12,
 			fontweight: "bold",
+			horizontalAlign: "right",
+			verticalAlign: "center"
 			// fontColor: '#FFF'
 		},
 		data: [{
@@ -1161,7 +1163,7 @@ function drawPieChartNew(target, dataPoints){
 				showInLegend: "true",
 				legendText: "{label}",
 				indexLabel: "{label} ({y})",
-				indexLabelPlacement: "inside",
+				indexLabelPlacement: "outside",
 				indexLabelFontSize: 12,
 				indexLabelFontWeight: "normal",
 				indexLabelFontColor: '#222',

@@ -20,6 +20,7 @@ class DashboardController extends Controller
 	public function offtrackIndicators(Request $request)
 	{
 		# code...
+		//return $request;die();
 		$status = $request->input('status');
 		if(!empty($request->input('dept_id'))){
 			$dept_id = $request->input('dept_id');
@@ -56,6 +57,7 @@ class DashboardController extends Controller
 			$opiwhere = ['opi.status', '=', 4];
 			$ociwhere = ['oci.status', '=', 4];
 		}
+		//echo $request->input('type');
 		if(!empty($request->input('type'))){
 			$allOfftrackIndsOutp = DB::table('outputindicators as opi')
 									->join('outputs as op', 'opi.output_id', "=", 'op.id')
@@ -901,13 +903,28 @@ public function getIndicatorDataMain(Request $request)
 								])
         						->first();
 
-             $achivements =$return_target->outcomeAchievements()->get();
+            $achivements=array();
+        	if(isset($return_target) && $return_target!=''){
+        		$achivements =$return_target->outcomeAchievements()->get();
+        	}
+
                         $cummulativeAchieve = 0 ;
-                        if(isset($achivements) && count($achivements)>0){
+                         if(isset($achivements) && count($achivements)>0){
                            foreach ($achivements as $achievementItem) {
-                          $cummulativeAchieve += $achievementItem->description;
+                           	//print_r($achievementItem->description);
+                           	if(is_int($achievementItem->description)){
+                           		$cummulativeAchieve += $achievementItem->description;
+                           	}else{
+                           		$cummulativeAchieve = $achievementItem->description;
+                           	}
+                          
                         }
                     }
+                    //     if(isset($achivements) && count($achivements)>0){
+                    //        foreach ($achivements as $achievementItem) {
+                    //       $cummulativeAchieve += $achievementItem->description;
+                    //     }
+                    // }
 		   	$targets = $indicator->outcomeTargets()->get();
    		foreach ($targets as $target) {
    			$outcomeAchievements = $target->outcomeAchievements()->get();
@@ -937,6 +954,7 @@ public function getIndicatorDataMain(Request $request)
 									['outputindicator_id',$indicator->id]// $indicator->id
 								])
         						->first();
+
         	//return $return_target;die();
         	//$return_target_count = $return_target->count();
         	//echo $return_target_count;die();					
@@ -944,17 +962,25 @@ public function getIndicatorDataMain(Request $request)
         	if(isset($return_target) && $return_target!=''){
         		$achivements = $return_target->achievements()->get();
         	}		
-        	
-            //return $achivements;die();
+        	//print_r($targets);die();
+            //print_r($achivements);die();
                         $cummulativeAchieve = 0 ;
                         if(isset($achivements) && count($achivements)>0){
                            foreach ($achivements as $achievementItem) {
-                          $cummulativeAchieve += $achievementItem->description;
+                           	//print_r($achievementItem->description);
+                           	if(is_int($achievementItem->description)){
+                           		$cummulativeAchieve += $achievementItem->description;
+                           	}else{
+                           		$cummulativeAchieve = $achievementItem->description;
+                           	}
+                          
                         }
                     }
-
+        //echo $cummulativeAchieve;die();
+        //print_r($targets);die();
    		foreach ($targets as $target) {
 	   			$outcomeAchievements = $target->achievements()->get();
+	   			//return $outcomeAchievements;die();
 	   			foreach ($outcomeAchievements as $outcomeAchievement) {
 	   				$reviews = $outcomeAchievement->reviews()->get();
 	   				foreach ($reviews as $review) {

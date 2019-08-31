@@ -1,22 +1,22 @@
 window.onload = function () {
-    if (typeof history.pushState === "function") {
-        history.pushState("jibberish", null, null);
-        window.onpopstate = function () {
-            history.pushState('newjibberish', null, null);           
-        };
-    }
-    else {
-        var ignoreHashChange = true;
-        window.onhashchange = function () {
-            if (!ignoreHashChange) {
-                ignoreHashChange = true;
-                window.location.hash = Math.random();                
-            }
-            else {
-                ignoreHashChange = false;   
-            }
-        };
-    }
+    // if (typeof history.pushState === "function") {
+    //     history.pushState("jibberish", null, null);
+    //     window.onpopstate = function () {
+    //         history.pushState('newjibberish', null, null);           
+    //     };
+    // }
+    // else {
+    //     var ignoreHashChange = true;
+    //     window.onhashchange = function () {
+    //         if (!ignoreHashChange) {
+    //             ignoreHashChange = true;
+    //             window.location.hash = Math.random();                
+    //         }
+    //         else {
+    //             ignoreHashChange = false;   
+    //         }
+    //     };
+    // }
 };
 var frontUrl = "http://103.92.47.157/plandev/";
 var siteUrl = "http://103.92.47.157/planapidev/public";

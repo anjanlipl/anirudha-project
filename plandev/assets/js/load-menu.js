@@ -174,4 +174,13 @@ $(".side-list li").css('display','block');
   $(".side-list").css('display','block');
 }, 30000);
 
+
+$('#sidebar').on({
+    'mousewheel': function(e) {
+        if (e.target.id == 'el') return;
+        e.preventDefault();
+        e.stopPropagation();
+     }
+});
+
 });

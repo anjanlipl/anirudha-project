@@ -28,6 +28,7 @@ class TargetEntryController extends Controller
      }
 	
 	public function showSchemeIndicators(Request $request){
+		//return $request;die();
 		// print_r($request->input());
 		$dept_id = $request->input('dept_id');
 		$depart = Department::find($dept_id);
@@ -889,7 +890,7 @@ class TargetEntryController extends Controller
 
 
 public function addAchievementSubmit(Request $request) {
-
+	//return $request;
 	$target_ids = $request->input('target_ids');
 	$type = $request->input('type');
 	$achievement_val = $request->input('achievement_val');
@@ -907,6 +908,7 @@ public function addAchievementSubmit(Request $request) {
 	if($quarter == 'q4'){
 		$qrt = '03';
 	}
+
 	$year =  $request->input('year');
 		// $end_dates =  $request->input('end_date');
 	$dates = explode('-', $year);
@@ -949,8 +951,10 @@ public function addAchievementSubmit(Request $request) {
 	//   	}
 	// }
 
-
+	//return $achievement_val;
 	foreach ($target_ids as $key => $value) {
+		//echo $achievement_val[$key];
+		//print_r($target_ids); 
 	  	# code...
 	  	if($type[$key] == 'output'){
 			if(!empty($achievement_val[$key])){
@@ -966,6 +970,7 @@ public function addAchievementSubmit(Request $request) {
 					}
 					$indicator_id = $target->outputindicator_id;
 					$indicator = Outputindicator::find($indicator_id);
+					//print_r($indicator);
 					$achievement = $target->achievements()->create([
 					  	'description' => $achievement_val[$key],
 					  	'start_date' => $start_dates,
@@ -1008,7 +1013,7 @@ public function addAchievementSubmit(Request $request) {
 			}
 	  	}
 
-	}
+	}//die();
 	return response()->json(['success'=>true]);
 }
 
