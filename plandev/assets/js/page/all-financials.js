@@ -29,7 +29,7 @@ $(document).ready(function(){
                     perf = 0;
                 }
                 if(result.totalEst[key] > 0){
-                    var htm = '<div class="col-md-4 dash-sec-thumb-main" data-perf="'+perf+'"><div class="dash-sec-thumb '+cls+'"><a class="anch" data-target="#chartDrop2_'+key+'"><div class="title">'+sector.name+'</div><div class="thumb-ind-wrap"><span class="thumb-ind-item">'+result.totalEst[key]+'</span> Allocations <span class="thumb-ind-item green">'+result.totalExp[key]+'</span> Expenditure </div></a><span class="sub-anchor"></span><div class="sub-anchor-drop"><div class="sub-anchor-drop-in"><a href="dept_dashboard.html?dept_id='+sector.id+'">Dashboard</a></div></div><div class="dash-sec-thumb-dets" id="chartDrop2_'+key+'"><canvas id="chartCan2_'+key+'" width="500"></canvas></div></div></div>';
+                    var htm = '<div class="col-md-4 dash-sec-thumb-main" data-perf="'+perf+'"><div class="dash-sec-thumb active"><div class="anch"><div class="title">'+sector.name+'</div></div><div class="dash-sec-thumb-dets" id="chartDrop2_'+key+'"><canvas id="chartCan2_'+key+'" width="500"></canvas></div><div class="thumb-ind-wrap"><div class="row"><div class="col-md-6"><div class="indi"><span class="thumb-ind-item">'+result.totalEst[key]+'</span> Allocations <span class="thumb-ind-item green">'+result.totalExp[key]+'</span></div></div><div class="col-md-6"><div class="sub-anchor-drop-in"><a href="dept_dashboard.html?dept_id='+sector.id+'">More</a></div></div></div></div><span class="sub-anchor"></span><div class="sub-anchor-drop"></div></div></div>';
                     $('#sectorDashList1').append(htm);
                     includeHTML();
                     data = {

@@ -2363,6 +2363,12 @@ table {
 #myChartEst {
 	height: 479px;
 }
+#home_main #indicatorsScrollOfftrack, #cri_ind #indicatorsScrollOfftrack {
+	height: 410px !important;
+}
+#menu_main #indicatorsScrollOfftrack {
+	height: 410px;
+}
 #tableDepartments table  thead  tr  th, #tableDepartments table  tbody  tr  td:nth-child(2) {
 	text-align: center !important;
 }
@@ -2542,3 +2548,7 @@ table {
 }
 .right {text-align: right;}
 .right .btn {padding: 10px;}
+.act-pnt {
+	height: 440px;
+	overflow: auto;
+}

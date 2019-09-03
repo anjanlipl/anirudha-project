@@ -762,10 +762,10 @@ public function getSectorFinancials(Request $request)
 }
 return response()->json(['sector_name'=>$sector->name,'current_year'=>$current_year,'current_month_exp'=>$current_month_exp/100,'totalExp'=>$totalExp/100,'totalEst'=>$totalEst/100]);
 }
-public function getDashboardCounts()
+public function getDashboardCounts(Request $request)
 {
-	
-
+	//return $request;die();
+	$finYear = $request->input('finYear');
 	if(auth()->user()->department_id){
 		$dept_id = auth()->user()->department_id;
 		$department =  Department::find($dept_id) ;

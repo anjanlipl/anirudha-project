@@ -431,7 +431,7 @@ $.ajax({
   	},
 	type: 'get',
 	success: function(result){
-		// console.log(result);
+		 console.log(result);
 		$('.total-schemes .value').html(result.schemesCount);
 		$('.total-indicators .value').html(result.indicatorsCount);
 		$('.on-track .value').html(result.ontrack);
