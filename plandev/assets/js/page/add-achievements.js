@@ -111,7 +111,7 @@ $(document).ready(function(){
 				    	'Authorization': 'Bearer ' + localStorage.token
 				  	},
 				  	data:{'dept_id':schemeId, 'year': year},
-				  	success: function(result){
+				  	success: function(result){//console.log(result);
 						$('.notifyjs-wrapper').trigger('notify-hide');
 						elem.removeClass('loading');
 				  		$('#IndicatorsList').html('');
@@ -275,6 +275,7 @@ $(document).ready(function(){
         //if($.validatr.validateForm($('#scheme-objective-output-add'))){
 			var form_data = $(this).serialize() + '&year=' + $('#financial_year').val();
 			form_data = form_data + '&quarter=' + $('#financial_quarter').val();
+			//alert(form_data);
 			$.ajax({async: true,
 				url: siteUrl + "/api/add_achievements_submit",
 				headers: {
@@ -285,7 +286,7 @@ $(document).ready(function(){
 				data: form_data,
 				success: function(result){
 					$('.notifyjs-wrapper').trigger('notify-hide');
-					console.log(result);
+					//console.log(result);
 					location.reload();
 				},
 				error:function (error) {

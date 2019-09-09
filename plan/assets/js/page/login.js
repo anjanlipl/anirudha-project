@@ -82,7 +82,7 @@ $( document ).ready(function() {
               var dept_id = result.user.department_id;
               if(dept_id == null){
                 
-                window.location.href = frontUrl + 'my-dashboards.html';
+                window.location.href = frontUrl + 'dashboard.html';
               
               }
               else{

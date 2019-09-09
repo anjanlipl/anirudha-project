@@ -103,18 +103,18 @@ class OutcomeindicatorController extends Controller
                         $sum3_new = "";
                     }
 
-                    $actionBtn = '<a href="outcome-target-baseline.html?indicator_id='.$outcomeIndicator->id.'" class="btn btn-sm btn-green">
+                    $actionBtn = '<ul><li><a href="outcome-target-baseline.html?indicator_id='.$outcomeIndicator->id.'" class="btn btn-sm btn-green">
                                                 <span class="text">Targets &amp; Baseline</span>
-                                            </a>
+                                            </a></li><li>
                                             <a class="btn btn-sm btn-primary editIndicator " data-toggle="modal" data-target="#editIndicatorModal" data-name="'.$outcomeIndicator->name .'" data-id="'.$outcomeIndicator->id .'" data-unit="'.$outcomeIndicator->unit_id.'" data-remark="'.$outcomeIndicator->remark.'">
                                                 <span class="text">Edit</span>
-                                            </a>
+                                            </a></li><li>
                                             <a class="btn btn-sm btn-danger deleteObj" data-id="'.$outcomeIndicator->id .'">
                                                 <span class="text">Delete</span>
-                                            </a>
+                                            </a></li><li>
                                             <a class="btn btn-sm btn-red indicatorObj" data-id="'.$outcomeIndicator->id .'">
                                                 <span class="text">Indicator Objects</span>
-                                            </a>';
+                                            </a></li>';
 
                     $user = Auth::user(); 
                     $roles = $user->getRoleNames();
@@ -128,9 +128,9 @@ class OutcomeindicatorController extends Controller
                     }
                     foreach ($roles as $role) {
                             if($role =='super-admin'){
-                                $actionBtn .= '<a class="btn btn-sm btn-primary markCritical" data-id="'.$outcomeIndicator->id .'">
+                                $actionBtn .= '<li><a class="btn btn-sm btn-primary markCritical" data-id="'.$outcomeIndicator->id .'">
                                                                                 <span class="text">'.$criticBtnText.'</span>
-                                                                            </a>';
+                                                                            </a></li></ul>';
                                 break;
                             }
                     }  

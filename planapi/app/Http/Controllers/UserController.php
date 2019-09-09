@@ -354,6 +354,7 @@ class UserController extends Controller
     }
 
      public function deptAssigntolist(){
+
     // {
     //     $users = User::all();
     //     $returnUsers = array();
@@ -370,14 +371,19 @@ class UserController extends Controller
 
 
         $currentuser = Auth::user(); 
+        
         $currentroles = $currentuser->getRoleNames();
+
         $returnUsers = array();
         $moreUsers = array();
 
 
         foreach ($currentroles as $role1) {
+
                 if($role1 == 'super-admin'){
+
                    $returnUsers = User::role('department-admin')->get();
+
                    $moreUsers =User::role('hod')->get();
 
                    
@@ -761,11 +767,11 @@ class UserController extends Controller
 
         // print_r($request->input());
         $support_data['user'] = auth()->user()->name;
+         $email = auth()->user()->email;
         $support_data['text'] = $request->input('message');
-        print_r($support_data);
         Mail::send('ticket', $support_data, function($message) use ($support_data) {
-            $message->to("nishant6639@gmail.com", 'GOVERNMENT OF THE NATIONAL CAPITAL TERRITORY OF DELHI')->subject('New Ticket Raised');
-            $message->from('nishant060990@gmail.com','GOVERNMENT OF THE NATIONAL CAPITAL TERRITORY OF DELHI');
+            $message->to("budget.delhi@gov.in", 'GOVERNMENT OF THE NATIONAL CAPITAL TERRITORY OF DELHI')->subject('New Ticket Raised');
+            $message->from('$email','GOVERNMENT OF THE NATIONAL CAPITAL TERRITORY OF DELHI');
         });
         return response()->json(['saved'=>'true'], 200);
     }
@@ -1400,6 +1406,7 @@ class UserController extends Controller
                         "critical-nr-indicators.html",
                         "reports.html",
                         "scheme_dashboard.html",
+                        "scheme-list.html",
                         "change-password",
                         "change-password.html"
                     ]

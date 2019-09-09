@@ -489,11 +489,13 @@ class SchemeController extends Controller
             $img_path = $destinationPath . '/' . $file->getClientOriginalName();
             config(['excel.import.startRow' => 1]);
             try {
-                  
+                  //echo $img_path;die();
+                $reader = \Excel::load($img_path); 
+                //this will load file
+                //echo 'sadasd';die();
 
-                $reader = \Excel::load($img_path);                  //this will load file
                 $results = $reader->noHeading()->get()->toArray();
-
+                //print_r($results);
                 $head = $results[0];
                 
                 $baseline1Name = "Baseline 2017-18";
@@ -509,13 +511,14 @@ class SchemeController extends Controller
                 $target2EndDate = date('Y-m-d',strtotime('2020-03-31'));
                 $allOneEntries = array();
                 $newResult =$results;
-                  
+                
                 $countTotal = count($results);
                 for($i=1;$i<$countTotal;$i++){
                     $oneEntry = $results[$i];
                     array_push($allOneEntries, $oneEntry);
                     if(is_array($oneEntry)){
-                        if( count($oneEntry)>=15 ) {
+                      //echo count($oneEntry);die();
+                        if(count($oneEntry)>=14 ) {
                             $str = $oneEntry[1];
                             $objName = $oneEntry[2];
                             $indName = $oneEntry[3];

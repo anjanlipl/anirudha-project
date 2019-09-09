@@ -3,7 +3,7 @@ $(document).ready(function(){
     var dept_id = urlParams.get('dept_id');
 	var sector_id = urlParams.get('sector_id');
 	var data = {
-		status: '3',
+		status: '4',
 		dept_id: dept_id,
 		sector_id: sector_id
 	};

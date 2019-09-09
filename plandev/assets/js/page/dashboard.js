@@ -263,7 +263,7 @@ $.ajax({
   	},
 	type: 'get',
 	success: function(result){
-		// console.log(result);
+		console.log(result);
 		var data = [
 			{ label: "Total Scheme Expenditure", y: result.totalSchemeExp, color: "#FF8300" },
 			{ label: "Total Est. Expenditure", y: result.totalExp, color: '#000' }
@@ -305,6 +305,7 @@ $.ajax({
   	},
 	type: 'get',
 	success: function(result){
+		console.log(result);
 		$('.total-estimate .value').html(result.totalEst);
 		$('.total-exp .value').html(result.totalExp);
 		$('.month-exp .value').html(result.current_month_exp);
@@ -382,7 +383,7 @@ $.ajax({
 			    perf = 0;
 			}
 			if(result.totalExp[key]){
-			   	var htm = '<div class="col-md-4 dash-sec-thumb-main" data-perf="'+perf+'"><div class="dash-sec-thumb active"><div class="anch"><div class="title">'+sector.name+'</div></div><div class="dash-sec-thumb-dets" id="chartDrop2_'+key+'"><div id="chartCan2_'+key+'" width="400"></div></div><div class="thumb-ind-wrap"><div class="row"><div class="col-md-6"><div class="indi"><span class="thumb-ind-item">'+result.totalEst[key]+'</span> Allocation<span class="thumb-ind-item green">'+result.totalExp[key]+'</span></div></div><div class="col-md-6"><div class="sub-anchor-drop-in"><a href="dept_dashboard.html?dept_id='+sector.id+'">More</a></div></div></div></div><span class="sub-anchor"></span><div class="sub-anchor-drop"></div></div></div>';
+			   	var htm = '<div class="col-md-4 dash-sec-thumb-main" data-perf="'+perf+'"><div class="dash-sec-thumb active"><div class="anch"><div class="title">'+sector.name+'</div></div><div class="dash-sec-thumb-dets" id="chartDrop2_'+key+'"><div id="chartCan2_'+key+'" width="300"></div></div><div class="thumb-ind-wrap"><div class="row"><div class="col-md-6"><div class="indi"><span class="thumb-ind-item">'+result.totalEst[key]+'</span> Allocation<span class="thumb-ind-item green">'+result.totalExp[key]+'</span></div></div><div class="col-md-6"><div class="sub-anchor-drop-in"><a href="dept_dashboard.html?dept_id='+sector.id+'">More 123</a></div></div></div></div><span class="sub-anchor"></span><div class="sub-anchor-drop"></div></div></div>';
 				$('#sectorDashList1').append(htm);
 				includeHTML();
 				data = {
@@ -436,8 +437,10 @@ $.ajax({
 		$('.total-indicators .value').html(result.indicatorsCount);
 		$('.on-track .value').html(result.ontrack);
 		$('.off-track .value').html(result.offtrack);
-		$('.inprogress .value').html(result.na);
-		$('.notapplicable .value').html(result.inProgess);
+		 $('.inprogress .value').html(result.na);
+		 $('.notapplicable .value').html(result.inProgess);
+		// $('.notapplicable .value').html(result.na);
+		// $('.inprogress .value').html(result.inProgess);
 		data = {
 		    datasets: [{
 		        data: [result.ontrack, result.offtrack, result.inProgess, result.na],

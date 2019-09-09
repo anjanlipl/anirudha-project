@@ -238,7 +238,7 @@ $(document).ready(function(){
         	$('.reptable-overlay').fadeIn(300);
         	$('body').css('overflow', 'hidden');
 			var data = $(this).serialize();
-			// alert(data);
+			//x alert(data);
 
 			$.ajax({async: true,
 				url: siteUrl + "/api/getSchemeReports",
@@ -252,8 +252,8 @@ $(document).ready(function(){
 					console.log(result);
 					$('#rep').html(result);
 					var title_text = $('body #titleText').val();
-					console.log(title_text);
-					// $("#ExcelTable").tableExport();	
+					//console.log(title_text);
+					 $("#ExcelTable").tableExport();	
 					$('#ExcelTable').DataTable({
 						"paging":   false,
 						"searching": false,

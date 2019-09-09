@@ -19,12 +19,16 @@ class EstablishmentController extends Controller
     {
     	$dept_id = request()->get('dept_id');
 
-    	$allexp = array();
+    	  $allexp = array();
         $exp_per_be = array();
         $exp_per_re =array();
         $bugets = array();
         $revised = array();
-
+        $current_year=date("Y");
+        $current_month=date('m');
+        $next_year = date('Y', strtotime('+1 year'));
+        $newDate=$next_year.'-03-01';
+        $next_month = date('m', strtotime($newDate));
     	if(isset($dept_id) && $dept_id != null){
     		$department = Department::find($dept_id);
 
@@ -127,7 +131,7 @@ class EstablishmentController extends Controller
 
     		}
     	}
-               return response()->json(['bugets'=>$bugets,'revised'=>$revised,'exp' =>$allexp]);
+               return response()->json(['bugets'=>$bugets,'revised'=>$revised,'exp' =>$allexp,'current_month'=>$current_month,'current_year'=>$current_year,'next_year'=>$next_year]);
 
         //return view('department.index', compact('departments'));
     }
@@ -162,18 +166,21 @@ class EstablishmentController extends Controller
              
              if(isset($re) && count($re)>0){
                  foreach ($re as $value) {
+                  //print_r($value);
                  if($value->end_date == $est_end_year){
                     $xtotalRe = $value->sal + $value->benefits + $value->wages + $value->machinery + $value->office_exp ;
                  }
                 }
              }else if(isset($be) && count($be)>0){
                 foreach ($be as $value) {
+                  //print_r($value);
                  if($value->end_date == $est_end_year){
                     $xtotalRe = $value->sal + $value->benefits + $value->wages + $value->machinery + $value->office_exp ;
                  }
                 }
              }
-
+             // echo $xtotalRe;
+             // die();
              if(isset($exp) && count($exp)>0){
                  foreach ($exp as $value) {
                     $year_exp =  explode('-',$value->exp_year);

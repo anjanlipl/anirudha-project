@@ -112,7 +112,7 @@ $(document).ready(function(){
 	 $(document).on('click', '.editIndicator', function(){
 	 	//alert('here');
       var indId = $(this).attr('data-id');
-      alert(indId);
+      //alert(indId);
       var desc = $(this).attr('data-name');
       var remark = $(this).attr('data-remark');
            	$('#edit-output-ind .id').val(indId);

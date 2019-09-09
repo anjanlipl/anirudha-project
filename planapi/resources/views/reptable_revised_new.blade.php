@@ -164,6 +164,9 @@
                     <td style="border: none !important; border-right: 1px solid #DDD !important;">&nbsp;</td>
                     <td style="border: none !important;">&nbsp;</td>
                 </tr>
+                 <tr class="not-printable" style="background-color: #EEE;">
+                    <td colspan="16"><b>Dept Name : @php echo $schemes[0]['dept_namng']; @endphp</b></td>
+                </tr>
                 <tr class="not-printable" style="background-color: #EEE;">
                     <td><b>S. No.</b></td>
                     <td><b>Name of the Scheme / Programme and Budget Allocation (Rs. Lakhs)</b></td>
@@ -184,6 +187,7 @@
                     {{-- <td><b>Target({{ date('Y', strtotime('+1 years')) }} - {{ date('y', strtotime('+2 years')) }})</b></td> --}}
                     <td><b>Remarks</b></td>
                 </tr>
+
                 <tr style="background-color: #FAFAFA;">
                     <td>1</td>
                     <td>2</td>

@@ -178,6 +178,7 @@ class DashboardController extends Controller
 	public function getDashboardFinancials()
 	{
 		$schemes= Scheme::all();
+
 		$current_month = date('m');
 		$current_year = date('Y');
 		$current_month_exp =0;
@@ -190,8 +191,10 @@ class DashboardController extends Controller
 		}
 		$totalEst = 0;
 		$totalExp =0;
+		$current_month_exp_new=0;
 		foreach ($schemes as $scheme) {
 			$unit = $scheme->unit()->first();
+			//return $unit;
           	$unitName ='NA';
           	if(isset($unit->id) && $unit->is_default == 0){
               	$unitName = $unit->name;
@@ -205,10 +208,12 @@ class DashboardController extends Controller
                 	}
                 }
      		}
+
 			$estimate =$scheme->estimates()->where('end_date',$est_end_year)->first();
+			//print_r($estimate);
 			if(!empty($estimate)){
 				$revisedEstimate = $estimate->revisedEstimates()->get();
-
+				
 				if(count($revisedEstimate)){
 					// print_r($revisedEstimate);
 					foreach ($revisedEstimate as $re) {
@@ -225,34 +230,52 @@ class DashboardController extends Controller
 		 }
 
 		 $expenditures = $scheme->expenditures()->get();
-		 foreach ($expenditures as $exp) {
-		 	$exp_date = date('Y-m', strtotime($exp->exp_year));
-			$year_exp =  explode('-',$exp->exp_year);
-					// print_r($year_exp);
-			$concerned_year = $year_exp[1];
-			$concerned_month =  $year_exp[0];
-			if(date('m') < 4){
-				if(($concerned_month > 3 && $concerned_year == date('Y', strtotime('-1 years'))) || ($concerned_month < 4 && $concerned_year == date('Y'))) {
-					$totalExp += $exp->revenue + $exp->capital + $exp->loan;
-					if($current_month ==$concerned_month ){
-						$current_month_exp = $exp->revenue + $exp->capital + $exp->loan;
+		 
+		 if(isset($expenditures) && count($expenditures)>1){
+		 	//print_r($expenditures);
+		 	foreach ($expenditures as $exp) {
+			 	//print_r($exp);
+			 	$exp_date = date('Y-m', strtotime($exp->exp_year));
+				$year_exp =  explode('-',$exp->exp_year);
+
+						// print_r($year_exp);
+				$concerned_year = $year_exp[1];
+				$concerned_month =  $year_exp[0];
+				//echo $concerned_year;die();
+				if((int)date('m') < 4){
+
+					if(((int)$concerned_month > 3 && (int)$concerned_year == date('Y', strtotime('-1 years'))) || ((int)$concerned_month < 4 && (int)$concerned_year == date('Y'))) {
+						$totalExp += $exp->revenue + $exp->capital + $exp->loan;
+						//if($current_month ==$concerned_month ){
+							$current_month_exp = $exp->revenue + $exp->capital + $exp->loan;
+						//}
 					}
 				}
-			}
-			else{
-				if(($concerned_month > 3 && $concerned_year == date('Y')) || ($concerned_month < 4 && $concerned_year == date('Y', strtotime('+1 years')))) {
-					$totalExp += $exp->revenue + $exp->capital + $exp->loan;
-					if($current_month ==$concerned_month ){
-						$current_month_exp = $exp->revenue + $exp->capital + $exp->loan;
+				else{
+					
+					if(((int)$concerned_month > 3 && (int)$concerned_year == date('Y')) || ((int)$concerned_month < 4 && (int)$concerned_year == date('Y', strtotime('+1 years')))) {
+						//echo $exp->id.'@@';
+						$totalExp += $exp->revenue + $exp->capital + $exp->loan;
+						//if($current_month ==$concerned_month){
+							$current_month_exp = $exp->revenue + $exp->capital + $exp->loan;
+							
+						//}
 					}
 				}
+				
 			}
+			//echo $exp->scheme_id.'@@';
+			$current_month_exp_new +=$current_month_exp;
+			//echo $current_month_exp.'##';
+		 }
+		 	//die();
+			//echo $current_month_exp.'@@';
 			
-		}
+		 
 	}
 	
-}
-return response()->json(['current_year'=>$current_year,'current_month_exp'=>round(($current_month_exp/100), 2),'totalExp'=>round(($totalExp/100),2),'totalEst'=>round(($totalEst/100),2)]);
+}//die();
+return response()->json(['current_year'=>$current_year,'current_month_exp'=>round(($current_month_exp_new/100), 2),'totalExp'=>round(($totalExp/100),2),'totalEst'=>round(($totalEst/100),2)]);
 }
 
 public function getDashboardFinancialsScheme(Request $request)
@@ -767,12 +790,14 @@ public function getDashboardCounts(Request $request)
 	//return $request;die();
 	$finYear = $request->input('finYear');
 	if(auth()->user()->department_id){
+
 		$dept_id = auth()->user()->department_id;
 		$department =  Department::find($dept_id) ;
 		$na =0;
 		$ontrack=0;
 		$offtrack=0;
 		$inProgess=0;
+		$nr=0;
 		$schemesCount=0;
 		$allOfftrackOutputIndicators =array();
 		$allOfftrackOutcomeIndicators = array();
@@ -847,7 +872,7 @@ public function getDashboardCounts(Request $request)
 	   $allOfftrackOutputIndicators = Outputindicator::where([ ['status',3], ['name', '!=', '.'] ])->get();
 	   $allOfftrackOutcomeIndicators = Outcomeindicator::where([ ['status',3], ['name', '!=', '.'] ])->get();
 	   
-
+	   //print_r($outputIndicators);die();
 
 	   $na = count(Outputindicator::where([ ['status',1], ['name', '!=', '.'] ])->get()) + count(Outcomeindicator::where([ ['status',1], ['name', '!=', '.'] ])->get()) ;
 	   $ontrack = count(Outputindicator::where([ ['status',2], ['name', '!=', '.'] ])->get()) + count(Outcomeindicator::where([ ['status',2], ['name', '!=', '.'] ])->get()) ;
@@ -885,8 +910,11 @@ public function getIndicatorDataMain(Request $request)
    			$status = 'Off Track';
    			
    		}else if($status_id == 4){
-   			$status = 'In progress';
+   			//$status = 'In progress';
+   			$status = 'NR';
    			
+   		}else{
+   			$status = 'In progress';
    		}
    		$result_actionpoints = array();
    		if($indicator_type == 'outcome'){

@@ -436,8 +436,8 @@ $.ajax({
 		$('.total-indicators .value').html(result.indicatorsCount);
 		$('.on-track .value').html(result.ontrack);
 		$('.off-track .value').html(result.offtrack);
-		$('.inprogress .value').html(result.inProgess);
-		$('.notapplicable .value').html(result.na);
+		$('.inprogress .value').html(result.na);
+		$('.notapplicable .value').html(result.inProgess);
 		
 		data = {
 		    datasets: [{
@@ -500,14 +500,14 @@ $.ajax({
 		};
 		drawBarChart('myChart1', data, 500);
 
-		$.each( result.allOfftrackOutputIndicators, function( key, value ) {
+		/*$.each( result.allOfftrackOutputIndicators, function( key, value ) {
 			var htm = '<a href="output-target-baseline.html?indicator_id='+value.id +'">' + value.name + '</a>';
 			$('#indicatorsScrollOfftrack').append(htm);
 		});
 		$.each( result.allOfftrackOutcomeIndicators, function( key, value ) {
 			var htm = '<a href="outcome-target-baseline.html?indicator_id='+value.id +'">' + value.name + '</a>';
 			$('#indicatorsScrollOfftrack').append(htm);
-		});
+		});*/
 
 	},
 	error:function (error) {

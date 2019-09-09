@@ -1,14 +1,17 @@
 $( document ).ready(function() {
+  
     //console.log( "ready!" );
     checkDadminOrHOD();
+
      $.ajax({async: true,url: siteUrl + "/api/assign_departments_list",
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + localStorage.token
       },
       success: function(result){
+        //console.log(result);
        $('#departmentTab').DataTable({
-       	data: result['departments']
+        data: result['departments']
        }) 
    },error:function (error) {
                 console.log(error.status);

@@ -100,6 +100,89 @@ class EvaluationCriteriaController extends Controller
 
         $item->save();
 
+        if(date('m') > 3){
+            $current_begin_date = date('Y-04-01', strtotime('-2 years'));
+            $current_end_date = date('Y-03-31', strtotime('-1 years'));
+
+            $last_begin_date = date('Y-04-01', strtotime('-1 years'));
+            $last_end_date = date('Y-03-31');
+
+            $begin_date = date('Y-04-01');
+            $end_date = date('Y-03-31', strtotime('+1 years'));
+
+
+            $next_begin_date = date('Y-04-01', strtotime('+1 years'));
+            $next_end_date = date('Y-03-31', strtotime('+2 years'));
+
+        }
+        else{
+            $current_begin_date = date('Y-04-01', strtotime('-3 years'));
+            $current_end_date = date('Y-03-31', strtotime('-2 years'));
+
+            $last_begin_date = date('Y-04-01', strtotime('-2 years'));
+            $last_end_date = date('Y-03-31', strtotime('-1 years'));
+
+            $begin_date = date('Y-04-01', strtotime('-1 years'));
+            $end_date = date('Y-03-31');
+
+
+            $next_begin_date = date('Y-04-01');
+            $next_end_date = date('Y-03-31', strtotime('+1 years'));
+
+        }
+
+        $scheme_outp = DB::table('schemes as s')
+                        ->join('objectives as o', 'o.scheme_id', '=', 's.id')
+                        ->join('outputs as op', 'op.objective_id', '=', 'o.id')
+                        ->join('outputindicators as opi', 'opi.output_id', '=', 'op.id')
+                        ->join('baselines as opb', 'opb.outputindicator_id', '=', 'opi.id', 'left')
+                        ->join('outputtargets as opt', 'opt.outputindicator_id', '=', 'opi.id', 'left')
+                        ->select('opt.id as target_id')
+                        ->where([
+                          ['opt.start_date', '>=', $begin_date],
+                          ['opt.end_date', '<=', $end_date]
+                        ])
+                        ->get();
+        // $sum1=0;
+        // foreach($scheme_outp as $key30=>$value30){
+        //     if(!empty($value30->opt_id)){
+        //         $sum1 = DB::table('achievements')->where('outputtarget_id', $value30->opt_id)->sum('description');
+        //     }
+        //     $scheme_outp[$key30]->status = $sum1;
+        // }
+
+        foreach ($scheme_outp as $key => $value) {
+            # code...
+
+        }
+
+
+
+        $scheme_outc = DB::table('schemes as s')
+                        ->join('objectives as o', 'o.scheme_id', '=', 's.id')
+                        ->join('outputs as op', 'op.objective_id', '=', 'o.id')
+                        ->join('outcomes as oc', 'oc.output_id', '=', 'op.id')
+                        ->join('outcomeindicators as oci', 'oci.outcome_id', '=', 'oc.id')
+                        ->join('outcomebaselines as ocb', 'ocb.outcomeindicator_id', '=', 'oci.id', 'left')
+                        ->join('outcometargets as oct', 'oct.outcomeindicator_id', '=', 'oci.id', 'left')
+                        ->select('oct.id as oct_id')
+                        ->where([
+                          ['oct.start_date', '>=', $begin_date],
+                          ['oct.end_date', '<=', $end_date]
+                        ])
+                        ->get();
+
+        // print_r($scheme_outp.'------------'.$scheme_outc);
+        // die;
+
+        foreach($scheme_outc as $key=>$value){
+          //print_r($value);
+            $this->outcomeStatus($value->oct_id);
+        }
+
+        foreach($scheme_outp as $key1=>$value1){
+            $this->outputStatus($value1->target_id);
+        }
         //$sectorCreated = Sector::where('name',$request->get('sectorName'))->first();
         
        
@@ -228,13 +311,14 @@ class EvaluationCriteriaController extends Controller
         // die;
 
         foreach($scheme_outc as $key=>$value){
+          //print_r($value);
             $this->outcomeStatus($value->oct_id);
         }
 
         foreach($scheme_outp as $key1=>$value1){
             $this->outputStatus($value1->target_id);
         }
-
+        //die();
         return response()->json(['success'=>'true','criteria'=>$item]);
     }
 

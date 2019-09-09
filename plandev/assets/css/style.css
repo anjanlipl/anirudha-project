@@ -1284,10 +1284,17 @@ td{
 	/*padding-bottom: 20px !important;*/
 	vertical-align: middle !important;
 	border-right-width: 0px !important;
-	text-align: left !important;
+	text-align: left;
 }
 td:last-child, th:last-child{
 	border-right-width: 1px !important;
+}
+/*Below code added by Anjan Barik*/
+#DataTables_Table_2_wrapper tr td:last-child {
+  text-align: right !important;
+}
+table thead tr th:nth-child(2){
+  text-align: center !important;
 }
 .reptable-overlay{
 	display: block;
@@ -2358,8 +2365,9 @@ table {
 	height: auto;
 }
 #cri_ind .section-scroll {
-	height: 500px;
+	height: 410px;
 }
+
 #myChartEst {
 	height: 479px;
 }
@@ -2424,6 +2432,9 @@ table {
 	width: 30px;
 	margin: 20px;
   }
+  #outputTarget .btn, #outputBaseline .btn, #add-baseline .btn, #add-target .btn {
+	  width: 110px;
+	}
 
 
   
@@ -2442,7 +2453,9 @@ table {
   	height: 45px;
   	width: 45px;
   }
-
+  #outputTarget .btn, #outputBaseline .btn, #add-baseline .btn, #add-target .btn {
+	  width: 110px;
+	}
 
   
 }
@@ -2460,7 +2473,9 @@ table {
   	height: 50px;
   	width: 50px;
   }
-
+  #outputTarget  .btn, #outputBaseline .btn, #add-baseline .btn, #add-target .btn {
+	  width: 110px;
+	}
   
 }
 /* 

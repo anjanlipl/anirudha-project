@@ -13,7 +13,8 @@ $(document).ready(function(){
 		  	},
 		  	data: $('#sendSupportTicket').serialize(),
 		  	success: function(result){
-				$('.notifyjs-wrapper').trigger('notify-hide');
+		  		console.log(result);
+				//$('.notifyjs-wrapper').trigger('notify-hide');
 
 			}
 		});

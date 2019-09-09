@@ -134,7 +134,7 @@ class DepartmentController extends Controller
 
      public function assignDepartmentslist()
     {
-      $curr_user = Auth::user(); 
+      $curr_user = Auth::user();
       $roles = $curr_user->getRoleNames();
       foreach ($roles as $role) {
          if($role =='super-admin'){
@@ -150,42 +150,57 @@ class DepartmentController extends Controller
                $departments =array();
             }
         }    
-        $result = array();
-        foreach ($departments as $depart) {
-              $allUserAssigned='';
+        //$departments = Department::orderBy('name', 'asc')->get();
 
+        $result = array();
+
+        foreach ($departments as $depart) {
                 $name = $depart->name;
+                $depart_assigned = $depart->assigned_to;
                 $subsector = $depart->subsector()->first();
                 $sector = $subsector->sector()->first();
-
-                $sectorName = $sector->name;
+                if(isset($subsector->id) && isset($sector->id)){
+                    $sectorName = $sector->name;
                 if($subsector->is_default == 1){
                     $subsectorName ='NA';
                 }else{
                     $subsectorName = $subsector->name;
                 }
 
-                $actionBtn = '<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#assignDepartModal" id="assignDept" data-id="'. $depart->id .'">
+                 $actionBtn = '<a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#assignDepartModal" id="assignDept" data-id="'. $depart->id .'">
                                         <span class="text">Assign</span>
                                     </a>
                                    ';
 
 
-                             $createdDate = 'NA';
-
+             $createdDate = 'NA';
                 if(isset($depart->created_at)){
                   $createdDate =  date('d M, Y',strtotime($depart->created_at) );
-                }    
+                }     
 
+foreach ($roles as $role) {
 
-                 
-                  //var_dump($roles);die;
-                  foreach ($roles as $role) {
                           if($role =='super-admin'){
-                              if($depart->assigned_to != null && $depart->assigned_to != ''){
-                                  $assignedUser= User::find($depart->assigned_to);
-                                  $assigned_to = $assignedUser->name;
+                              if($depart_assigned != null && $depart_assigned != ''){
+                                
+                                  //$assignedUser= User::find($depart->assigned_to);
+                                
+                              
+                                //$assignedUser = Users::where('id',$idd);
+                                $depart_assignedto = User::where('id',$depart_assigned)->get();
+                               
+                               
+                                foreach ($depart_assignedto as $depart_assigned_to) {
+                                 $alldepart_assigned_to = $depart_assignedto[0]['name'];
+                                   
+                                }
+
+                             
+                             $assigned_to = $alldepart_assigned_to;
+                                //$assigned_to = $depart->assigned_to;
+                               
                               }else{
+                                
                                    $assigned_to = 'None';
 
                               }
@@ -200,16 +215,18 @@ class DepartmentController extends Controller
                             
                           }
                 }
-
-               
+                
+                
                 array_push($result, [
                     $name,
                     $sectorName,
                     $subsectorName,
+                    //$createdDate,
                     $assigned_to,
-                    // $createdDate,
                     $actionBtn
                 ]);
+                }
+                
         }
         return response()->json(['departments'=>$result]);
 

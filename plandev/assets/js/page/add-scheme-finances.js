@@ -151,6 +151,24 @@ $(document).ready(function(){
         'Authorization': 'Bearer ' + localStorage.token
       },
       success: function(result){
+        console.log(result);
+       if(parseInt(result.current_month) > 3 || parseInt(result.current_month) < 10){
+        $('.exp_be').show();
+        $('.budget').show();
+        $('.revised').hide();
+          $('#exp_per_be_tab').DataTable({
+            data: result['exp_per_be']
+           }) ;
+          $('.exp_re').hide();
+        }else{
+          $('.exp_re').show();
+          $('.budget').hide();
+          $('.revised').show();
+          $('#exp_per_re_tab').DataTable({
+            data: result['exp_per_re']
+           }) ;
+          $('.exp_be').hide();
+        }
        $('#be_tab').DataTable({
        	data: result['bugets']
        }) ;
@@ -160,12 +178,7 @@ $(document).ready(function(){
        $('#exp_tab').DataTable({
        	data: result['exp']
        }) ;
-       $('#exp_per_be_tab').DataTable({
-        data: result['exp_per_be']
-       }) ;
-       $('#exp_per_re_tab').DataTable({
-        data: result['exp_per_re']
-       }) ;
+       
    },error:function (error) {
                 console.log(error.status);
                 if(error.status == 401){

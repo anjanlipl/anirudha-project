@@ -34,9 +34,11 @@ class ReportController extends Controller
 
     public function getSchemeRep(Request $request)
     {
+
         # code...
 
         if(date('m') > 3){
+
             $current_begin_date = date('Y-04-01', strtotime('-2 years'));
             $current_end_date = date('Y-03-31', strtotime('-1 years'));
 
@@ -68,7 +70,7 @@ class ReportController extends Controller
         }
 
         $head = "";
-
+        $dept_name="";
 
         if(!empty($request->input('scheme_id'))){
 
@@ -86,6 +88,7 @@ class ReportController extends Controller
                         ->get();
             if(count($schemes)){
                 $head = $schemes[0]->name;
+                $dept_name=$schemes[0]->dept_name;
             }
         }
         else{
@@ -118,6 +121,7 @@ class ReportController extends Controller
                                 ->get();
                     if(count($schemes)){
                         $head = $schemes[0]->dept_name;
+
                     }
                 }
                 else{
@@ -171,46 +175,48 @@ class ReportController extends Controller
             $objectives = DB::table('objectives as o')
                             ->where('scheme_id', '=', $value1->id)
                             ->get();
-        
+            
             foreach($objectives as $key2=>$value2){
 
                 $outputs = DB::table('outputs as op')
                                 ->where('objective_id', '=', $value2->id)
                                 ->get();
-        
+                //print_r($outputs);
                 foreach($outputs as $key3=>$value3){
-
+                    //print_r($value3);
                     $output_inds = DB::table('outputindicators as opi')
 
                                     ->where([
                                         ['output_id', '=', $value3->id]
                                     ])
                                     ->get();
-
-                    $output_inds = $this->getOutputIndMetrics($output_inds);
-                    foreach ($output_inds as $key4 => $value4) {
-        
+                    if(count($output_inds) > 0){
+                        $output_inds1 = $this->getOutputIndMetrics($output_inds);
+                    }
+                    //print_r($output_inds1);
+                    foreach ($output_inds1 as $key4 => $value4) {
                         # code...
-                    
+                        //echo "@@".$value4->id;
                         $outcome_inds = DB::table('outcomeindicators as oci')
                                             ->where([
                                                 ['output_indicator_id', '=', $value4->id]
                                             ])
                                             ->get();
+
                         $outcome_inds = $this->getOutcomeIndMetrics($outcome_inds);
-                    
-                        $output_inds[$key4]->outcome_inds = $outcome_inds;
-                    
+                        
+                        $output_inds1[$key4]->outcome_inds = $outcome_inds;
+                        
                     }
                     
-                    $objectives[$key2]->output_inds= $output_inds;
-                
+                    $objectives[$key2]->output_inds= $output_inds1;
+                    //print_r($objectives);
                 }
-
+                //print_r($objectives);die();
             }
 
             $schemes[$key1]->objectives = $objectives;
-        
+            
         }
 
         // $allObjectiveOutputIndicators[$key2]->status = $status_new;
@@ -228,7 +234,11 @@ class ReportController extends Controller
 
         $i=0; $sl = 1;
         $row_arr = array();
+     
+        $dept_namng = $schemes[0]->dept_name;
+        
         foreach($schemes as $key5=>$value5){
+            $row_arr[0]['dept_namng']=$dept_namng;
             $j=0;
             foreach ($value5->objectives as $key6 => $value6) {
                 # code...
@@ -340,63 +350,15 @@ class ReportController extends Controller
                 }
             }
         }
-        // echo json_encode($row_arr);
-        // die;
-        $data['schemes'] = $row_arr;
+
+        //echo "<pre>";
+        // var_dump($row_arr);
+         //echo "<pre>";
+         // json_encode($row_arr);
+         //die;
+      $data['schemes'] = $row_arr;
         $data['head'] = $head;
-        $this->data = $data;
-        Excel::create('New file', function($excel) {
-
-            $excel->sheet('New sheet', function($sheet) {
-
-                $sheet->loadView('reptable_revised_new', $this->data);
-            });
-
-            $lastrow= $excel->getActiveSheet()->getHighestRow();
-            // echo 'A1:P'.$lastrow;
-            $excel->getActiveSheet()->getStyle('A1:P'.$lastrow)->getAlignment()->setWrapText(true);
-            for($rowIndex=1; $rowIndex<$lastrow; $rowIndex++){
-                $excel->getActiveSheet()->getRowDimension($rowIndex)->setRowHeight(70);
-            }
-            $excel->getActiveSheet()->cells('A1:P'.$lastrow, function($cells) {
-                // manipulate the range of cells
-                $cells->setValignment('top');
-
-            });
-
-            $excel->getActiveSheet()->setStyle([
-                'borders' => [
-                    'allborders' => [
-                        'color' => [
-                            'rgb' => 'DDDDDD'
-                        ]
-                    ]
-                ]
-            ]);
-
-
-            $excel->getActiveSheet()->setWidth(array(
-                'A'     =>  10,
-                'B'     =>  30,
-                'C'     =>  30,
-                'D'     =>  30,
-                'E'     =>  30,
-                'F'     =>  30,
-                'G'     =>  30,
-                'H'     =>  30,
-                'I'     =>  30,
-                'J'     =>  30,
-                'K'     =>  30,
-                'L'     =>  30,
-                'M'     =>  30,
-                'N'     =>  30,
-                'O'     =>  30,
-                'P'     =>  30,
-            ));
-
-        })->store('xlsx');
         return view('reptable_revised_new', $data);
-
 
     }
 

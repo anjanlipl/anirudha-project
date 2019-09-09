@@ -244,7 +244,7 @@ label{
 }
 .form-row{
 	position: relative;
-	margin: 24px 0px;
+	margin: 15px 0px;
 }
 .validatr-message{
 	background-color: transparent !important;
@@ -749,7 +749,7 @@ nav.sidebar.collapsed:hover{
 }
 .side-list > li{
 	position: relative;
-	display: block;
+	display: none;
 	cursor: pointer;
 	width: 230px;
 	border-left: 4px solid transparent;
@@ -916,14 +916,13 @@ nav.sidebar.collapsed:hover{
 	margin-left: 54px;
 }
 .dash-sec-thumb-title{
-	display: none;
 	font-size: 15px;
     font-weight: 700;
     background-color: #4eafb7;
     text-transform: uppercase;
     /* border-bottom: 1px solid #DDD; */
     /* margin-bottom: 20px; */
-    margin: -20px -30px;
+    margin: 0px -30px;
     /* line-height: 40px; */
     line-height: 30px;
     margin-bottom: 0px;
@@ -1195,12 +1194,15 @@ canvas{
 	padding: 0px;
 }
 .section-scroll{
-	height: 500px;
+	height: 467px;/* 500px; */
 	overflow-x: hidden;
 	position: relative;
 	z-index: 2;
 	margin: 0px;
 	/*padding: 4px 20px;*/
+}
+#indicatorsScrollOfftrack, #indicatorsScrollOfftrackCri {
+	height: 410px;
 }
 .section-scroll > a{
 	display: block;
@@ -2133,7 +2135,7 @@ thead.hidden {
 #IndList h3{
 	font-family: 'Nunito', sans-serif;
     padding: 25px;
-    margin: 15px;
+    /* margin: 15px; */
     font-size: 15px;
     background: #EEE;
     border-bottom: 1px solid #DDD;
@@ -2280,9 +2282,9 @@ select#finYear option {
 table.dataTable thead th {
 	padding-right: 20px !important;
 }
-#add-scheme-form .form-control {
+#add-scheme-form .form-control, select[multiple="multiple"], inupt.form-control {
   height: 35px;
-  border: 1px solid #33d5e1;
+  /* border: 1px solid #33d5e1; */
   padding: 0 12px;
 }
 #add-scheme-form .form-control#montype-select, #add-scheme-form .form-control#tag-select{
@@ -2311,7 +2313,42 @@ li.init { cursor: pointer; }
 	margin-bottom: 15px;
 	line-height: 30px;
 }
-#schemeObjectivesOutput .btn, #outcomeTab .btn {
-  width: 150px;
+#schemeObjectivesOutput .btn, #outcomeTab .btn, #schemeObjectives .btn {
+  width: 150px !important;
 }
-/* table#schemeObjectives */
+table#schemeObjectives .btn {
+	width: 100%;
+}
+.pdlr15 {
+  padding: 0 15px;
+}
+.num-indicator-item {
+  min-height: 130px;
+}
+table {
+	width: 100%;
+}
+#IndList button.btn {
+  margin-left: 15px;
+}
+#IndList textarea, #IndicatorsList textarea {
+	height: 35px;
+}
+#indicatorTab ul {
+	list-style: none;
+}
+#indicatorTab ul li a {
+	width: 100%;
+}
+#sectorDashList .dash-sec-thumb-dets {
+	display: none;
+}
+.title_department{
+font-size: 1.5em;
+font-weight: 700;
+background: #4eafb7;
+margin: 0 -30px;
+padding: 5px 15px;
+color: #fff;
+}
+.side-list {display: none;}

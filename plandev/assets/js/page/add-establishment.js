@@ -40,7 +40,14 @@ $(document).ready(function(){
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + localStorage.token
       },
-      success: function(result){
+      success: function(result){console.log(result);
+       if(parseInt(result.current_month) > 3 || parseInt(result.current_month) < 10){
+        $('.budget').show();
+        $('.revised').hide();
+        }else{
+          $('.budget').hide();
+          $('.revised').show();
+        }
        $('#be_tab').DataTable({
        	data: result['bugets']
        }) ;

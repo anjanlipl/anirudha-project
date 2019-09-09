@@ -50,7 +50,7 @@ $.ajax({
         // localStorage.token = result;
     },
     error: function(result){
-        $('body').html('Access Denied');
+        //$('body').html('Access Denied');
         // localStorage.removeItem('token');
         // localStorage.removeItem('user_role');
         // localStorage.removeItem('username');

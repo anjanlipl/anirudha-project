@@ -25,9 +25,6 @@ $(document).ready(function(){
     error:function (error) {
       console.log(error.status);
       if(error.status == 401){
-        
-        
-        
       }
     }
   });

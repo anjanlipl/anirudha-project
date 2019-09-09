@@ -132,14 +132,45 @@ class FinanceController extends Controller
         $exp_per_re =array();
         $bugets = array();
         $revenues = array();
-
+        $current_year=date("Y");
+        $current_month=date('m');
+        $next_year = date('Y', strtotime('+1 year'));
+        $newDate=$next_year.'-03-01';
+        $next_month = date('m', strtotime($newDate));
+        //echo $next_month;die();
         foreach ($esitmates as $esitmate) {
 
         	$be = $esitmate->budgetEstimates()->first();
         	$re = $esitmate->revisedEstimates()->first();
 
-        	
-                if(isset($re))  {
+        	//echo $current_month;die();
+                    
+                    if(isset($be)) {
+                            $actionBtnbe = '<div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+                                        Actions <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu beAction" role="menu" id="actionDrop ">
+                                        <li><a class="edit" data-toggle="modal"
+                                        data-target="#editBeModal"  data-id="'.$be->id.'">Edit</a></li>
+                                        <li><a class="delete" id="deleteBe" data-id="'.$be->id.'"  href="javascript:void(0);" >Delete</a></li>
+                                    </ul>
+                                </div>';
+
+                         $total = $be->revenue + $be->capital + $be->loan; 
+                            array_push($bugets, [
+                       $esitmate->start_date.'-'. $esitmate->end_date,
+                        $be->revenue,
+                        $be->capital,
+                        $be->loan,
+                        $total,
+                        $actionBtnbe,
+                        
+                    ]);
+                    }
+                
+                    
+                    if(isset($re))  {
                     $actionBtnre = '<div class="btn-group">
                                 <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
                                     Actions <span class="caret"></span>
@@ -162,35 +193,7 @@ class FinanceController extends Controller
                                 $actionBtnre,
                     
                             ]);
-                }          
-                if(isset($be)) {
-                        $actionBtnbe = '<div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
-                                    Actions <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu beAction" role="menu" id="actionDrop ">
-                                    <li><a class="edit" data-toggle="modal"
-                                    data-target="#editBeModal"  data-id="'.$be->id.'">Edit</a></li>
-                                    <li><a class="delete" id="deleteBe" data-id="'.$be->id.'"  href="javascript:void(0);" >Delete</a></li>
-                                </ul>
-                            </div>';
-
-                     $total = $be->revenue + $be->capital + $be->loan; 
-                        array_push($bugets, [
-                   $esitmate->start_date.'-'. $esitmate->end_date,
-                    $be->revenue,
-                    $be->capital,
-                    $be->loan,
-                    $total,
-                    $actionBtnbe,
-                    
-                ]);
-                }
-
-                
-               
-                
-               
+                    }
         }
 
 
@@ -211,15 +214,25 @@ class FinanceController extends Controller
             $year_exp =  explode('-',$expenditure->exp_year);
             $concerned_year = $year_exp[1];
             $concerned_month =  $year_exp[0];
+            //echo $concerned_year;die();
             $exp_this ='';
             if($concerned_month < 3){
              $exp_this = $scheme->estimates()->where('end_date',$concerned_year)->first();
             }else{
              $exp_this = $scheme->estimates()->where('start_date',$concerned_year)->first();
             }
+
             if(isset($exp_this) && $exp_this != '' ){
                 $be_this = $exp_this->budgetEstimates()->first();
                 $re_this = $exp_this->revisedEstimates()->first();
+                // if((int)$current_month < 10 || (int)$current_month > 3){
+                    
+                // }
+                // if(((int)$current_month > 9 && $current_year==date("Y")) || ((int)$next_month < 4 && $current_year == date('Y', strtotime('+1 year')))){
+
+                   
+                // }
+                //return $be_this;die();
                  if(isset($be_this) && $be_this != '' && !empty($be_this)){
                     
 
@@ -241,7 +254,7 @@ class FinanceController extends Controller
                 
                  
 
-                array_push($exp_per_be, [
+                        array_push($exp_per_be, [
                         $expenditure->exp_year,
                         round($rev_per_be,2),
                         round($cap_per_be,2),
@@ -299,7 +312,7 @@ class FinanceController extends Controller
                     
                 ]);
         }
-        return response()->json(['revenues'=>$revenues,'bugets'=>$bugets,'exp'=>$exp,'exp_per_be'=>$exp_per_be,'exp_per_re'=>$exp_per_re]);
+        return response()->json(['revenues'=>$revenues,'bugets'=>$bugets,'exp'=>$exp,'exp_per_be'=>$exp_per_be,'exp_per_re'=>$exp_per_re,'current_month'=>$current_month,'current_year'=>$current_year,'next_year'=>$next_year]);
 
         //return view('department.index', compact('departments'));
     }

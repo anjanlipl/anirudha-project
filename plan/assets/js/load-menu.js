@@ -1,5 +1,7 @@
 $(window).on('load', function(){
 
+   // $(".side-list").css('display','block');
+
     $(document).ajaxStop(function() {
         $('body .side-list').css('display', 'none');
         userRole = localStorage.user_role;
@@ -26,6 +28,13 @@ $(window).on('load', function(){
             $('.dadmin').css('display','none');
             $('.hodrole').css('display','none');
             $('.superonly').css('display','none');
+            $('#change-password').css('display','none');
+            $('#custom-dashboard').css('display','none');
+            $('#icon-btn').css('display','none');
+            $('#notifyCount').css('display','none');
+            $('#msg-img').css('display','none');
+            $('.rep-menu').css('display','none');
+
         }
         else{
             $('#masters-menu').css('display','none');
@@ -33,11 +42,12 @@ $(window).on('load', function(){
             $('.dadmin').css('display','none');
             $('.hodrole').css('display','none');
             $('.superonly').css('display','none');
+
           
         }
-        // setTimeout(function(){
+         //setTimeout(function(){
           $('body .side-list').css('display', 'block');
-        // }, 200);
+         //}, 200);
     });
 
     var func = setInterval(function(){
@@ -158,4 +168,10 @@ $(window).on('load', function(){
 
         clearInterval(func);
     }, 500);
+
+$(".side-list li").css('display','block');
+  setTimeout(function(){
+  $(".side-list").css('display','block');
+}, 30000);
+
 });

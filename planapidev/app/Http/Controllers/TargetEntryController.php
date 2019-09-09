@@ -37,6 +37,7 @@ class TargetEntryController extends Controller
 		$dates = explode('-', $year);
 	  	$start_dates = date('Y-m-d', strtotime($dates[0].'-04-01'));
 	  	$end_dates = date('Y-m-d', strtotime('20'.$dates[1].'-03-31'));
+
 		if(count($units) > 1){
 	        $schemes_ret = array();
 			$k=0;
@@ -65,6 +66,7 @@ class TargetEntryController extends Controller
 											['start_date', '>=', $start_dates],
 											['end_date', '<=', $end_dates]
 										])->get();
+									//print_r($outputTargets);
 									$outputIndicatorsFinal[$i]->targets = $outputTargets;
 									$i++;
 					  			}
@@ -120,6 +122,7 @@ class TargetEntryController extends Controller
 											['start_date', '>=', $start_dates],
 											['end_date', '<=', $end_dates]
 										])->get();
+								//print_r($outputTargets);
 								$outputIndicatorsFinal[$i]->targets = $outputTargets;
 								$i++;
 				  			}
@@ -896,6 +899,9 @@ public function addAchievementSubmit(Request $request) {
 	$achievement_val = $request->input('achievement_val');
 	$year = $request->input('year');
 	$quarter = $request->input('quarter');
+	//$target_indicator_ids = $request->input('target_indicator_ids');
+	//print_r($target_indicator_ids);
+	//print_r($target_ids);die();
 	if($quarter == 'q1'){
 		$qrt = '06';
 	}
@@ -927,6 +933,7 @@ public function addAchievementSubmit(Request $request) {
 	$ind_types = $request->input('ind_types');
 	$ind_unit = $request->input('ind_unit');
 	$evaluation_types = $request->input('evaluation_types');
+	
 	// print_r($evaluation_types); die;
 	// foreach($ind_ids as $key1=>$value1){
 	//   	if($ind_types[$key1] == 'output'){
@@ -970,7 +977,19 @@ public function addAchievementSubmit(Request $request) {
 					}
 					$indicator_id = $target->outputindicator_id;
 					$indicator = Outputindicator::find($indicator_id);
-					//print_r($indicator);
+					// echo $achieveValue;
+					// print_r($indicator);die();
+					if($achieveValue == 'NA' || $achieveValue == 'na'){
+				  		$indicator->status = 1;
+				  		$indicator->save();
+				  		//continue;
+					}
+					elseif($achieveValue == 'NR' || $achieveValue == 'nr'){
+				  		$indicator->status = 4;
+				  		$indicator->save();
+				  		//continue;
+					}
+
 					$achievement = $target->achievements()->create([
 					  	'description' => $achievement_val[$key],
 					  	'start_date' => $start_dates,
@@ -991,14 +1010,14 @@ public function addAchievementSubmit(Request $request) {
 					$indicator_id = $target->outcomeindicator_id;
 					$indicator = Outcomeindicator::find($indicator_id);
 					if($achieveValue == 'NA' || $achieveValue == 'na'){
-				  		$indicator->status = 4;
-				  		$indicator->save();
-				  		continue;
-					}
-					elseif($achieveValue == 'NR' || $achieveValue == 'nr'){
 				  		$indicator->status = 1;
 				  		$indicator->save();
-				  		continue;
+				  		//continue;
+					}
+					elseif($achieveValue == 'NR' || $achieveValue == 'nr'){
+				  		$indicator->status = 4;
+				  		$indicator->save();
+				  		//continue;
 					}
 					if(empty($remarks[$key])){
 				  		$remarks[$key] = " ";
@@ -1009,6 +1028,7 @@ public function addAchievementSubmit(Request $request) {
 					  	'end_date' => $end_dates,
 					  	'remarks' => $remarks[$key]
 					]);
+					
 				}
 			}
 	  	}

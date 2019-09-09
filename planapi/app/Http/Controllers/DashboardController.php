@@ -19,6 +19,7 @@ class DashboardController extends Controller
 
 	public function offtrackIndicators(Request $request)
 	{
+
 		# code...
 		$status = $request->input('status');
 		if(!empty($request->input('dept_id'))){
@@ -881,6 +882,7 @@ public function getIndicatorDataMain(Request $request)
    			$status = 'In progress';
    			
    		}
+
    		$result_actionpoints = array();
    		if($indicator_type == 'outcome'){
    			$baseline = $indicator->outcomeBaselines()->first();
@@ -890,17 +892,28 @@ public function getIndicatorDataMain(Request $request)
    			else{
    				$today = date('Y-m-d');
    			}
+
             $return_target = Outcometarget::where([
 									['end_date','>=',$today],
 									['outcomeindicator_id', $indicator->id]
 								])
         						->first();
 
-             $achivements =$return_target->outcomeAchievements()->get();
+        	$achivements=array();
+        	if(isset($return_target) && $return_target!=''){
+        		$achivements =$return_target->outcomeAchievements()->get();
+        	}
+             
                         $cummulativeAchieve = 0 ;
                         if(isset($achivements) && count($achivements)>0){
                            foreach ($achivements as $achievementItem) {
-                          $cummulativeAchieve += $achievementItem->description;
+                           	//print_r($achievementItem->description);
+                           	if(is_int($achievementItem->description)){
+                           		$cummulativeAchieve += $achievementItem->description;
+                           	}else{
+                           		$cummulativeAchieve = $achievementItem->description;
+                           	}
+                          
                         }
                     }
 		   	$targets = $indicator->outcomeTargets()->get();
@@ -924,17 +937,25 @@ public function getIndicatorDataMain(Request $request)
    			else{
    				$today = date('Y-m-d');
    			}
-            // $return_target = Outputtarget::where('end_date','>=',$today)->first();
-            $return_target = Outputtarget::where([
-									['end_date','>=',$today],
-									['outputindicator_id', $indicator->id]
-								])
-        						->first();
-             $achivements =$return_target->achievements()->get();
+           
+
+   			$return_target = Outputtarget::where( [ ['end_date','>=' ,$today], ['outputindicator_id', $indicator_id] ] )->first();
+            $achivements=array();
+        	if(isset($return_target) && $return_target!=''){
+        		$achivements = $return_target->achievements()->get();
+        	}
+             
+
                         $cummulativeAchieve = 0 ;
                         if(isset($achivements) && count($achivements)>0){
                            foreach ($achivements as $achievementItem) {
-                          $cummulativeAchieve += $achievementItem->description;
+                           	//print_r($achievementItem->description);
+                           	if(is_int($achievementItem->description)){
+                           		$cummulativeAchieve += $achievementItem->description;
+                           	}else{
+                           		$cummulativeAchieve = $achievementItem->description;
+                           	}
+                          
                         }
                     }
    		foreach ($targets as $target) {

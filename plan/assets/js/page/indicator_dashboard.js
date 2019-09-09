@@ -5,7 +5,6 @@ checkDadminOrHOD();
 	var urlParams = new URLSearchParams(window.location.search);
 	var indicator_type = urlParams.get('type');
 	var indicator_id = urlParams.get('id');
-
 	$.ajax({async: true,
   	url: siteUrl + "/api/indicator_data_main",
   	headers: {
@@ -14,8 +13,9 @@ checkDadminOrHOD();
   	},
   	data:{'indicator_type':indicator_type,'indicator_id':indicator_id},
   	success: function(result){
+      //console.log(result);
       $('#dashSecThumbTitle').html(result.indicator_name);
-  		console.log(result);
+  		
   		$('.total-schemes .value ').html(result.indicator_type);
   		$('.total-indicators .value ').html(result.status);
       if(result.baseline != null){
@@ -46,9 +46,9 @@ checkDadminOrHOD();
        $('#created_at').html(result.indicator.created_at);
        $('#updated_at').html(result.indicator.updated_at);
   		
-   		// sectorTable = $('#actionPointsTab').DataTable({
-    	// 	data: result['indicators']
-   		// });
+   		sectorTable = $('#actionPointsTab').DataTable({
+    		data: result['indicators']
+   		});
  	},
  	error:function (error) {
       	console.log(error.status);
