@@ -1296,6 +1296,16 @@ td:last-child, th:last-child{
 table thead tr th:nth-child(2){
   text-align: center !important;
 }
+#tableDepartments table tbody tr td:first-child {
+	width: 50px !important;
+}
+#tableDepartments table tbody tr td:last-child {
+	width: 150px !important;
+}
+#tableDepartments table tbody tr td a {
+	width: 100%;
+}
+
 .reptable-overlay{
 	display: block;
 	position: fixed;
@@ -2257,6 +2267,9 @@ ul.btn-group li a {
 	width: 100%;
 }
 .bestperdeptInd tr td:nth-child(2) {
+	text-align: center;
+}
+.bestperdeptInd tr td:last-child {
 	text-align: right;
 }
 .bestperdeptInd tr th {
@@ -2365,20 +2378,22 @@ table {
 	height: auto;
 }
 #cri_ind .section-scroll {
-	height: 410px;
+	height: 500px;
 }
-
+#DataTables_Table_1_wrapper tr td:last-child{text-align: right !important;}
+#allDepCi #indicatorsScrollOfftrack {height: 503px !important;}
 #myChartEst {
 	height: 479px;
 }
 #home_main #indicatorsScrollOfftrack, #cri_ind #indicatorsScrollOfftrack {
-	height: 410px !important;
+	height: 503px ;
 }
 #menu_main #indicatorsScrollOfftrack {
 	height: 410px;
 }
 #tableDepartments table  thead  tr  th, #tableDepartments table  tbody  tr  td:nth-child(2) {
 	text-align: center !important;
+	width: 100%;
 }
 #tableDepartments table  tbody  tr  td:last-child {
 	text-align: right !important;
@@ -2410,8 +2425,12 @@ table {
 	min-height: 290px !important;
 }
 
-
-
+#sidebar.collapsed span.text{
+	display: none;
+}
+#sidebar.collapsed:hover span.text {
+	display: block;
+}
 
 /* 
   ##Device = Desktops
