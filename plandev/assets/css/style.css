@@ -2425,13 +2425,27 @@ table {
 	min-height: 290px !important;
 }
 
-#sidebar.collapsed span.text{
+#sidebar.collapsed .text{
 	display: none;
 }
-#sidebar.collapsed:hover span.text {
+#sidebar.collapsed a > span.icon{
+	display: block;
+	left: -50px;
+	position: relative;
+}
+#sidebar.collapsed:hover a > span.text {
 	display: block;
 }
-
+#sidebar.collapsed:hover a > span.icon {
+	position: absolute;
+	left: 0;
+}
+#sidebar.collapsed .side-list > li.has-dropdown > a::after {
+	display: none;
+}
+#sidebar.collapsed:hover .side-list > li.has-dropdown > a::after {
+	display: block;
+}
 /* 
   ##Device = Desktops
   ##Screen = 1281px to higher resolution desktops
