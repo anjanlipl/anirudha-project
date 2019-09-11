@@ -2432,6 +2432,41 @@ table {
 #indiMap.tab-content {
 	min-height: 290px !important;
 }
+#foTi #indicatorsScrollOfftrack {height: 467px;}
+#idOti #indicatorsScrollOfftrack {height: 410px;}
+#ciOti > div.col-md-12 > div#indicatorsScrollOfftrackCri {height: 410px;}
+#ddt1 table tr td:first-child, #ddt2 table tr td:first-child, #ddt3 table tr td:first-child {
+  width: 50px !important;
+  text-align: left;
+}
+#ddt1 table tr td, #ddt2 table tr td, #ddt3 table tr td {
+  width: 100%;
+  text-align: center;
+}
+#ddt1 table tr td:last-child, #ddt2 table tr td:last-child, #ddt3 table tr td:last-child {
+  width: 150px !important;
+  text-align: right;
+}
+#fct1 table tr td, #aist table tr td {
+	width: 100%;
+	text-align: center;
+}
+#fct1 table tr td:first-child, #aist table tr td:first-child {
+	width: 50px;
+	text-align: left;
+}
+#fct1 table tr td:last-child, #aist table tr td:last-child {
+	width: 70px;
+	text-align: right;
+}
+#cist >div.row >div.col-md-12 > div.section-scroll {
+	height: 440px;
+}
+#aist div.section-scroll  {
+	height: 840px;
+}
+
+
 
 /* #sidebar.collapsed .text{
 	display: none;
