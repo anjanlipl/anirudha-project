@@ -729,16 +729,9 @@ nav.sidebar{
 }
 nav.sidebar.collapsed{
 	width: 54px;
-	overflow: auto;
-}
-.nicescroll-rails.nicescroll-rails-vr {
-  display: none !important;
 }
 nav.sidebar.collapsed:hover{
 	width: 230px;
-}
-nav.sidebar {
-	overflow: auto;
 }
 .side-list{
 	/*position: absolute;
@@ -787,7 +780,6 @@ nav.sidebar {
 	background-repeat: no-repeat;
 	background-position: center;
 	transition: all 0.3s linear;
-	margin-right: 10px;
 }
 .side-list > li.has-dropdown.active > a:after{
 	background-image: url(../icons/down.png);
@@ -1292,28 +1284,11 @@ td{
 	/*padding-bottom: 20px !important;*/
 	vertical-align: middle !important;
 	border-right-width: 0px !important;
-	text-align: left;
+	text-align: left !important;
 }
 td:last-child, th:last-child{
 	border-right-width: 1px !important;
 }
-/*Below code added by Anjan Barik*/
-#DataTables_Table_2_wrapper tr td:last-child {
-  text-align: right !important;
-}
-table thead tr th:nth-child(2){
-  text-align: center !important;
-}
-#tableDepartments table tbody tr td:first-child {
-	width: 50px !important;
-}
-#tableDepartments table tbody tr td:last-child {
-	width: 150px !important;
-}
-#tableDepartments table tbody tr td a {
-	width: 100%;
-}
-
 .reptable-overlay{
 	display: block;
 	position: fixed;
@@ -2275,9 +2250,6 @@ ul.btn-group li a {
 	width: 100%;
 }
 .bestperdeptInd tr td:nth-child(2) {
-	text-align: center;
-}
-.bestperdeptInd tr td:last-child {
 	text-align: right;
 }
 .bestperdeptInd tr th {
@@ -2388,20 +2360,11 @@ table {
 #cri_ind .section-scroll {
 	height: 500px;
 }
-#DataTables_Table_1_wrapper tr td:last-child{text-align: right !important;}
-#allDepCi #indicatorsScrollOfftrack {height: 503px !important;}
 #myChartEst {
 	height: 479px;
 }
-#home_main #indicatorsScrollOfftrack, #cri_ind #indicatorsScrollOfftrack {
-	height: 503px ;
-}
-#menu_main #indicatorsScrollOfftrack {
-	height: 410px;
-}
 #tableDepartments table  thead  tr  th, #tableDepartments table  tbody  tr  td:nth-child(2) {
 	text-align: center !important;
-	width: 100%;
 }
 #tableDepartments table  tbody  tr  td:last-child {
 	text-align: right !important;
@@ -2433,27 +2396,9 @@ table {
 	min-height: 290px !important;
 }
 
-/* #sidebar.collapsed .text{
-	display: none;
-}
-#sidebar.collapsed a > span.icon{
-	display: block;
-	left: -50px;
-	position: relative;
-}
-#sidebar.collapsed:hover a > span.text {
-	display: block;
-}
-#sidebar.collapsed:hover a > span.icon {
-	position: absolute;
-	left: 0;
-}
-#sidebar.collapsed .side-list > li.has-dropdown > a::after {
-	display: none;
-}
-#sidebar.collapsed:hover .side-list > li.has-dropdown > a::after {
-	display: block;
-} */
+
+
+
 /* 
   ##Device = Desktops
   ##Screen = 1281px to higher resolution desktops
@@ -2473,9 +2418,6 @@ table {
 	width: 30px;
 	margin: 20px;
   }
-  #outputTarget .btn, #outputBaseline .btn, #add-baseline .btn, #add-target .btn {
-	  width: 110px;
-	}
 
 
   
@@ -2494,9 +2436,7 @@ table {
   	height: 45px;
   	width: 45px;
   }
-  #outputTarget .btn, #outputBaseline .btn, #add-baseline .btn, #add-target .btn {
-	  width: 110px;
-	}
+
 
   
 }
@@ -2514,9 +2454,7 @@ table {
   	height: 50px;
   	width: 50px;
   }
-  #outputTarget  .btn, #outputBaseline .btn, #add-baseline .btn, #add-target .btn {
-	  width: 110px;
-	}
+
   
 }
 /* 
@@ -2604,7 +2542,3 @@ table {
 }
 .right {text-align: right;}
 .right .btn {padding: 10px;}
-.act-pnt {
-	height: 440px;
-	overflow: auto;
-}

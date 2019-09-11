@@ -170,7 +170,6 @@ class TargetEntryController extends Controller
 		if(count($units) > 1){
 	        $schemes_ret = array();
 			$k=0;
-			//print_r($units);
 			foreach ($units as $unit) {
 				# code...
 				$schemes = $unit->schemes()->orderBy('name', 'asc')->get();

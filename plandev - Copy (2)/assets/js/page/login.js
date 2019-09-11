@@ -18,8 +18,8 @@ window.onload = function () {
         };
     }
 };
-var frontUrl = "http://103.92.47.157/plandev/";
-var siteUrl = "http://103.92.47.157/planapidev/public";
+var frontUrl = "http://103.92.47.157/planstaging/";
+var siteUrl = "http://103.92.47.157/planapistaging/public";
 
 $( document ).ready(function() {
 

@@ -383,7 +383,7 @@ $.ajax({
 			    perf = 0;
 			}
 			if(result.totalExp[key]){
-			   	var htm = '<div class="col-md-4 dash-sec-thumb-main" data-perf="'+perf+'"><div class="dash-sec-thumb active"><div class="anch"><div class="title">'+sector.name+'</div></div><div class="dash-sec-thumb-dets" id="chartDrop2_'+key+'"><div id="chartCan2_'+key+'" width="300"></div></div><div class="thumb-ind-wrap"><div class="row"><div class="col-md-6"><div class="indi"><span class="thumb-ind-item">'+result.totalEst[key]+'</span> Allocation<span class="thumb-ind-item green">'+result.totalExp[key]+'</span></div></div><div class="col-md-6"><div class="sub-anchor-drop-in"><a href="dept_dashboard.html?dept_id='+sector.id+'">More</a></div></div></div></div><span class="sub-anchor"></span><div class="sub-anchor-drop"></div></div></div>';
+			   	var htm = '<div class="col-md-4 dash-sec-thumb-main" data-perf="'+perf+'"><div class="dash-sec-thumb active"><div class="anch"><div class="title">'+sector.name+'</div></div><div class="dash-sec-thumb-dets" id="chartDrop2_'+key+'"><div id="chartCan2_'+key+'" width="300"></div></div><div class="thumb-ind-wrap"><div class="row"><div class="col-md-6"><div class="indi"><span class="thumb-ind-item">'+result.totalEst[key]+'</span> Allocation<span class="thumb-ind-item green">'+result.totalExp[key]+'</span></div></div><div class="col-md-6"><div class="sub-anchor-drop-in"><a href="dept_dashboard.html?dept_id='+sector.id+'">More 123</a></div></div></div></div><span class="sub-anchor"></span><div class="sub-anchor-drop"></div></div></div>';
 				$('#sectorDashList1').append(htm);
 				includeHTML();
 				data = {
@@ -1156,21 +1156,18 @@ function drawPieChartNew(target, dataPoints){
 			fontSize: 12,
 			fontweight: "bold",
 			horizontalAlign: "right",
-			verticalAlign: "center",
+			verticalAlign: "center"
 			// fontColor: '#FFF'
-			maxWidth: 350,
-			itemWidth: 80
 		},
 		data: [{
 				type: "pie",
-				startAngle: 90,
-				radius: 120,
+				startAngle: 45,
+				radius: 150,
 				showInLegend: "true",
 				legendText: "{label}",
 				indexLabel: "{label} ({y})",
 				indexLabelPlacement: "outside",
-				indexLabelOrientation: "horizontal",
-				indexLabelFontSize: 9,
+				indexLabelFontSize: 12,
 				indexLabelFontWeight: "normal",
 				indexLabelFontColor: '#222',
 				yValueFormatString:"#,##0.#"%"",
