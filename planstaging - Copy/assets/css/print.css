@@ -1,0 +1,32 @@
+body{
+	/*visibility: hidden;*/
+}
+.head-nav{
+	display: none;
+}
+.sidebar{
+	display: none;
+}
+.content{
+	display: none;
+	margin-left: 0px;
+	margin-top: 0px;
+}
+.reptable-overlay{
+	position: relative;
+	display: block;
+}
+body .rep-table th, body .rep-table td{
+	min-width: 50px !important;
+	font-size: 16pt !important;
+}
+.close-reptable{
+	display: none;
+}
+.rep-table-wrap .dash-sec-thumb-title{
+	display: none;
+}
+
+.dt-buttons{
+	display: none;
+}

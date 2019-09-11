@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> Delhi Government, Department of Planning</title>    
+<noscript><meta http-equiv="refresh" content="0; URL=/badbrowser.html"></noscript>
+<meta http-equiv="X-Frame-Options" content="deny">
+	<link rel="stylesheet" href="assets/css/animate.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/login_check.js"></script>
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+</head>
+<body>
+<div id="antiClickjack" style="position: fixed;top: 0; left: 0;right: 0;bottom: 0;z-index: 1234565433456432345464; background: #FFF;"></div>
+<script type="text/javascript">
+   if (self === top) {
+       var antiClickjack = document.getElementById("antiClickjack");
+       antiClickjack.parentNode.removeChild(antiClickjack);
+   } else {
+       top.location = self.location;
+   }
+</script>
+<nav class="head-nav" w3-include-html="parts/head-nav-in.html"></nav>
+<nav class="sidebar" id="sidebar" w3-include-html="sidelist.html"></nav>
+<div class="content">
+	<div class="row">
+		<ol class="breadcrumb">
+		    <li><a href="dashboard.html">Home</a></li>
+		    <li><a href="all-schemes.html">Schemes</a></li>
+		    <li><a class="objectiveBread" href="scheme-objectives.html">Objectives</a></li>
+		    <li><a class="outputBread" href="scheme-objectives-outputs.html">Outputs</a></li>
+		    <li><a class="outcomeBread" href="scheme-objectives-outputs-outcome.html">Outcomes</a></li>
+		    <li><a class="IndicatorBread" href="scheme-objectives-outputs-outcome-indicators.html">Indicators</a></li>
+		    <li><a class="TargetBread" href="outcome-target-baseline.html">Targets and Baseline</a></li>
+		    <li><a class="AchievementBread"  href="outcome-target-achievements.html">Achievements</a></li>
+		    <li><a href="#">Reviews</a></li>
+	  	</ol>
+	</div>
+	<div class="row head-info"></div>
+	<div class="modal fade" id="editReviewModal" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Edit Review</h4>
+			</div>
+			<div class="modal-body">
+				<form autocomplete="off" id="editReviewForm">
+					<input type="hidden" class="id" name="id">
+					<div class="form-row">
+						<textarea  class="form-control" name="desc" placeholder="Description" required="required" ></textarea>
+					</div>
+					
+					
+					
+					<div class="form-row">
+						<button type="submit" class="btn btn-primary">Update</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+	<div class="row section">
+		<div class="col-md-12">
+			<div class="row section-title">
+				<div class="col-md-8">
+					<span class="section-title-text">Scheme Objective Outputs - Outcomes Indicators Target Achievements Reviews</span>
+				</div>
+			</div>
+			<div class="row section-content">
+				<div class="col-md-12">
+					<div class="row subsection">
+						<div class="col-md-12">
+							<div class="row subsection-title">Reviews</div>
+							<div class="row subsection-content">
+								<div class="col-md-12 plain-table">
+									<div class="row">
+										<div class="col-md-12">
+											<table class="table table-hover" id="reviewTab">
+												<thead>
+													<th>Description</th>
+													<th>Actions</th>
+												</thead>
+												<tbody></tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row subsection">
+						<div class="col-md-12">
+							<div class="row subsection-title">Add New Review</div>
+							<div class="row subsection-content">
+								<div class="col-md-12">
+									<div class="row">
+										<div class="col-md-12">
+											<form autocomplete="off" id="review-add">
+												<div class="row">
+													<div class="row form-row">
+														<div class="col-md-6">
+															<label>Description</label>
+															<textarea class="form-control" placeholder="Enter Description" name="description" required="required"></textarea>
+														</div>
+													</div>
+													<div class="row form-row">
+														<div class="col-md-9 text-right">
+															<button class="btn btn-primary" type="submit">Add</button>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/wow.js"></script>
+<script src="assets/js/scrollify.js"></script>
+<script src="assets/js/nicescroll.js"></script>
+<script src="assets/js/particle.min.js"></script>
+<script src="//cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+	<script src="assets/js/validatr.min.js"></script>
+<script src="assets/js/brain.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+<script src="assets/js/notify.min.js"></script>
+<script src="assets/js/dept_list.js"></script>
+<script src="assets/js/page/outcome-tar-achieve-review.js"></script>
+<script>$( document ).ajaxStop(function() {
+$('body').css('display', 'block');
+});</script><script src="assets/js/load-menu.js"></script>
+</body>
+</html>

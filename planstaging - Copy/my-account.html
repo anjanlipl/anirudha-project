@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> Delhi Government, Department of Planning</title>    
+<noscript><meta http-equiv="refresh" content="0; URL=/badbrowser.html"></noscript>
+<meta http-equiv="X-Frame-Options" content="deny">
+	<link rel="stylesheet" href="assets/css/animate.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/login_check.js"></script>
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+</head>
+<body>
+<div id="antiClickjack" style="position: fixed;top: 0; left: 0;right: 0;bottom: 0;z-index: 1234565433456432345464; background: #FFF;"></div>
+<script type="text/javascript">
+   if (self === top) {
+       var antiClickjack = document.getElementById("antiClickjack");
+       antiClickjack.parentNode.removeChild(antiClickjack);
+   } else {
+       top.location = self.location;
+   }
+</script>
+<nav class="head-nav" w3-include-html="parts/head-nav-in.html"></nav>
+<nav class="sidebar" id="sidebar" w3-include-html="sidelist.html"></nav>
+<div class="content">
+	<div class="row">
+		<ol class="breadcrumb">
+		    <li><a href="dashboard.html">Home</a></li>
+		    <li><a href="">My Account</a></li>
+	  	</ol>
+	</div>
+	<div class="row section">
+		<div class="col-md-12">
+			<div class="row section-title">
+				<div class="col-md-8">
+					<span class="section-title-text">My Profile</span>
+				</div>
+				<div class="col-md-4 text-right">
+					<div class="section-btn-wrap">
+						<a id="goBack" href="" class="btn btn-primary">
+							<span class="icon" w3-include-html="assets/icons/back.html"></span>
+							<span class="text">Back</span>
+						</a>
+						<script>
+							var last_page = document.referrer;
+							$('#goBack').attr('href', last_page);
+						</script>
+					</div>
+				</div>
+			</div>
+			<form autocomplete="off" id="editProfile">
+				<div class="row section-content">
+					<div class="col-md-6">
+						<div class="row form-row">
+							<label>Name</label>
+							<input type="text" id="username" autocomplete="off" name="user_name" class="form-control" required="required" readonly="true" pattern="[A-Za-z0-9_ ]+" oninvalid="setCustomValidity('Only letters, numbers and underscores allowed')" onchange="try{setCustomValidity('')}catch(e){}">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="row form-row">
+							<label>Email</label>
+							<input type="email" id="useremail" autocomplete="off" name="email" class="form-control" required="required" readonly="true">
+						</div>
+					</div>
+				</div>
+				<div class="row section-main-btn"  >
+					<button type="button" id="editButton" class="btn btn-primary">Edit</button>
+				</div>
+				<div class="row section-main-btn"  >
+					<button type="submit" id="updateButton" style="display: none"  class="btn btn-primary">Update</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row section">
+		<div class="col-md-12">
+			<div class="row section-title">
+				<div class="col-md-8">
+					<span class="section-title-text">Change Password</span>
+				</div>
+			</div>
+			<form autocomplete="off" id="changePassword">
+				<div class="row section-content">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="row form-row">
+									<label>Current Password</label>
+									<input type="password" autocomplete="off" name="user_password" class="form-control" required="required">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="row form-row">
+									<label>New Password</label>
+									<input type="password" id="password" autocomplete="off" name="password" class="form-control" required="required">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="row form-row">
+									<label>Confirm New Password</label>
+									<input type="password" autocomplete="off" name="password_confirmation" class="form-control" required="required">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row section-main-btn">
+					<button type="submit" class="btn btn-primary">Change</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+  $('#password').bind('change', function(e){
+  	e.preventDefault();
+  	var _pw = $(this).val();
+  	if(_pw != ''){
+	  	if(checkPassword(_pw)){
+	  		return true;
+	  	}
+	  	else{
+	  		alert('Password length must be 6 and must contain atleast one uppercase, one lowercase and one number');
+	  		$(this).val('');
+	  	}
+  	}
+  });
+  function checkPassword(str)
+  {
+    // at least one number, one lowercase and one uppercase letter
+    // at least six characters
+    var re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}/;
+    return re.test(str);
+  }
+</script>
+<script src="assets/js/jquery.min.js"></script>
+<script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/wow.js"></script>
+<script src="assets/js/scrollify.js"></script>
+<script src="assets/js/nicescroll.js"></script>
+<script src="assets/js/particle.min.js"></script>
+<script src="//cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+<script src="assets/js/validatr.min.js"></script>
+<script src="assets/js/brain.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+<script src="assets/js/notify.min.js"></script>
+<!-- <script src="assets/js/dept_list.js"></script> -->
+<script src="assets/js/page/user_profile.js"></script>
+<script>$( document ).ajaxStop(function() {
+$('body').css('display', 'block');
+});</script><script src="assets/js/load-menu.js"></script>
+</body>
+</html>

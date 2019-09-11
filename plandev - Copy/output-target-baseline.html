@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> Delhi Government, Department of Planning</title>    
+<noscript><meta http-equiv="refresh" content="0; URL=/badbrowser.html"></noscript>
+<meta http-equiv="X-Frame-Options" content="deny">
+	<link rel="stylesheet" href="assets/css/animate.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/login_check.js"></script>
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+</head>
+<body>
+<div id="antiClickjack" style="position: fixed;top: 0; left: 0;right: 0;bottom: 0;z-index: 1234565433456432345464; background: #FFF;"></div>
+<script type="text/javascript">
+   if (self === top) {
+       var antiClickjack = document.getElementById("antiClickjack");
+       antiClickjack.parentNode.removeChild(antiClickjack);
+   } else {
+       top.location = self.location;
+   }
+</script>
+<nav class="head-nav" w3-include-html="parts/head-nav-in.html"></nav>
+<nav class="sidebar" id="sidebar" w3-include-html="sidelist.html"></nav>
+<div class="content">
+	<div class="row">
+		<ol class="breadcrumb">
+		    <li><a href="dashboard.html">Home</a></li>
+		    <li><a href="all-schemes.html">Schemes</a></li>
+		    <li><a class="objectiveBread" href="scheme-objectives.html">Objectives</a></li>
+		    <li><a class="outputBread" href="scheme-objectives-outputs.html">Outputs</a></li>
+		    <li><a class="IndicatorBread" href="scheme-objectives-outputs-indicators.html">Indicators</a></li>
+		    <li><a class="TargetBread" href="output-target-baseline.html">Targets and Baseline</a></li>
+	  	</ol>
+	</div>
+	<div class="row head-info"></div>
+	<div class="modal fade" id="editBaselineModal" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Edit Baseline</h4>
+			</div>
+			<div class="modal-body">
+				<form autocomplete="off" id="editBaselineForm">
+					<input type="hidden" class="id" name="id">
+					<div class="form-row">
+						<input type="text" autocomplete="off" class="form-control" name="base_name" placeholder="Enter Baseline name" required="required" />
+					</div>
+					<div class="form-row">
+						<input type="text" autocomplete="off" class="form-control" name="base_value" placeholder="Enter Baseline value" required="required" onchange="try{setCustomValidity('')}catch(e){}" />
+					</div>
+					<!-- <div class="form-row">
+						<label>Start date</label>
+						<input type="date" class="form-control" placeholder="Enter Start date" name="start_date" required="required" />
+					</div>
+					<div class="form-row">
+						<label>End date</label>
+						<input type="date" class="form-control" placeholder="Enter End date" name="end_date" required="required" />
+					</div> -->
+					
+					<div class="form-row">
+						<button type="submit" class="btn btn-primary">Update</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="editTargetModal" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Edit Target</h4>
+			</div>
+			<div class="modal-body">
+				<form autocomplete="off" id="editTargetForm">
+					<input type="hidden" class="id" name="id">
+					<div class="form-row">
+						<input type="text" autocomplete="off" class="form-control" name="target_name" placeholder="Enter Target name" required="required" />
+					</div>
+					<div class="form-row">
+						<input type="text" autocomplete="off" class="form-control" name="target_value" placeholder="Enter Target value" required="required" onchange="try{setCustomValidity('')}catch(e){}" />
+					</div>
+					
+					
+					<div class="form-row">
+						<button type="submit" class="btn btn-primary">Update</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+	<div class="row section">
+		<div class="col-md-12">
+			<div class="row section-title">
+				<div class="col-md-8">
+					<span class="section-title-text">Scheme Objective Outputs Indicators (Targets and baselines)</span>
+				</div>
+			</div>
+			<div class="row section-content">
+				<div class="col-md-12">
+					<div class="row subsection">
+						<div class="col-md-12 pd-lr15">
+							<div class="row subsection-title">Baselines</div>
+							<div class="row subsection-content">
+								<div class="col-md-12 plain-table">
+									<div class="row">
+										<div class="col-md-12">
+											<table class="table table-hover" id="outputBaseline">
+												<thead>
+													<th>Name</th>
+													<th>Value</th>
+													<th>Start Date</th>
+													<th>End Date</th>
+													<th>Actions</th>
+												</thead>
+												<tbody>
+													<!-- <tr>
+														<td>Test</td>
+														<td>Test</td>
+														<td>Test</td>
+														<td>Test</td>
+														<td>
+															<a class="btn btn-sm btn-primary">
+																<span class="text">Edit</span>
+															</a>
+															<a class="btn btn-sm btn-primary">
+																<span class="text">Delete</span>
+															</a>
+														</td>
+													</tr> -->
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="row">
+												<form autocomplete="off" id="add-baseline">
+													<div class="row form-row">
+														<div class="col-md-3">
+															<label>Name</label>
+															<input type="text" autocomplete="off" class="form-control" placeholder="Enter Baseline name" id="baselineName" name="name" required="required">
+														</div>
+														<div class="col-md-3">
+															<label>Value</label>
+															<input type="text" autocomplete="off" class="form-control" placeholder="Enter Value" name="value" required="required" onchange="try{setCustomValidity('')}catch(e){}" />
+														</div>
+														<div class="col-md-3">
+															<label>Start date</label>
+															<input type="date" class="form-control" placeholder="Enter Start date" name="start_date" id="base_start" required="required" />
+														</div>
+														<div class="col-md-3">
+															<label>End date</label>
+															<input type="date" id="base_end" class="form-control" placeholder="Enter End date" name="end_date" required="required" />
+														</div>
+													</div>
+													<div class="row form-row">
+														<div class="col-md-12 text-right">
+															<button class="btn btn-primary" type="submit">Add</button>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row subsection">
+						<div class="col-md-12 pd-lr15">
+							<div class="row subsection-title">Targets</div>
+							<div class="row subsection-content">
+								<div class="col-md-12 plain-table">
+									<div class="row">
+										<div class="col-md-12">
+											<table class="table table-hover" id="outputTarget">
+												<thead>
+													<th>Name</th>
+													<th>Value</th>
+													<th>Start Date</th>
+													<th>End Date</th>
+													<th>Actions</th>
+												</thead>
+												<tbody>
+													<tr>
+														<!-- <td>Test</td>
+														<td>Test</td>
+														<td>Test</td>
+														<td>Test</td>
+														<td>On track</td>
+														<td>
+															<a href="output-target-achievements.html" class="btn btn-sm btn-primary">
+																<span class="text">Achievements</span>
+															</a>
+															<a class="btn btn-sm btn-primary">
+																<span class="text">Edit</span>
+															</a>
+															<a class="btn btn-sm btn-primary">
+																<span class="text">Delete</span>
+															</a>
+														</td> -->
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="row">
+												<form autocomplete="off" id="add-target">
+													<div class="row form-row">
+														<div class="col-md-3">
+															<label>Name</label>
+															<input type="text" autocomplete="off" id="targetName" class="form-control" placeholder="Enter Target name" name="name">
+														</div>
+														<div class="col-md-3">
+															<label>Value</label>
+															<input type="text" autocomplete="off" class="form-control" placeholder="Enter Value" name="value" required="required" onchange="try{setCustomValidity('')}catch(e){}" />
+														</div>
+														<div class="col-md-3">
+															<label>Start date</label>
+															<input type="date" id="targ_start" class="form-control" placeholder="Enter Start date" name="start_date">
+														</div>
+														<div class="col-md-3">
+															<label>End date</label>
+															<input type="date" id="targ_end" class="form-control" placeholder="Enter End date" name="end_date">
+														</div>
+														
+													</div>
+													<div class="row form-row">
+														<div class="col-md-12 text-right">
+															<button class="btn btn-primary" type="submit">Add</button>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/wow.js"></script>
+<script src="assets/js/scrollify.js"></script>
+<script src="assets/js/nicescroll.js"></script>
+<script src="assets/js/particle.min.js"></script>
+<script src="//cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+	<script src="assets/js/validatr.min.js"></script>
+<script src="assets/js/brain.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+<script src="assets/js/notify.min.js"></script>
+<script src="assets/js/dept_list.js"></script>
+<script src="assets/js/page/output-target-baseline.js"></script>
+<script>$( document ).ajaxStop(function() {
+$('body').css('display', 'block');
+});</script><script src="assets/js/load-menu.js"></script>
+</body>
+</html>

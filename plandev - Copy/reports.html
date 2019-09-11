@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> Delhi Government, Department of Planning</title>    
+<noscript><meta http-equiv="refresh" content="0; URL=/badbrowser.html"></noscript>
+<meta http-equiv="X-Frame-Options" content="deny">
+	<link rel="stylesheet" href="assets/css/animate.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/login_check.js"></script>
+	<link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+	<link rel="stylesheet" type="text/css" media="print" href="assets/css/print.css" />
+</head>
+<body>
+<div id="antiClickjack" style="position: fixed;top: 0; left: 0;right: 0;bottom: 0;z-index: 1234565433456432345464; background: #FFF;"></div>
+<script type="text/javascript">
+   if (self === top) {
+       var antiClickjack = document.getElementById("antiClickjack");
+       antiClickjack.parentNode.removeChild(antiClickjack);
+   } else {
+       top.location = self.location;
+   }
+</script>
+	<div class="reptable-overlay">
+		<span class="close-reptable" w3-include-html="assets/icons/close.html" data-target="#rep"></span>
+		<!-- <button id="expXls">Export Excel </button>-->
+		<div class="table-responsive rep-table-wrap" id="rep">
+			
+		</div>
+	</div>
+	<nav class="head-nav" w3-include-html="parts/head-nav-in.html"></nav>
+	<nav class="sidebar" id="sidebar" w3-include-html="sidelist.html"></nav>
+
+	<div class="content">
+		<div class="row section">
+			<div class="col-md-12">
+				<div class="row section-title">
+					<div class="col-md-8">
+						<span class="section-title-text">Reports</span>
+					</div>
+					<div class="col-md-4 text-right">
+					</div>
+				</div>
+				<div class="row section-content">
+					<div class="col-md-12 pd-lr15">
+						<form autocomplete="off" id="generateScheme">
+							<input type="hidden" name="finYearSet" id="finYearSet">
+							<div class="row pdlr15">
+								<div class="col-md-4">
+									<div class="row form-row">
+										<label>Select a Sector</label>
+										<select name="sector_id" class="form-control" id="sector-select" required="required">
+											<option value="" disabled="disabled" selected="selected">Select a Sector</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="row form-row">
+										<label>Select a Subsector</label>
+										<select name="subsector_id" class="form-control" id="sub-sector-select">
+											<option value="" disabled="disabled" selected="selected">Select a Subsector</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="row form-row">
+										<label>Select a Department</label>
+										<select name="department_id" class="form-control" id="dept-select">
+											<option value="" disabled="disabled" selected="selected">Select a Department</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="row pdlr15">
+								<div class="col-md-4">
+									<div class="row form-row">
+										<label>Select Implementing agency</label>
+										<select name="unit_id" class="form-control" id="unit-select">
+											<option value="" disabled="disabled" selected="selected">Select Implementing agency</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="row form-row">
+										<label>Select a Scheme</label>
+										<select name="scheme_id" class="form-control" id="scheme-select">
+											<option value="" disabled="disabled" selected="selected">Select a Scheme</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="row form-row">
+										<label>&nbsp;</label>
+										<button class="form-control btn btn-primary" type="submit">Generate Report</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/wow.js"></script>
+	<script src="assets/js/scrollify.js"></script>
+	<script src="assets/js/nicescroll.js"></script>
+	<script src="assets/js/particle.min.js"></script>
+	<script src="assets/js/validatr.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
+	<script src="assets/js/xlsx.core.min.js"></script>
+	<script src="assets/js/FileSaver.min.js"></script>
+	<script src="assets/js/tableexport.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+	<script src="assets/js/brain.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+	<script src="assets/js/notify.min.js"></script>
+	<script src="assets/js/dept_list.js"></script>
+	<script src="assets/js/page/reports.js"></script>
+	<script>
+		$( document ).ajaxStop(function() {
+			$('body').css('display', 'block');
+		});
+	</script>
+	<script src="assets/js/load-menu.js"></script>
+</body>
+</html>

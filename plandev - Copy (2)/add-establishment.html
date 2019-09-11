@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> Delhi Government, Department of Planning</title>    
+<noscript><meta http-equiv="refresh" content="0; URL=/badbrowser.html"></noscript>
+<meta http-equiv="X-Frame-Options" content="deny">
+	<link rel="stylesheet" href="assets/css/animate.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/login_check.js"></script>
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+</head>
+<body>
+<div id="antiClickjack" style="position: fixed;top: 0; left: 0;right: 0;bottom: 0;z-index: 1234565433456432345464; background: #FFF;"></div>
+<script type="text/javascript">
+   if (self === top) {
+       var antiClickjack = document.getElementById("antiClickjack");
+       antiClickjack.parentNode.removeChild(antiClickjack);
+   } else {
+       top.location = self.location;
+   }
+</script>
+	<div class="error-content">
+	
+	</div>
+
+	<nav class="head-nav" w3-include-html="parts/head-nav-in.html"></nav>
+	<nav class="sidebar" id="sidebar" w3-include-html="sidelist.html"></nav>
+	<div class="content">
+		<div class="row">
+			<ol class="breadcrumb">
+			    <li><a href="dashboard.html">Home</a></li>
+			    <li><a href="all-schemes.html">Schemes</a></li>
+			    <li><a href="#">Establishment</a></li>
+		  	</ol>
+		</div>
+		<div class="row section">
+			<div class="col-md-12">
+				<div class="row section-title">
+					<div class="col-md-8">
+						<span class="section-title-text">Select Department</span>
+					</div>
+				</div>
+				<div class="row section-content">
+					<div class="col-md-12">
+						<div class="row subsection">
+							<div class="col-md-12">
+								<form>
+									<div class="row subsection-content">
+										<div class="col-md-4">
+											<select class="form-control"  id="dept-select" name="dept_id" required="required">
+												<option>Select a department</option>
+											</select>
+										</div>
+										
+										<div class="col-md-4">
+											<button class="btn btn-primary" type="submit">Submit</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row head-info"></div>
+		<div class="row section">
+			<div class="col-md-12">
+				<div class="row section-title">
+					<div class="col-md-8">
+						<span class="section-title-text">Scheme Establishment Expenditure</span>
+					</div>
+				</div>
+				<div class="row section-content">
+					<div class="col-md-12">
+						<div class="row subsection">
+							<div class="col-md-12 pd-lr15">
+								<div class="row subsection-title">Estimates ( in Lakhs)</div>
+								<form autocomplete="off" id="addEstimateForm">
+								<div class="row subsection-content">
+									<div class="col-md-12">
+										<div class="row">
+											<div class="col-md-12 plain-table">
+												<div class="table-title">Budget Estimate History (in Lakhs)</div>
+												<table id="be_tab">
+													<thead>
+														<th>Year</th>
+														<th>Salary</th>
+														<th>Benifits</th>
+														<th>Wages</th>
+														<th>Machinery & Equipments</th>
+														<th>Office Expenses</th>
+														<th>Total</th>
+														<th>Actions</th>
+													</thead>
+													<tbody>
+														
+													</tbody>
+												</table>
+											</div>
+											<div class="col-md-12 plain-table">
+												<div class="table-title">Revised Estimate History (in Lakhs)</div>
+												<table id="re_tab">
+													<thead>
+														<th>Year</th>
+														<th>Salary</th>
+														<th>Benifits</th>
+														<th>Wages</th>
+														<th>Machinery & Equipments</th>
+														<th>Office Expenses</th>
+														<th>Total</th>
+														<th>Actions</th>
+													</thead>
+													<tbody>
+														
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12" id="addEstimate">
+												<div class="row">
+													<div class="col-md-6 col-md-offset-3">
+														<div class="row">
+															<div class="form-row">
+																<div class="col-md-6">
+																	<label>Start Year</label>
+																	<input type="text" autocomplete="off" class="form-control" name="start_year" required placeholder="Ex. 2018"  pattern="[0-9]+" />
+																</div>
+																<div class="col-md-6">
+																	<label>End Year</label>
+																	<input type="text" autocomplete="off" class="form-control" required name="end_year"  placeholder="Ex. 2019"  pattern="[0-9]+" />
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-12 budget">
+														<div class="row">
+															<div class="col-md-12">
+																<span class="subsection-title2">Budget Estimate (in Lakhs)</span>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-row">
+																<div class="col-md-4">
+																	<label>Salary</label>
+																	<input type="text" autocomplete="off" class="form-control be_sal be_rcl" name="besalary" placeholder="Rs."  pattern="[0-9]+" />
+																</div>
+																<div class="col-md-4">
+																	<label>Benefits</label>
+																	<input type="text" autocomplete="off" class="form-control be_benifit be_rcl" name="bebenefits" placeholder="Rs."  pattern="[0-9]+" />
+																</div>
+																<div class="col-md-4">
+																	<label>Wages</label>
+																	<input type="text" autocomplete="off" class="form-control be_wages be_rcl" name="bewages" placeholder="Rs."  pattern="[0-9]+" />
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-4">
+																	<label>Machinery and Equipments</label>
+																	<input type="text" autocomplete="off" class="form-control be_machinery be_rcl" name="bemachinery" placeholder="Rs."  pattern="[0-9]+" />
+																</div>
+															<div class="col-md-4">
+																	<label>Office Expenses</label>
+																	<input type="text" autocomplete="off" class="form-control be_office be_rcl" name="beoffice" placeholder="Rs."  pattern="[0-9]+" />
+															</div>
+															<div class="col-md-4">
+																	<label>Total BE</label>
+																	<input type="text" autocomplete="off" class="form-control be_total"  name="total_be" readonly  placeholder="Rs."  pattern="[0-9]+" />
+																</div>
+														</div>
+													</div>
+													<div class="col-md-12 revised">
+														<div class="row">
+															<div class="col-md-12">
+																<span class="subsection-title2">Revised Estimate (in Lakhs)</span>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-row">
+																<div class="col-md-4">
+																	<label>Salary</label>
+																	<input type="text" autocomplete="off" class="form-control re_sal re_rcl" name="resalary" placeholder="Rs."  pattern="[0-9]+" />
+																</div>
+																<div class="col-md-4">
+																	<label>Benefits</label>
+																	<input type="text" autocomplete="off" class="form-control re_benifit re_rcl" name="rebenefits" placeholder="Rs."  pattern="[0-9]+" />
+																</div>
+																<div class="col-md-4">
+																	<label>Wages</label>
+																	<input type="text" autocomplete="off" class="form-control re_wages re_rcl" name="rewages" placeholder="Rs."  pattern="[0-9]+" />
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-4">
+																	<label>Machinery and Equipments</label>
+																	<input type="text" autocomplete="off" class="form-control re_machinery re_rcl" name="remachinery" placeholder="Rs."  pattern="[0-9]+" />
+																</div>
+															<div class="col-md-4">
+																	<label>Office Expenses</label>
+																	<input type="text" autocomplete="off" class="form-control re_office re_rcl" name="reoffice" placeholder="Rs."  pattern="[0-9]+" />
+															</div>
+															<div class="col-md-4">
+																	<label>Total RE</label>
+																	<input type="text" autocomplete="off" class="form-control re_total"  name="total_re" readonly  placeholder="Rs."  pattern="[0-9]+" />
+																</div>
+														</div>
+													</div>
+												</div>
+												<hr>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 text-right section-form-btn-wrap">
+												<button type="submit" class="btn btn-primary" id="addEstimateBtn">
+													<span class="text">Add Another</span>
+												</button>
+											</div>
+										</div>
+									</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row subsection">
+							<div class="col-md-12 pd-lr15">
+								<div class="row subsection-title">Expenditures (in Lakhs)</div>
+								<div class="row subsection-content">
+									<div class="col-md-12 plain-table">
+										<div class="table-title">Expenditure History (in Lakhs)</div>
+										<table id="exp_tab">
+											<thead>
+												<th>Month-Year</th>
+												<th>Salary</th>
+														<th>Benifits</th>
+														<th>Wages</th>
+														<th>Machinery & Equipments</th>
+														<th>Office Expenses</th>
+														<th>Total</th>
+														<th>Actions</th>
+
+											</thead>
+											<tbody>
+												
+											</tbody>
+										</table>
+									</div>
+									<!-- <div class="col-md-12 plain-table">
+										<div class="table-title">Expenditure History compared to Budget (%)</div>
+										<table id="exp_per_be_tab">
+											<thead>
+												<th>Month-Year</th>
+												<th>Salary</th>
+														<th>Benifits</th>
+														<th>Wages</th>
+														<th>Machinery & Equipments</th>
+														<th>Office Expenses</th>
+														<th>Total</th>
+														<th>Actions</th>
+												
+
+											</thead>
+											<tbody>
+												
+											</tbody>
+										</table>
+									</div> -->
+									<!-- <div class="col-md-12 plain-table">
+										<div class="table-title">Expenditure History compared to Revised estimate (%)</div>
+										<table id="exp_per_re_tab">
+											<thead>
+												<th>Month-Year</th>
+												<th>Salary</th>
+														<th>Benifits</th>
+														<th>Wages</th>
+														<th>Machinery & Equipments</th>
+														<th>Office Expenses</th>
+														<th>Total</th>
+														<th>Actions</th>
+												
+
+											</thead>
+											<tbody>
+												
+											</tbody>
+										</table>
+									</div> -->
+									<form autocomplete="off" id="addExpForm">
+									<div class="col-md-12">
+										<div class="row" id="addExp">
+											<div class="row form-row">
+												<div class="col-md-3">
+													<label>Month and Year</label>
+													<input type="text" autocomplete="off" class="form-control" name="expyear" placeholder="Ex. 02-2018" required="required" pattern="[0-9-]+" />
+												</div>
+												<div class="col-md-3">
+													<label>Salary</label>
+													<input type="text" autocomplete="off" class="form-control exp_sal exp_rcl" name="exp_salary" placeholder="Rs." pattern="[0-9]+" />
+												</div>
+												<div class="col-md-3">
+													<label>Benefits</label>
+													<input type="text" autocomplete="off" class="form-control exp_benefit exp_rcl" name="exp_benefits" placeholder="Rs." pattern="[0-9]+" />
+												</div>
+												<div class="col-md-3">
+													<label>Wages</label>
+													<input type="text" autocomplete="off" class="form-control exp_wages exp_rcl" name="exp_wages" placeholder="Rs." pattern="[0-9]+" />
+												</div>
+											</div>
+											<div class="row form-row">
+												<div class="col-md-4">
+													<label>Machinery and Equipments</label>
+													<input type="text" autocomplete="off" class="form-control exp_machinery exp_rcl" name="exp_machinery" placeholder="Rs." pattern="[0-9]+" />
+												</div>
+												<div class="col-md-4">
+													<label>Office Expenses</label>
+													<input type="text" autocomplete="off" class="form-control exp_office exp_rcl" name="exp_office" placeholder="Rs." pattern="[0-9]+" />
+												</div>
+												<div class="col-md-4">
+													<label>TOTAL EXPENDITURE(Rupees in Croress)</label>
+													<input type="text" autocomplete="off" class="form-control exp_total"  name="total_exp" readonly  placeholder="Rs." pattern="[0-9]+" />
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12 text-right section-form-btn-wrap">
+												<button type="submit" class="btn btn-primary" id="addExpBtn">
+													<span class="text">Add Another</span>
+												</button>
+											</div>
+										</div>
+									</div>
+								</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- <form autocomplete="off" id="addSchemeFinances" action="add-scheme-financials.php" method="POST"> -->
+			<!-- <div class="row section-main-btn">
+				<a id="redirBtnObj" class="btn btn-primary">
+					<span class="text">Proceed to add Objectives</span>
+				</a>
+			</div> -->
+		<!-- </form> -->
+		
+<div class="modal fade" id="editBeModal" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Edit <span id="estimateTitle"></span> </h4>
+			</div>
+			<div class="modal-body">
+				<form autocomplete="off" id="editbeForm" name="editExpenditureForm">
+					<label>Year:</label>
+					<input type="text" autocomplete="off" name="year"  readonly="readonly" disabled="disabled">
+					<input type="hidden" name="id">
+					<input type="hidden" name="type">
+
+					<div class="form-row">
+						<input type="text" autocomplete="off" class="form-control " name="salary" placeholder="Salary" required="required" pattern="[0-9]+" />
+					</div>
+					<div class="form-row">
+						<input type="text" autocomplete="off" class="form-control " name="benefits" placeholder="Benefits" required="required" pattern="[0-9]+" />
+					</div>
+					<div class="form-row">
+						<input type="text" autocomplete="off" class="form-control " name="wages" placeholder="Wages" required="required" pattern="[0-9]+" />
+					</div>
+					<div class="form-row">
+						<input type="text" autocomplete="off" class="form-control " name="machinery" placeholder="machinery and equipments" required="required" pattern="[0-9]+" />
+					</div>
+					<div class="form-row">
+						<input type="text" autocomplete="off" class="form-control " name="officeexp" placeholder="Office Expenses" required="required" pattern="[0-9]+" />
+					</div>
+					<div class="form-row">
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</form>
+			</div>
+			<!-- <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div> -->
+		</div>
+	</div>
+</div>
+	</div>
+	<script src="assets/js/jquery.min.js"></script>
+<script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/wow.js"></script>
+	<script src="assets/js/scrollify.js"></script>
+	<script src="assets/js/nicescroll.js"></script>
+	<script src="assets/js/particle.min.js"></script>
+	<script src="//cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+	<script src="assets/js/validatr.min.js"></script>
+	<script src="assets/js/brain.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+<script src="assets/js/notify.min.js"></script>
+<script src="assets/js/dept_list.js"></script>
+	<script src="assets/js/page/add-establishment.js"></script>
+<script>$( document ).ajaxStop(function() {
+$('body').css('display', 'block');
+});</script><script src="assets/js/load-menu.js"></script>
+</body>
+</html>

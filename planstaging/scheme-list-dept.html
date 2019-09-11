@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> Delhi Government, Department of Planning</title>    
+<noscript><meta http-equiv="refresh" content="0; URL=/badbrowser.html"></noscript>
+<meta http-equiv="X-Frame-Options" content="deny">
+	<link rel="stylesheet" href="assets/css/animate.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/login_check.js"></script>
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+</head>
+<body>
+<div id="antiClickjack" style="position: fixed;top: 0; left: 0;right: 0;bottom: 0;z-index: 1234565433456432345464; background: #FFF;"></div>
+<script type="text/javascript">
+   if (self === top) {
+       var antiClickjack = document.getElementById("antiClickjack");
+       antiClickjack.parentNode.removeChild(antiClickjack);
+   } else {
+       top.location = self.location;
+   }
+</script>
+<nav class="head-nav" w3-include-html="parts/head-nav-in.html"></nav>
+<nav class="sidebar" id="sidebar" w3-include-html="sidelist.html"></nav>
+
+<div class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="dash-sec-thumb-title" id="dashSecThumbTitle">Scheme List</div>
+		</div>
+	</div>
+	<br>
+	<!-- <div class="row">
+		<div class="col-md-3">
+			<div class="dash-sec-thumb">
+				<a class="anch" data-target="#chartDrop1">
+					<div class="title">Scheme Name</div>
+					<div class="thumb-ind-wrap">
+						<span class="thumb-ind-item">10</span>
+						<span class="thumb-ind-item green">5</span>
+						<span class="thumb-ind-item red">3</span>
+						<span class="thumb-ind-item yellow">2</span>
+					</div>
+				</a>
+				<div class="dash-sec-thumb-dets" id="chartDrop1"></div>
+			</div>
+		</div>
+	</div> -->
+
+	<div class="row dash-sec-thumb-cont">
+		<div class="col-md-12">
+			<div class="row dash-sec-thumb-wrap" id="sectorDashList">
+				
+			</div>
+			<div class="row dash-sec-thumb-dets">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-6" id="chartSectContainer">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+
+
+
+<script type="text/javascript">
+	
+</script>
+<!-- To be worked upon for populating the data. .dash-sec-thumb acts as tab anchor and .dash-sec-thumb-dets-in acts as tab content -->
+<script type="text/javascript">
+	$('body').on('click', '.dash-sec-thumb .anch', function(e){
+		e.preventDefault();
+		if($(this).closest('.dash-sec-thumb').hasClass('active')){
+			// var targ = $(this).attr('data-target');
+			// $('body .dash-sec-thumb-dets:not('+targ+')').slideUp(300);
+			// $(targ).slideUp(300);
+			$('body .dash-sec-thumb').removeClass('active');
+		}
+		else{
+			var targ = $(this).attr('data-target');
+			// $('body .dash-sec-thumb-dets:not('+targ+')').slideUp(300);
+			// $(targ).slideDown(300);
+			$('body .dash-sec-thumb').removeClass('active');
+			$(this).closest('.dash-sec-thumb').addClass('active');
+		}
+	});
+
+	$('body').on('click', '.sub-anchor', function(e){
+		e.preventDefault();
+		$(this).toggleClass('active');
+		$(this).parent().find('.sub-anchor-drop').slideToggle(300);
+	})
+</script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/wow.js"></script>
+<script src="assets/js/scrollify.js"></script>
+<script src="assets/js/nicescroll.js"></script>
+<script src="assets/js/particle.min.js"></script>
+<script src="//cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+<script src="assets/js/validatr.min.js"></script>
+<script src="assets/js/brain.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+<script src="assets/js/notify.min.js"></script>
+<script src="assets/js/dept_list.js"></script>
+ <script src="assets/js/page/scheme-list-dept-home.js"></script>
+<script>$( document ).ajaxStop(function() {
+$('body').css('display', 'block');
+});</script><script src="assets/js/load-menu.js"></script>
+</body>
+</html>

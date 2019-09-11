@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Delhi Government, Department of Planning</title>    
+<noscript><meta http-equiv="refresh" content="0; URL=/badbrowser.html"></noscript>
+<meta http-equiv="X-Frame-Options" content="deny">
+	<link rel="stylesheet" href="assets/css/animate.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/login_check.js"></script>
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+</head>
+<body>
+<div id="antiClickjack" style="position: fixed;top: 0; left: 0;right: 0;bottom: 0;z-index: 1234565433456432345464; background: #FFF;"></div>
+<script type="text/javascript">
+   if (self === top) {
+       var antiClickjack = document.getElementById("antiClickjack");
+       antiClickjack.parentNode.removeChild(antiClickjack);
+   } else {
+       top.location = self.location;
+   }
+</script>
+<nav class="head-nav" w3-include-html="parts/head-nav-in.html"></nav>
+<nav class="sidebar" id="sidebar" w3-include-html="sidelist.html"></nav>
+
+<div class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="dash-sec-thumb-title text-center" id="dashSecThumbTitle"></div>
+			<!-- </div> -->
+		</div>
+		<div class="col-md-12">
+			<ul class="nav nav-tabs">
+				<li class="active"><a data-toggle="tab" href="#landing">Summary</a></li>
+		  		<li><a data-toggle="tab" href="#menu_main">Financials</a></li>
+		  		<li><a data-toggle="tab" href="#home_main">All Indicators</a></li>
+		  		<li><a data-toggle="tab" href="#cri_ind">Critical Indicators</a></li>
+		  		<li><a data-toggle="tab" href="#actionPoints">Action Points</a></li>
+	  		</ul>
+		</div>
+	</div>
+	<div class="tab-content">
+  		<div id="landing" class="tab-pane fade in active">
+  			<div class="row num-indicator-wrap">
+				<div class="col-md-2 num-indicator-item-wrap">
+					<a href="scheme-list.html" class="num-indicator-item orange total-schemes dept_spec">
+						<span class="icon-main" w3-include-html="assets/icons/scheme.html"></span>
+						<div class="value"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+						<div class="title"><span>Total Schemes</span><span>In Numbers</span></div>
+					</a>
+				</div>
+			</div>
+  			<div class="row">
+  				<div class="col-md-12">
+  					<h4>Financial Data</h4>
+  				</div>
+  			</div>
+  			<br>
+  			<div class="row">
+  				<div class="col-md-6">
+  					<div class="row section">
+						<div class="col-md-12">
+							<div class="row section-title">
+								<div class="col-md-8">
+									<div class="row">Schemes</div>
+								</div>
+								<div class="col-md-4">
+									<div class="row">
+										<select class="form-control sortPerfTable" data-target=".bestperdept">
+											<option value="1">Best to Worst</option>
+											<option value="2">Worst to Best</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="row section-content" style="padding: 0; padding-bottom: 10px;">
+								<div class="col-md-12">
+									<div class="row section-scroll">
+										<table class="table table-hover text-center bestperdept">
+											<thead>
+												<tr>
+													<th>S. No.</th>
+													<th>Name</th>
+													<th>% Expenditure</th>
+												</tr>
+											</thead>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+  				</div>
+  				<div class="col-md-6">
+					<div class="row num-indicator-wrap">
+						<!-- <div class="col-md-2 num-indicator-item-wrap">
+							<a href="scheme-list.html" class="num-indicator-item orange total-schemes">
+								<span class="icon-main" w3-include-html="assets/icons/scheme.html"></span>
+								<div class="value"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+								<div class="title"><span>Total Schemes</span><span>In Numbers</span></div>
+							</a>
+						</div> -->
+						<div class="col-md-4 num-indicator-item-wrap">
+							<a href="all-financials.html" class="num-indicator-item blue total-estimate dept_spec">
+								<span class="icon-main" w3-include-html="assets/icons/estimate.html"></span>
+								<div class="value"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+								<div class="title"><span>Total Allocation</span><span>(Rupees in Crores)</span></div>
+							</a>
+						</div>
+						<div class="col-md-4 num-indicator-item-wrap">
+							<a href="all-financials.html" class="num-indicator-item green total-exp dept_spec">
+								<span class="icon-main" w3-include-html="assets/icons/expend.html"></span>
+								<div class="value"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+								<div class="title"><span>TOTAL EXPENDITURE</span><span>(Rupees in Crores)</span></div>
+							</a>
+						</div>
+						<div class="col-md-4 num-indicator-item-wrap">
+							<a href="all-financials.html" class="num-indicator-item yellow month-exp dept_spec">
+								<span class="icon-main" w3-include-html="assets/icons/expend.html"></span>
+								<div class="value red-text"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+								<div class="title"><span>Monthly Expenditure</span><span>(Rupees in Crores)</span></div>
+							</a>
+						</div>
+						<div class="col-md-4 num-indicator-item-wrap">
+							<a href="all-financials.html" class="num-indicator-item green perc-exp dept_spec">
+								<span class="icon-main" w3-include-html="assets/icons/percent.html"></span>
+								<div class="value red-text"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+								<div class="title"><span>Percentage</span><span>in %</span></div>
+							</a>
+						</div>
+						<!-- <div class="col-md-4 num-indicator-item-wrap">
+							<div class="num-indicator-item yellow inprogress">
+								<div class="title">In Progress</div>
+								<div class="value red-text"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+							</div>
+						</div>
+						<div class="col-md-2 num-indicator-item-wrap">
+							<div class="num-indicator-item notapplicable">
+								<div class="title">NA</div>
+								<div class="value red-text"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+							</div>
+						</div> -->
+					</div>
+				</div>
+			</div>
+  			<div class="row">
+  				<div class="col-md-12">
+  					<h4>Indicator Data</h4>
+  				</div>
+  			</div>
+  			<br>
+  			<div class="row">
+  				<div class="col-md-6">
+		  			<div class="row num-indicator-wrap">
+						<div class="col-md-4 num-indicator-item-wrap">
+							<a href="all-indicators-status.html" class="num-indicator-item blue total-indicators dept_spec">
+								<span class="icon-main" w3-include-html="assets/icons/indicators.html"></span>
+								<div class="value"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+								<div class="title"><span>Total Indicators</span><span>In numbers</span></div>
+							</a>
+						</div>
+						<div class="col-md-4 num-indicator-item-wrap">
+							<a href="ontrack-indicators.html" class="num-indicator-item green on-track dept_spec">
+								<span class="icon-main" w3-include-html="assets/icons/ontrack.html"></span>
+								<div class="value"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+								<div class="title"><span>On Track</span><span>In numbers</span></div>
+							</a>
+						</div>
+						<div class="col-md-4 num-indicator-item-wrap">
+							<a href="offtrack-indicators.html" class="num-indicator-item red off-track dept_spec">
+								<span class="icon-main" w3-include-html="assets/icons/offtrack.html"></span>
+								<div class="value red-text"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+								<div class="title"><span>Off Track</span><span>In numbers</span></div>
+							</a>
+						</div>
+						<div class="col-md-4 num-indicator-item-wrap">
+							<a href="na-indicators.html" class="num-indicator-item yellow inprogress dept_spec">
+								<span class="icon-main" w3-include-html="assets/icons/progress.html"></span>
+								<div class="value red-text"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+								<div class="title"><span>Not Applicable</span><span>In numbers</span></div>
+							</a>
+						</div>
+						<div class="col-md-4 num-indicator-item-wrap">
+							<a href="nr-indicators.html" class="num-indicator-item notapplicable dept_spec">
+								<span class="icon-main" w3-include-html="assets/icons/na.html"></span>
+								<div class="value red-text"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+								<div class="title"><span>Not Reported (NR)</span><span>In Numbers</span></div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+  					<div class="row section">
+						<div class="col-md-12">
+							<div class="row section-title">
+								<div class="col-md-8">
+									<div class="row">Schemes</div>
+								</div>
+								<div class="col-md-4">
+									<div class="row">
+										<select class="form-control sortPerfTable" data-target=".bestperdeptInd">
+											<option value="1">Best to Worst</option>
+											<option value="2">Worst to Best</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="row section-content" style="padding: 0; padding-bottom: 10px;">
+								<div class="col-md-12">
+									<div class="row section-scroll">
+										<table class="table table-hover text-center bestperdeptInd">
+											<thead>
+												<tr>
+													<th>S. No.</th>
+													<th>Name</th>
+													<th>% on track or achieved</th>
+												</tr>
+											</thead>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+  				</div>
+			</div>
+			<div class="row">
+  				<div class="col-md-12">
+  					<h4>Critical Indicator Data</h4>
+  				</div>
+  			</div>
+  			<br>
+  			<div class="row">
+  				<div class="col-md-6">
+					<div class="row section">
+						<div class="col-md-12">
+							<div class="row section-title">
+								<div class="col-md-8">
+									<div class="row">Schemes</div>
+								</div>
+								<div class="col-md-4">
+									<div class="row">
+										<select class="form-control sortPerfTable" data-target=".bestperdeptCri">
+											<option value="1">Best to Worst</option>
+											<option value="2">Worst to Best</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="row section-content" style="padding: 0; padding-bottom: 10px;">
+								<div class="col-md-12">
+									<div class="row section-scroll">
+										<table class="table table-hover text-center bestperdeptCri">
+											<thead>
+												<tr>
+													<th>S. No.</th>
+													<th>Name</th>
+													<th>% on track or achieved</th>
+												</tr>
+											</thead>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+  				<div class="col-md-6">
+					<div class="row num-indicator-wrap">
+						<div class="col-md-4 num-indicator-item-wrap">
+							<a href="critical-indicators.html" class="num-indicator-item blue total-indicators1 dept_spec">
+								<span class="icon-main" w3-include-html="assets/icons/indicators.html"></span>
+								<div class="value"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+								<div class="title"><span>Total Indicators</span><span>In numbers</span></div>
+							</a>
+						</div>
+						<div class="col-md-4 num-indicator-item-wrap">
+							<a href="critical-ontrack-indicators.html" class="num-indicator-item green on-track1 dept_spec">
+								<span class="icon-main" w3-include-html="assets/icons/ontrack.html"></span>
+								<div class="value"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+								<div class="title"><span>On Track</span><span>In numbers</span></div>
+							</a>
+						</div>
+						<div class="col-md-4 num-indicator-item-wrap">
+							<a href="critical-offtrack-indicators.html" class="num-indicator-item red off-track1 dept_spec">
+								<span class="icon-main" w3-include-html="assets/icons/offtrack.html"></span>
+								<div class="value red-text"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+								<div class="title"><span>Off Track</span><span>In numbers</span></div>
+							</a>
+						</div>
+						<div class="col-md-4 num-indicator-item-wrap">
+							<a href="critical-na-indicators.html" class="num-indicator-item yellow inprogress1 dept_spec">
+								<span class="icon-main" w3-include-html="assets/icons/progress.html"></span>
+								<div class="value red-text"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+								<div class="title"><span>Not Applicable</span><span>In numbers</span></div>
+							</a>
+						</div>
+						<div class="col-md-4 num-indicator-item-wrap">
+							<a href="critical-nr-indicators.html" class="num-indicator-item notapplicable1 dept_spec">
+								<span class="icon-main" w3-include-html="assets/icons/na.html"></span>
+								<div class="value red-text"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+								<div class="title"><span>Not Reported (NR)</span><span>In Numbers</span></div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+  				<div class="col-md-12">
+  					<h4>All Schemes</h4>
+  				</div>
+  			</div>
+  			<br>
+  			<div class="row">
+				<div class="col-md-12" id="schemeListCustom">
+					
+				</div>
+			</div>
+  		</div>
+  		<div id="home_main" class="tab-pane fade">
+			<div class="row num-indicator-wrap">
+				<div class="col-md-2 num-indicator-item-wrap">
+					<a href="scheme-list.html" class="num-indicator-item orange total-schemes dept_spec">
+						<span class="icon-main" w3-include-html="assets/icons/scheme.html"></span>
+						<div class="value"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+						<div class="title"><span>Total Schemes</span><span>In Numbers</span></div>
+					</a>
+				</div>
+				<div class="col-md-2 num-indicator-item-wrap">
+					<a href="all-indicators-status.html" class="num-indicator-item blue total-indicators dept_spec">
+						<span class="icon-main" w3-include-html="assets/icons/indicators.html"></span>
+						<div class="value"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+						<div class="title"><span>Total Indicators</span><span>In numbers</span></div>
+					</a>
+				</div>
+				<div class="col-md-2 num-indicator-item-wrap">
+					<a href="ontrack-indicators.html" class="num-indicator-item green on-track dept_spec">
+						<span class="icon-main" w3-include-html="assets/icons/ontrack.html"></span>
+						<div class="value"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+						<div class="title"><span>On Track</span><span>In numbers</span></div>
+					</a>
+				</div>
+				<div class="col-md-2 num-indicator-item-wrap">
+					<a href="offtrack-indicators.html" class="num-indicator-item red off-track dept_spec">
+						<span class="icon-main" w3-include-html="assets/icons/offtrack.html"></span>
+						<div class="value red-text"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+						<div class="title"><span>Off Track</span><span>In numbers</span></div>
+					</a>
+				</div>
+				<div class="col-md-2 num-indicator-item-wrap">
+					<a href="na-indicators.html" class="num-indicator-item yellow inprogress dept_spec">
+						<span class="icon-main" w3-include-html="assets/icons/progress.html"></span>
+						<div class="value red-text"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+						<div class="title"><span>Not Applicable</span><span>In numbers</span></div>
+					</a>
+				</div>
+				<div class="col-md-2 num-indicator-item-wrap">
+					<a href="nr-indicators.html" class="num-indicator-item notapplicable dept_spec">
+						<span class="icon-main" w3-include-html="assets/icons/na.html"></span>
+						<div class="value red-text"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+						<div class="title"><span>Not Reported (NR)</span><span>In Numbers</span></div>
+					</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="row section">
+						<div class="col-md-12">
+							<div class="row section-title">
+								<div class="col-md-8">
+									<div class="row">Schemes</div>
+								</div>
+								<div class="col-md-4">
+									<div class="row">
+										<select class="form-control sortPerfTable" data-target=".bestperdeptInd">
+											<option value="1">Best to Worst</option>
+											<option value="2">Worst to Best</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="row section-content" style="padding: 0; padding-bottom: 10px;">
+								<div class="col-md-12">
+									<div class="row section-scroll">
+										<table class="table table-hover text-center bestperdeptInd">
+											<thead>
+												<tr>
+													<th>S. No.</th>
+													<th>Name</th>
+													<th>% on track or achieved</th>
+												</tr>
+											</thead>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<div class="row section">
+						<div class="col-md-12">
+							<div class="row section-title">Progress Indicators</div>
+							<div class="row section-content">
+								<div class="col-md-12">
+									<div class="tab-content" style="height: 820px;">
+								  		<div id="home" class="tab-pane fade in active">
+									    	<canvas id="myChart" style="width: 100% !important; height: 820px !important;"></canvas>
+									  	</div>
+									  	<div id="menu1" class="tab-pane fade">
+									    	<canvas id="myPieChart" style="width: 100% !important; height: 820px !important;"></canvas>
+									  	</div>
+									  	<div id="menu2" class="tab-pane fade">
+									    	<canvas id="myChart" style="width: 100% !important; height: 820px !important;"></canvas>
+									  	</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="col-md-4">
+					<div class="row section">
+						<div class="col-md-12">
+							<div class="row section-title">Off Track Indicators</div>
+							<div class="row section-content">
+								<div class="col-md-12">
+									<div class="row section-scroll" id="indicatorsScrollOfftrack">
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+			</div>
+			<div class="row dash-sec-thumb-cont">
+				<div class="col-md-12">
+					<div class="row dash-sec-thumb-wrap-title">
+						<div class="col-md-8">Click on Scheme name to expand</div>
+						<div class="col-md-4">
+							<select class="form-control sortPerf" data-target="#sectorDashList">
+								<option>None</option>
+								<option value="1">Best to Worst</option>
+								<option value="2">Worst to Best</option>
+							</select>
+						</div>
+					</div>
+					<div class="row dash-sec-thumb-wrap" id="sectorDashList">
+						
+					</div>
+					<div class="row dash-sec-thumb-dets">
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-6" id="chartSectContainer">
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="menu_main" class="tab-pane fade">
+			<div class="row num-indicator-wrap">
+				<div class="col-md-2 num-indicator-item-wrap">
+					<a href="scheme-list.html" class="num-indicator-item orange total-schemes dept_spec">
+						<span class="icon-main" w3-include-html="assets/icons/scheme.html"></span>
+						<div class="value"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+						<div class="title"><span>Total Schemes</span><span>In Numbers</span></div>
+					</a>
+				</div>
+				<div class="col-md-2 num-indicator-item-wrap">
+					<a href="all-financials.html" class="num-indicator-item blue total-estimate dept_spec">
+						<span class="icon-main" w3-include-html="assets/icons/estimate.html"></span>
+						<div class="value"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+						<div class="title"><span>Total Allocation</span><span>(Rupees in Crores)</span></div>
+					</a>
+				</div>
+				<div class="col-md-2 num-indicator-item-wrap">
+					<a href="all-financials.html" class="num-indicator-item green total-exp dept_spec">
+						<span class="icon-main" w3-include-html="assets/icons/expend.html"></span>
+						<div class="value"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+						<div class="title"><span>TOTAL EXPENDITURE</span><span>(Rupees in Crores)</span></div>
+					</a>
+				</div>
+				<div class="col-md-2 num-indicator-item-wrap">
+					<a href="all-financials.html" class="num-indicator-item yellow month-exp dept_spec">
+						<span class="icon-main" w3-include-html="assets/icons/expend.html"></span>
+						<div class="value red-text"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+						<div class="title"><span>Monthly Expenditure</span><span>(Rupees in Crores)</span></div>
+					</a>
+				</div>
+				<div class="col-md-2 num-indicator-item-wrap">
+					<a href="all-financials.html" class="num-indicator-item red perc-exp dept_spec">
+						<span class="icon-main" w3-include-html="assets/icons/percent.html"></span>
+						<div class="value red-text"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+						<div class="title"><span>Percentage</span><span>in %</span></div>
+					</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="row section">
+						<div class="col-md-12">
+							<div class="row section-title">
+								<div class="col-md-8">
+									<div class="row">Schemes</div>
+								</div>
+								<div class="col-md-4">
+									<div class="row">
+										<select class="form-control sortPerfTable" data-target=".bestperdept">
+											<option value="1">Best to Worst</option>
+											<option value="2">Worst to Best</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="row section-content" style="padding: 0; padding-bottom: 10px;">
+								<div class="col-md-12">
+									<div class="row section-scroll">
+										<table class="table table-hover text-center bestperdept">
+											<thead>
+												<tr>
+													<th>S. No.</th>
+													<th>Name</th>
+													<th>% Expenditure</th>
+												</tr>
+											</thead>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<div class="row section">
+						<div class="col-md-12">
+							<div class="row section-title">Overall Progress</div>
+							<div class="row section-content">
+								<div class="col-md-12">
+									<div class="row">
+										<div class="col-md-12">
+											<ul class="nav nav-tabs">
+												<li class="active"><a data-toggle="tab" href="#home12">Bar</a></li>
+												<li><a data-toggle="tab" href="#menu22">Pie</a></li>
+												<li><a data-toggle="tab" href="#menu32">Polar</a></li>
+												<li><a data-toggle="tab" href="#menu42">Doughnut</a></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="tab-content" style="height: 350px;">
+								  		<div id="home12" class="tab-pane fade in active">
+									    	<canvas id="myChart2" style="width: 100% !important; height: 350px !important;"></canvas>
+									  	</div>
+									  	<div id="menu22" class="tab-pane fade">
+									  		<div class="row">
+									  			<div class="col-md-12">
+									    			<canvas id="myPieChart2" style="width: 100% !important; height: 350px !important;"></canvas>
+									    		</div>
+								    		</div>
+									  	</div>
+
+									  	<div id="menu32" class="tab-pane fade">
+									  		<div class="row">
+									  			<div class="col-md-12">
+									    			<canvas id="myPolarChart2" style="width: 100% !important; height: 350px !important;"></canvas>
+									    		</div>
+								    		</div>
+									  	</div>
+
+									  	<div id="menu42" class="tab-pane fade">
+									  		<div class="row">
+									  			<div class="col-md-12">
+									    			<canvas id="myDoughnutChart2" style="width: 100% !important; height: 350px !important;"></canvas>
+									    		</div>
+								    		</div>
+									  	</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="col-md-4">
+					<div class="row section">
+						<div class="col-md-12">
+							<div class="row section-title">Off Track Indicators</div>
+							<div class="row section-content">
+								<div class="col-md-12">
+									<div class="row section-scroll" id="indicatorsScrollOfftrack">
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row section">
+						<div class="col-md-12">
+							<div class="row section-title">Establishment Expenditures</div>
+							<div class="row section-content">
+								<div class="col-md-12">
+							    	<canvas id="myChartEst" style="width: 100% !important; height: 350px !important;"></canvas>
+							  	</div>
+						  	</div>
+					  	</div>
+				  	</div>
+					<div class="row dash-sec-thumb-cont">
+						<div class="col-md-12">
+							<div class="row dash-sec-thumb-wrap-title">
+								<div class="col-md-8">Click on Scheme name to expand</div>
+								<div class="col-md-4">
+									<select class="form-control sortPerf" data-target="#sectorDashList1">
+										<option>None</option>
+										<option value="1">Best to Worst</option>
+										<option value="2">Worst to Best</option>
+									</select>
+								</div>
+							</div>
+							<div class="row dash-sec-thumb-wrap" id="sectorDashList1">
+								
+							</div>
+							<!-- <div class="row dash-sec-thumb-dets">
+								<div class="col-md-12">
+									<div class="row">
+										<div class="col-md-6" id="chartSectContainer1">
+											
+										</div>
+									</div>
+								</div>
+							</div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="row">
+				<div class="col-md-8">
+					<div class="row section">
+						<div class="col-md-12">
+							<div class="row section-title">
+								<div class="col-md-8">
+									<span class="section-title-text">Sector wise Progress </span>
+								</div>
+								<div class="col-md-4 text-right">
+									<ul class="nav nav-tabs text-right">
+										<li class="active"><a data-toggle="tab" href="#home">Bar</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="row section-content">
+								<div class="col-md-12">
+									<div class="tab-content">
+								  		<div id="home" class="tab-pane fade in active">
+									    	<canvas id="myChart" style="width: 100% !important; height: 500px !important;"></canvas>
+									  	</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="row section">
+						<div class="col-md-12">
+							<div class="row section-title">
+								<div class="col-md-12">
+									<span class="section-title-text">Off Track Indicators</span>
+								</div>
+							</div>
+							<div class="row section-content">
+								<div class="col-md-12"></div><div class="col-md-12">
+									<div class="row section-scroll" id="indicatorsScrollOfftrack">
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> -->
+
+			<!-- <div class="row dash-sec-thumb-cont">
+				<div class="col-md-12">
+					<div class="row dash-sec-thumb-wrap" id="sectorDashList">
+						
+					</div>
+					<div class="row dash-sec-thumb-dets">
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-6" id="chartSectContainer">
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> -->
+		</div>
+		<div id="cri_ind" class="tab-pane">
+			<div class="row num-indicator-wrap">
+				<div class="col-md-2 num-indicator-item-wrap">
+					<a href="scheme-list.html" class="num-indicator-item orange total-schemes1 dept_spec">
+						<span class="icon-main" w3-include-html="assets/icons/scheme.html"></span>
+						<div class="value"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+						<div class="title"><span>Total Schemes</span><span>In Numbers</span></div>
+					</a>
+				</div>
+				<div class="col-md-2 num-indicator-item-wrap">
+					<a href="critical-indicators.html" class="num-indicator-item blue total-indicators1 dept_spec">
+						<span class="icon-main" w3-include-html="assets/icons/indicators.html"></span>
+						<div class="value"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+						<div class="title"><span>Total Indicators</span><span>In numbers</span></div>
+					</a>
+				</div>
+				<div class="col-md-2 num-indicator-item-wrap">
+					<a href="critical-ontrack-indicators.html" class="num-indicator-item green on-track1 dept_spec">
+						<span class="icon-main" w3-include-html="assets/icons/ontrack.html"></span>
+						<div class="value"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+						<div class="title"><span>On Track</span><span>In numbers</span></div>
+					</a>
+				</div>
+				<div class="col-md-2 num-indicator-item-wrap">
+					<a href="critical-offtrack-indicators.html" class="num-indicator-item red off-track1 dept_spec">
+						<span class="icon-main" w3-include-html="assets/icons/offtrack.html"></span>
+						<div class="value red-text"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+						<div class="title"><span>Off Track</span><span>In numbers</span></div>
+					</a>
+				</div>
+				<div class="col-md-2 num-indicator-item-wrap">
+					<a href="critical-na-indicators.html" class="num-indicator-item yellow inprogress1 dept_spec">
+						<span class="icon-main" w3-include-html="assets/icons/progress.html"></span>
+						<div class="value red-text"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+						<div class="title"><span>Not Applicable</span><span>In numbers</span></div>
+					</a>
+				</div>
+				<div class="col-md-2 num-indicator-item-wrap">
+					<a href="critical-nr-indicators.html" class="num-indicator-item notapplicable1 dept_spec">
+						<span class="icon-main" w3-include-html="assets/icons/na.html"></span>
+						<div class="value red-text"><span class="icon"><img src="assets/icons/loader.gif"></span></div>
+						<div class="title"><span>Not Reported (NR)</span><span>In Numbers</span></div>
+					</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="row section">
+						<div class="col-md-12">
+							<div class="row section-title">
+								<div class="col-md-8">
+									<div class="row">Schemes</div>
+								</div>
+								<div class="col-md-4">
+									<div class="row">
+										<select class="form-control sortPerfTable" data-target=".bestperdeptCri">
+											<option value="1">Best to Worst</option>
+											<option value="2">Worst to Best</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="row section-content" style="padding: 0; padding-bottom: 10px;">
+								<div class="col-md-12">
+									<div class="row section-scroll">
+										<table class="table table-hover text-center bestperdeptCri">
+											<thead>
+												<tr>
+													<th>S. No.</th>
+													<th>Name</th>
+													<th>% on track or achieved</th>
+												</tr>
+											</thead>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<div class="row section">
+						<div class="col-md-12">
+							<div class="row section-title">Progress Indicators</div>
+							<div class="row section-content">
+								<div class="col-md-12">
+									<div class="tab-content" style="height: 420px;">
+								  		<div id="home" class="tab-pane fade in active">
+									    	<canvas id="myChart7" style="width: 100% !important; height: 420px !important;"></canvas>
+									  	</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="col-md-4">
+					<div class="row section">
+						<div class="col-md-12">
+							<div class="row section-title">
+								<div class="col-md-12">
+									<span class="section-title-text">Off Track Indicators</span>
+								</div>
+							</div>
+							<div class="row section-content">
+								<div class="col-md-12"></div><div class="col-md-12">
+									<div class="row section-scroll" id="indicatorsScrollOfftrack">
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+			</div>
+			<div class="row dash-sec-thumb-cont">
+				<div class="col-md-12">
+					<div class="row dash-sec-thumb-wrap-title">
+						<div class="col-md-8">Click on Scheme name to expand</div>
+						<div class="col-md-4">
+							<select class="form-control sortPerf" data-target="#sectorDashList7">
+								<option>None</option>
+								<option value="1">Best to Worst</option>
+								<option value="2">Worst to Best</option>
+							</select>
+						</div>
+					</div>
+					<div class="row dash-sec-thumb-wrap" id="sectorDashList7">
+						
+					</div>
+					<div class="row dash-sec-thumb-dets">
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-6" id="chartSectContainer">
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="actionPoints" class="tab-pane fade">
+			<div class="row section">
+				<div class="col-md-12">
+					<div class="row section-title">
+						<div class="col-md-12">
+							<span class="section-title-text">Action Points</span>
+						</div>
+					</div>
+					<div class="row section-content">
+						<div class="col-md-12">
+							<table class="table table-hover" id="actionPointsTab">
+								<thead>
+									<th>Scheme Name</th>
+									<th>Indicator</th>
+									<th>status</th>
+									<th>Action Point</th>
+								</thead>
+								<tbody>
+									<tr>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="assets/js/jquery.min.js"></script>
+<script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+
+
+
+<script type="text/javascript">
+	
+</script>
+<!-- To be worked upon for populating the data. .dash-sec-thumb acts as tab anchor and .dash-sec-thumb-dets-in acts as tab content -->
+<script type="text/javascript">
+	$('body').on('click', '.dash-sec-thumb .anch', function(e){
+		e.preventDefault();
+		if($(this).closest('.dash-sec-thumb').hasClass('active')){
+			// var targ = $(this).attr('data-target');
+			// $('body .dash-sec-thumb-dets:not('+targ+')').slideUp(300);
+			// $(targ).slideUp(300);
+			$('body .dash-sec-thumb').removeClass('active');
+		}
+		else{
+			var targ = $(this).attr('data-target');
+			// $('body .dash-sec-thumb-dets:not('+targ+')').slideUp(300);
+			// $(targ).slideDown(300);
+			$('body .dash-sec-thumb').removeClass('active');
+			$(this).closest('.dash-sec-thumb').addClass('active');
+		}
+	});
+	$('body').on('click', '.sub-anchor', function(e){
+		e.preventDefault();
+		var elem = $(this);
+		if(elem.hasClass('active')){
+			elem.parent().find('.sub-anchor-drop').slideUp(300);
+			elem.removeClass('active');
+		}
+		else{
+			$('body .sub-anchor-drop').slideUp(300);
+			elem.parent().find('.sub-anchor-drop').slideDown(300);
+			$('.sub-anchor').removeClass('active');
+			elem.addClass('active');
+		}
+	});
+</script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/wow.js"></script>
+<script src="assets/js/scrollify.js"></script>
+<script src="assets/js/nicescroll.js"></script>
+<script src="assets/js/particle.min.js"></script>
+<script src="//cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+<script src="assets/js/validatr.min.js"></script>
+<script src="assets/js/piecelabel.min.js"></script>
+<script src="assets/js/brain.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+<script src="assets/js/notify.min.js"></script>
+<script src="assets/js/dept_list.js"></script>
+<script src="assets/js/page/dept_dashboard.js"></script>
+<script>$( document ).ajaxStop(function() {
+$('body').css('display', 'block');
+});</script><script src="assets/js/load-menu.js"></script>
+</body>
+</html>
