@@ -11,8 +11,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class User extends Authenticatable
 {
-
-
+    protected $connection = 'mysql2';
     use HasRoles, HasApiTokens, Notifiable,LogsActivity;
 
     /**

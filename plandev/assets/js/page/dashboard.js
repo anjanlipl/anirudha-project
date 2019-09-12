@@ -1155,8 +1155,8 @@ function drawPieChartNew(target, dataPoints){
 		legend:{
 			fontSize: 12,
 			fontweight: "bold",
-			horizontalAlign: "right",
-			verticalAlign: "center",
+			horizontalAlign: "center",
+			verticalAlign: "bottom",
 			// fontColor: '#FFF'
 			maxWidth: 350,
 			itemWidth: 80

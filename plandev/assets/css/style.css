@@ -733,7 +733,7 @@ nav.sidebar.collapsed{
 }
 .nicescroll-rails.nicescroll-rails-vr {
   display: none !important;
-}
+} 
 nav.sidebar.collapsed:hover{
 	width: 230px;
 }
@@ -887,7 +887,7 @@ nav.sidebar {
 	position: relative;
 	line-height: 20px;
 	padding: 10px;
-	padding-left: 40px;
+	padding-left: 50px;
 	text-transform: capitalize;
 	/*letter-spacing: 0.5px;*/
 	font-size: 13px;
@@ -1204,7 +1204,8 @@ canvas{
 }
 .section-scroll{
 	height: 467px;/* 500px; */
-	overflow-x: hidden;
+	/* overflow-x: hidden;  Commented by Anjan Barik Reson of table scrol system display in  crome browser like black line on right side */
+	overflow-y: auto;
 	position: relative;
 	z-index: 2;
 	margin: 0px;
