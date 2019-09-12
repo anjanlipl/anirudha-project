@@ -18,6 +18,11 @@ class CreatePasswordResetsTable extends Migration
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
+
+        Schema::connection('mysql2')->create('some_table', function($table)
+        {
+                $table->increments('id'):
+        });
     }
 
     /**

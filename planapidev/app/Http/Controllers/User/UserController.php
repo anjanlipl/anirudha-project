@@ -22,6 +22,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        //$results = DB::select('select * from users');
+        //print_r();
+
         $users = User::all();
         return response()->json(['users'=>$users]);
 
