@@ -163,7 +163,7 @@ class ReportController extends Controller
             }
         }
 
-
+        //print_r($schemes);
         $final_arr = array();
 
 
@@ -360,6 +360,7 @@ class ReportController extends Controller
          //die;
       $data['schemes'] = $row_arr;
         $data['head'] = $head;
+        //return $data;die();
         return view('reptable_revised_new', $data);
 
     }
@@ -798,6 +799,7 @@ class ReportController extends Controller
         }
 
 
+        //echo $current_begin_date.'##'.$current_end_date;
 
         foreach($allObjectiveOutcomeIndicators as $key2=>$value2){
             if(!empty($value2->id)){

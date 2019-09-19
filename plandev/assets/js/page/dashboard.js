@@ -444,20 +444,20 @@ $.ajax({
 		data = {
 		    datasets: [{
 		        data: [result.ontrack, result.offtrack, result.inProgess, result.na],
-		        backgroundColor:['#9bbb58', '#c0504e', '#4f81bc','#4aacc5']
+		        backgroundColor:['#37942c', '#b70000', '#999999','#ffff00']
 		    }],
 		    labels: [
 		        'On track ('+result.ontrack+')',
 		        'Off track ('+result.offtrack+')',
-		        'Not Applicable ('+result.inProgess+')',
-		        'Not Reported ('+result.na+')'
+		        'Not  Respondent ('+result.inProgess+')',
+		        'Not Available ('+result.na+')'
 		    ]
 		};
 		var data = [
-			{ label: "On track", y: result.ontrack, color: "#9bbb58" },
-			{ label: "Off track", y: result.offtrack, color: '#c0504e' },
-			{ label: "Not Applicable", y: result.inProgess, color: '#4f81bc' },
-			{ label: "Not Reported", y: result.na, color: '#4aacc5' }
+			{ label: "On track", y: result.ontrack, color: "#37942c" },
+			{ label: "Off track", y: result.offtrack, color: '#b70000' },
+			{ label: "Not  Respondent", y: result.inProgess, color: '#999999' },
+			{ label: "Not Available", y: result.na, color: '#ffff00' }
 		];
 		drawPieChartNew('myPieChart', data);
 		drawPolarChart('myPolarChart', data);
@@ -658,7 +658,7 @@ $.ajax({
 		  	},
 			type: 'get',
 			success: function(result){
-				// console.log(result);
+				 console.log(result);
 				$('.total-schemes1 .value').html(result.schemesCount);
 				$('.total-indicators1 .value').html(result.indicatorsCount);
 				$('.on-track1 .value').html(result.ontrack);

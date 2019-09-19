@@ -253,66 +253,66 @@ $(document).ready(function(){
 					$('#rep').html(result);
 					var title_text = $('body #titleText').val();
 					//console.log(title_text);
-					 $("#ExcelTable").tableExport();	
-					$('#ExcelTable').DataTable({
-						"paging":   false,
-						"searching": false,
-						dom: 'Bfrtip',
-						"bSort": false,
-				        buttons: [
-				            {
-				            	extend: 'print',
-				            	header: false,
-				            	title: title_text,
-				            	exportOptions: {
-	                  				columns: ':visible',
-	                  				rows: ':not(.not-printable)'
-	              				},
-				                orientation:"landscape",
-				                pageSize:"A2",
-				            	text: "Print"
-				            },
-				            {
-				            	extend: 'excelHtml5',
-				            	// header: false,
-				            	title: title_text,
-				            	exportOptions: {
-				            		// stripHtml: false,
-	                  				columns: ':visible',
-	                  				rows: ':not(.not-printable)'
-							    },
-				            	text: "Export as Excel(.xslx)"
-				            },
-				            {
-				            	extend: 'csvHtml5',
-				            	title: title_text,
-				            	exportOptions: {
-	                  				columns: ':visible',
-	                  				rows: ':not(.not-printable)'
-	              				},
-				            	text: 'Export as CSV(.csv)'
-				            },
-				            {
-				            	// header: false,
-				                extend: 'pdfHtml5',
-				                //download: 'open',
-				                text: 'Export as PDF(.pdf)',
-				                // headerRows: 0,
-				            	title: title_text,
-				            	filename: title_text,
-				                exportOptions: {
-	                  				columns: ':visible',
-	                  				rows: ':not(.not-printable)'
-	              				},
-				                orientation:"landscape",
-				                pageSize:"A2"
-							},
-							{
-								extend: 'colvis',
-								text: 'Show/Hide Columns'
-							}
-			        	]
-		        	});
+					//  $("#ExcelTable").tableExport();	
+					// $('#ExcelTable').DataTable({
+					// 	"paging":   false,
+					// 	"searching": false,
+					// 	dom: 'Bfrtip',
+					// 	"bSort": false,
+				 //        buttons: [
+				 //            {
+				 //            	extend: 'print',
+				 //            	header: false,
+				 //            	title: title_text,
+				 //            	exportOptions: {
+	    //               				columns: ':visible',
+	    //               				rows: ':not(.not-printable)'
+	    //           				},
+				 //                orientation:"landscape",
+				 //                pageSize:"A2",
+				 //            	text: "Print"
+				 //            },
+				 //            {
+				 //            	extend: 'excelHtml5',
+				 //            	// header: false,
+				 //            	title: title_text,
+				 //            	exportOptions: {
+				 //            		// stripHtml: false,
+	    //               				columns: ':visible',
+	    //               				rows: ':not(.not-printable)'
+					// 		    },
+				 //            	text: "Export as Excel(.xslx)"
+				 //            },
+				 //            {
+				 //            	extend: 'csvHtml5',
+				 //            	title: title_text,
+				 //            	exportOptions: {
+	    //               				columns: ':visible',
+	    //               				rows: ':not(.not-printable)'
+	    //           				},
+				 //            	text: 'Export as CSV(.csv)'
+				 //            },
+				 //            {
+				 //            	// header: false,
+				 //                extend: 'pdfHtml5',
+				 //                //download: 'open',
+				 //                text: 'Export as PDF(.pdf)',
+				 //                // headerRows: 0,
+				 //            	title: title_text,
+				 //            	filename: title_text,
+				 //                exportOptions: {
+	    //               				columns: ':visible',
+	    //               				rows: ':not(.not-printable)'
+	    //           				},
+				 //                orientation:"landscape",
+				 //                pageSize:"A2"
+					// 		},
+					// 		{
+					// 			extend: 'colvis',
+					// 			text: 'Show/Hide Columns'
+					// 		}
+			  //       	]
+		   //      	});
 				},
 				error:function (error) {
 					console.log(error.status);

@@ -53,22 +53,24 @@
 			<form autocomplete="off" id="editProfile">
 				<div class="row section-content">
 					<div class="col-md-6">
-						<div class="row form-row">
+						<div class=" form-row">
 							<label>Name</label>
 							<input type="text" id="username" autocomplete="off" name="user_name" class="form-control" required="required" readonly="true" pattern="[A-Za-z0-9_ ]+" oninvalid="setCustomValidity('Only letters, numbers and underscores allowed')" onchange="try{setCustomValidity('')}catch(e){}">
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="row form-row">
+						<div class=" form-row">
 							<label>Email</label>
 							<input type="email" id="useremail" autocomplete="off" name="email" class="form-control" required="required" readonly="true">
 						</div>
 					</div>
+					<div class="col-md-12">
+						<div class="pdlr15 section-main-btn"  >
+							<button type="button" id="editButton" class="btn btn-primary">Edit</button>
+						</div>
+					</div>
 				</div>
-				<div class="row section-main-btn"  >
-					<button type="button" id="editButton" class="btn btn-primary">Edit</button>
-				</div>
-				<div class="row section-main-btn"  >
+				<div class=" section-main-btn"  >
 					<button type="submit" id="updateButton" style="display: none"  class="btn btn-primary">Update</button>
 				</div>
 			</form>
@@ -84,35 +86,37 @@
 			<form autocomplete="off" id="changePassword">
 				<div class="row section-content">
 					<div class="col-md-12">
-						<div class="row">
-							<div class="col-md-6">
-								<div class="row form-row">
+						<div class="row pdlr15">
+							<div class="col-md-4">
+								<div class=" form-row">
 									<label>Current Password</label>
 									<input type="password" autocomplete="off" name="user_password" class="form-control" required="required">
 								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="row form-row">
+						<!-- </div> -->
+						<!-- <div class="row"> -->
+							<div class="col-md-4">
+								<div class=" form-row">
 									<label>New Password</label>
 									<input type="password" id="password" autocomplete="off" name="password" class="form-control" required="required">
 								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="row form-row">
+						<!-- </div> -->
+						<!-- <div class="row"> -->
+							<div class="col-md-4">
+								<div class=" form-row">
 									<label>Confirm New Password</label>
 									<input type="password" autocomplete="off" name="password_confirmation" class="form-control" required="required">
 								</div>
 							</div>
-						</div>
+						<!-- </div> -->
 					</div>
 				</div>
+				<div class="col-md-3">
 				<div class="row section-main-btn">
 					<button type="submit" class="btn btn-primary">Change</button>
 				</div>
+			</div>
 			</form>
 		</div>
 	</div>

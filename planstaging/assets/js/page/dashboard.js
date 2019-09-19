@@ -383,7 +383,7 @@ $.ajax({
 			    perf = 0;
 			}
 			if(result.totalExp[key]){
-			   	var htm = '<div class="col-md-4 dash-sec-thumb-main" data-perf="'+perf+'"><div class="dash-sec-thumb active"><div class="anch"><div class="title">'+sector.name+'</div></div><div class="dash-sec-thumb-dets" id="chartDrop2_'+key+'"><div id="chartCan2_'+key+'" width="300"></div></div><div class="thumb-ind-wrap"><div class="row"><div class="col-md-6"><div class="indi"><span class="thumb-ind-item">'+result.totalEst[key]+'</span> Allocation<span class="thumb-ind-item green">'+result.totalExp[key]+'</span></div></div><div class="col-md-6"><div class="sub-anchor-drop-in"><a href="dept_dashboard.html?dept_id='+sector.id+'">More 123</a></div></div></div></div><span class="sub-anchor"></span><div class="sub-anchor-drop"></div></div></div>';
+			   	var htm = '<div class="col-md-4 dash-sec-thumb-main" data-perf="'+perf+'"><div class="dash-sec-thumb active"><div class="anch"><div class="title">'+sector.name+'</div></div><div class="dash-sec-thumb-dets" id="chartDrop2_'+key+'"><div id="chartCan2_'+key+'" width="300"></div></div><div class="thumb-ind-wrap"><div class="row"><div class="col-md-6"><div class="indi"><span class="thumb-ind-item">'+result.totalEst[key]+'</span> Allocation<span class="thumb-ind-item green">'+result.totalExp[key]+'</span></div></div><div class="col-md-6"><div class="sub-anchor-drop-in"><a href="dept_dashboard.html?dept_id='+sector.id+'">More</a></div></div></div></div><span class="sub-anchor"></span><div class="sub-anchor-drop"></div></div></div>';
 				$('#sectorDashList1').append(htm);
 				includeHTML();
 				data = {
@@ -444,20 +444,20 @@ $.ajax({
 		data = {
 		    datasets: [{
 		        data: [result.ontrack, result.offtrack, result.inProgess, result.na],
-		        backgroundColor:['#9bbb58', '#c0504e', '#4f81bc','#4aacc5']
+		        backgroundColor:['#37942c', '#b70000', '#999999','#ffff00']
 		    }],
 		    labels: [
 		        'On track ('+result.ontrack+')',
 		        'Off track ('+result.offtrack+')',
-		        'Not Applicable ('+result.inProgess+')',
-		        'Not Reported ('+result.na+')'
+		        'Not  Respondent ('+result.inProgess+')',
+		        'Not Available ('+result.na+')'
 		    ]
 		};
 		var data = [
-			{ label: "On track", y: result.ontrack, color: "#9bbb58" },
-			{ label: "Off track", y: result.offtrack, color: '#c0504e' },
-			{ label: "Not Applicable", y: result.inProgess, color: '#4f81bc' },
-			{ label: "Not Reported", y: result.na, color: '#4aacc5' }
+			{ label: "On track", y: result.ontrack, color: "#37942c" },
+			{ label: "Off track", y: result.offtrack, color: '#b70000' },
+			{ label: "Not  Respondent", y: result.inProgess, color: '#999999' },
+			{ label: "Not Available", y: result.na, color: '#ffff00' }
 		];
 		drawPieChartNew('myPieChart', data);
 		drawPolarChart('myPolarChart', data);
@@ -626,8 +626,8 @@ $.ajax({
 				var data = [
 					{ label: "On track", y: result.xontrack[sector.id], color: "#5cb85c" },
 					{ label: "Off track", y: result.xofftrack[sector.id], color: '#b70000' },
-					{ label: "Not Applicable", y: result.xinprogress[sector.id], color: '#FFFF00' },
-					{ label: "Not Reported", y: result.xtotalNa[sector.id], color: '#999' }
+					{ label: "NA", y: result.xinprogress[sector.id], color: '#FFFF00' },
+					{ label: "NR", y: result.xtotalNa[sector.id], color: '#999' }
 				];
 				if(!isNaN(sector.id)){
 					drawPieChartNew('chartCan_'+sector.id, data);
@@ -1153,21 +1153,24 @@ function drawPieChartNew(target, dataPoints){
 		// bevelEnabled: true,
 		// zoomEnabled:true,
 		legend:{
-			fontSize: 12,
+			fontSize: 10,
 			fontweight: "bold",
-			horizontalAlign: "right",
-			verticalAlign: "center"
+			horizontalAlign: "center",
+			verticalAlign: "top",
 			// fontColor: '#FFF'
+			maxWidth: 470,
+			itemWidth: 100
 		},
 		data: [{
 				type: "pie",
-				startAngle: 45,
-				radius: 150,
+				startAngle: 90,
+				radius: 120,
 				showInLegend: "true",
 				legendText: "{label}",
 				indexLabel: "{label} ({y})",
 				indexLabelPlacement: "outside",
-				indexLabelFontSize: 12,
+				indexLabelOrientation: "horizontal",
+				indexLabelFontSize: 9,
 				indexLabelFontWeight: "normal",
 				indexLabelFontColor: '#222',
 				yValueFormatString:"#,##0.#"%"",
@@ -1201,7 +1204,65 @@ function drawPieChartNew(target, dataPoints){
 	//     }
 	// });
 }
+// Added a new pie chart through anirudha reason of three colum pie chart system in dashboard page
+function drawPieChartNewdata(target, dataPoints){
+	// console.log(dataPoints);
+	var options = {
+		backgroundColor: null,
+		// bevelEnabled: true,
+		// zoomEnabled:true,
+		legend:{
+			fontSize: 10,
+			fontweight: "bold",
+			horizontalAlign: "center",
+			verticalAlign: "top",
+			// fontColor: '#FFF'
+			maxWidth: 320,
+			itemWidth: 65
+		},
+		data: [{
+				type: "pie",
+				startAngle: 90,
+				radius: 120,
+				showInLegend: "true",
+				legendText: "{label}",
+				indexLabel: "{label} ({y})",
+				indexLabelPlacement: "outside",
+				indexLabelOrientation: "horizontal",
+				indexLabelFontSize: 9,
+				indexLabelFontWeight: "normal",
+				indexLabelFontColor: '#222',
+				yValueFormatString:"#,##0.#"%"",
+				dataPoints: dataPoints
+		}]
+	};
+	$('#'+target).CanvasJSChart(options);
 
+	// var ctx = document.getElementById(target).getContext('2d');
+	// var myPieChart = new Chart(ctx,{
+	//     type: 'pie',
+	//     data: data,
+	//     options: {
+	// 		responsive: true,
+	//     	maintainAspectRatio: true,
+	//     	aspectRatio: 1,
+	//     	legend: {
+	//     		position: 'inside'
+	//     	},
+ //        	pieceLabel: {
+	// 		    render: 'percentage',
+	// 		    fontColor: '#444',
+	// 		    position: 'outside',
+	// 		    textMargin: 10,
+	// 		    fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+	// 		    fontSize: 17,
+	// 		    precision: 2
+	// 	  	},
+	// 		showTooltips: true,
+	//     	cutoutPercentage: 10
+	//     }
+	// });
+}
 function drawDonutChart(target, dataPoints){
 	var options = {
 		backgroundColor: null,

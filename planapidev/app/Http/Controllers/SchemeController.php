@@ -512,9 +512,12 @@ class SchemeController extends Controller
                 $allOneEntries = array();
                 $newResult =$results;
                 
+                //print_r($results);die();
                 $countTotal = count($results);
                 for($i=1;$i<$countTotal;$i++){
+                  $status = 0;
                     $oneEntry = $results[$i];
+                    // print_r($oneEntry[6]);
                     array_push($allOneEntries, $oneEntry);
                     if(is_array($oneEntry)){
                       //echo count($oneEntry);die();
@@ -526,6 +529,8 @@ class SchemeController extends Controller
                             if($oneEntry[8] != null){
                                 $outcomeIndName = $oneEntry[8];
                             }
+                           
+                            //print_r($indName);die();
                             if($str != null){
                                 $scheme = new Scheme;
                                 $SchemeName = strtok($str, "\n");
@@ -545,10 +550,22 @@ class SchemeController extends Controller
                                   'name'=>'outcome_1'
                                 ]);
                             }
+
                             if($indName != null && $indName != ''){
+                                if($oneEntry[6] == 'NA' || $oneEntry[6] == 'na'){
+                                  // || $oneEntry[6] == 'NIL'
+                                      $status = 1;
+                                      //continue;
+                                  }
+                                  elseif($oneEntry[6] == 'NR' || $oneEntry[6] == 'nr'){
+                                      $status = 4;
+                                      //continue;
+                                  }else{
+                                      $status = 0;
+                                  }
                                 $indicator =  $output->outputIndicators()->create([
                                     'name'=>$indName,
-                                    'status'=>1,
+                                    'status'=>$status,
                                     'remark'=>$oneEntry[13]
                                 ]);
                                 $output_indicator_id = $indicator->id;
@@ -568,6 +585,7 @@ class SchemeController extends Controller
                                         'end_date'=>$target1EndDate
                                     ]);
                                     if($oneEntry[6] != null && $oneEntry[6] != ''){
+                                        
                                         $target->achievements()->create([
                                             'description'=>$oneEntry[6],
                                             'start_date'=>$target1StartDate,
@@ -585,10 +603,21 @@ class SchemeController extends Controller
                                 }
                             }
                             if($outcomeIndName != null && $outcomeIndName != ''){
+                                if($oneEntry[11] == 'NA' || $oneEntry[11] == 'na'){
+                                    $status = 1;
+                                    //continue;
+                                }
+                                elseif($oneEntry[11] == 'NR' || $oneEntry[11] == 'nr'){
+                                    $status = 4;
+                                    //continue;
+                                }
+                                else{
+                                      $status = 0;
+                                  }
                                 $indicator =  $outcome->outcomeIndicators()->create([
                                     'name'=>$outcomeIndName,
                                     'output_indicator_id'=>$output_indicator_id,
-                                    'status'=>1,
+                                    'status'=>$status,
                                     'remark'=>$oneEntry[13]
                                 ]);
 
@@ -605,6 +634,7 @@ class SchemeController extends Controller
                                     'end_date'=>$target1EndDate
                                 ]);
                                 if($oneEntry[11] != null && $oneEntry[11] != ''){
+                                  
                                     $target->outcomeAchievements()->create([
                                         'description'=>$oneEntry[11],
                                         'start_date'=>$target1StartDate,

@@ -139,10 +139,10 @@ class EvaluationCriteriaController extends Controller
                         ->join('outputtargets as opt', 'opt.outputindicator_id', '=', 'opi.id', 'left')
                         ->select('opt.id as target_id')
                         ->where([
-                          ['opt.start_date', '>=', $begin_date],
-                          ['opt.end_date', '<=', $end_date]
+                          ['opt.start_date', '>=', $request->input('start_date')],
+                          ['opt.end_date', '<=', $request->input('end_date')]
                         ])
-                        ->get();
+                        ->get();//$begin_date//$end_date
         // $sum1=0;
         // foreach($scheme_outp as $key30=>$value30){
         //     if(!empty($value30->opt_id)){
@@ -167,8 +167,8 @@ class EvaluationCriteriaController extends Controller
                         ->join('outcometargets as oct', 'oct.outcomeindicator_id', '=', 'oci.id', 'left')
                         ->select('oct.id as oct_id')
                         ->where([
-                          ['oct.start_date', '>=', $begin_date],
-                          ['oct.end_date', '<=', $end_date]
+                          ['oct.start_date', '>=', $request->input('start_date')],
+                          ['oct.end_date', '<=', $request->input('end_date')]
                         ])
                         ->get();
 
@@ -177,11 +177,11 @@ class EvaluationCriteriaController extends Controller
 
         foreach($scheme_outc as $key=>$value){
           //print_r($value);
-            $this->outcomeStatus($value->oct_id);
+            $this->outcomeStatus($value->oct_id,$request->input('start_date'),$request->input('end_date'));
         }
 
         foreach($scheme_outp as $key1=>$value1){
-            $this->outputStatus($value1->target_id);
+            $this->outputStatus($value1->target_id,$request->input('start_date'),$request->input('end_date'));
         }
         //$sectorCreated = Sector::where('name',$request->get('sectorName'))->first();
         
@@ -265,7 +265,7 @@ class EvaluationCriteriaController extends Controller
             $next_end_date = date('Y-03-31', strtotime('+1 years'));
 
         }
-
+        
         $scheme_outp = DB::table('schemes as s')
                         ->join('objectives as o', 'o.scheme_id', '=', 's.id')
                         ->join('outputs as op', 'op.objective_id', '=', 'o.id')
@@ -274,8 +274,8 @@ class EvaluationCriteriaController extends Controller
                         ->join('outputtargets as opt', 'opt.outputindicator_id', '=', 'opi.id', 'left')
                         ->select('opt.id as target_id')
                         ->where([
-                          ['opt.start_date', '>=', $begin_date],
-                          ['opt.end_date', '<=', $end_date]
+                          ['opt.start_date', '>=', $request->input('start_date_e')],
+                          ['opt.end_date', '<=', $request->input('end_date_e')]
                         ])
                         ->get();
         // $sum1=0;
@@ -302,8 +302,8 @@ class EvaluationCriteriaController extends Controller
                         ->join('outcometargets as oct', 'oct.outcomeindicator_id', '=', 'oci.id', 'left')
                         ->select('oct.id as oct_id')
                         ->where([
-                          ['oct.start_date', '>=', $begin_date],
-                          ['oct.end_date', '<=', $end_date]
+                          ['oct.start_date', '>=', $request->input('start_date_e')],
+                          ['oct.end_date', '<=', $request->input('end_date_e')]
                         ])
                         ->get();
 
@@ -311,12 +311,12 @@ class EvaluationCriteriaController extends Controller
         // die;
 
         foreach($scheme_outc as $key=>$value){
-          //print_r($value);
-            $this->outcomeStatus($value->oct_id);
+          print_r($value);
+            $this->outcomeStatus($value->oct_id,$request->input('start_date_e'),$request->input('end_date_e'));
         }
 
         foreach($scheme_outp as $key1=>$value1){
-            $this->outputStatus($value1->target_id);
+            $this->outputStatus($value1->target_id,$request->input('start_date_e'),$request->input('end_date_e'));
         }
         //die();
         return response()->json(['success'=>'true','criteria'=>$item]);
@@ -341,13 +341,18 @@ class EvaluationCriteriaController extends Controller
         }
     }
 
-    public function outcomeStatus($target_id)
+    public function outcomeStatus($target_id,$start_date,$end_date)
     {
         # code...
         if(empty($target_id)){
             return;
         }
-        $target = Outcometarget::find($target_id);
+        //echo $target_id;
+        //$target = Outcometarget::find($target_id);
+        $target = Outcometarget::where([['id', '=', $target_id],['start_date','>=', $start_date],['end_date', '<=', $end_date]])->first();
+        
+        //$target = Outcometarget::where([['id', '=', $target_id]])->toSql();
+        //dd($target);
         $targetVal = $target->value;
         if (strpos($targetVal, '%') !== false) {
             $targetValNew = str_replace("%", "",$targetVal);
@@ -355,24 +360,31 @@ class EvaluationCriteriaController extends Controller
         else{
             $targetValNew = $targetVal;
         }
+        
         $per = 0;
-        if(isset($target) && is_numeric($targetValNew) && $targetValNew > 0 )
+        if(isset($target) && is_numeric($targetValNew) && $targetValNew > 0)
         {
             $indicator_id = $target->outcomeindicator_id;
+            //echo $indicator_id;
             $indicator = Outcomeindicator::find($indicator_id);
 
             $achivements =$target->outcomeAchievements()->get();
+            /*echo '<pre>';
+            print_r($achivements);*/
             $cummulativeAchieve = 0;
             if(isset($achivements) && count($achivements)>0){
                 foreach ($achivements as $achievementItem) {
                     $desc =$achievementItem->description;
-                    echo $desc.',';
+                    //echo $desc.',';
+                    
                     $descNew = str_replace("%", "",$desc );
-                    if(is_numeric($descNew))
+                    if(is_numeric($descNew)){
+                      
                       $cummulativeAchieve += $descNew;
+                    }                      
                 }
             }
-            // echo $cummulativeAchieve; die();
+            
             if($cummulativeAchieve > 0){
                 $per = ($cummulativeAchieve/$targetValNew)*100;
             }
@@ -394,6 +406,8 @@ class EvaluationCriteriaController extends Controller
             else{
                 $criteriaPer = 0;
             }
+            //echo $per.'@@'.$criteriaPer.'##';
+
           if($scheme->is_capital !=1){
                  if($indicator->respond_to_criteria == 1){
                      if($per > $criteriaPer){
@@ -433,20 +447,112 @@ class EvaluationCriteriaController extends Controller
         else{
           if($targetValNew == 'NA'){
             $indicator_id = $target->outcomeindicator_id;
+            //echo $indicator_id;
             $indicator = Outcomeindicator::find($indicator_id);
-            $indicator->status = 4;
-            $indicator->update();
+
+            $achivements =$target->outcomeAchievements()->get();
+            /*echo '<pre>';
+            print_r($achivements);*/
+            $cummulativeAchieve = 0;
+            if(isset($achivements) && count($achivements)>0){
+                foreach ($achivements as $achievementItem) {
+                  if($achievementItem->description!='NA' || $achievementItem->description!='NR'){
+                      $desc =$achievementItem->description;
+                
+                      $descNew = str_replace("%", "",$desc );
+                      if(is_numeric($descNew)){
+                        $cummulativeAchieve += $descNew;
+                      }
+                  }
+                    /*$desc =$achievementItem->description;
+                    //echo $desc.',';
+                    
+                    $descNew = str_replace("%", "",$desc );
+                    if(is_numeric($descNew)){
+                      
+                      $cummulativeAchieve += $descNew;
+                    }*/                      
+                }
+            }
+            
+            if($cummulativeAchieve > 0){
+                $per = ($cummulativeAchieve)*100;
+            }
+            else{
+                $per = 0;
+            }
+
+
+
+            $outcome = $indicator->outcome()->first();
+            $output = $outcome->output()->first();
+            $objective = $output->objective()->first();
+            $scheme = $objective->scheme()->first();
+            $today = date('Y-m-d');
+            $evalcriteria = EvaluationCriteria::where('end_date','>=',$today)->first();
+            if(!empty($evalcriteria)){
+                $criteriaPer = $evalcriteria->percentage;
+            }
+            else{
+                $criteriaPer = 0;
+            }
+            //echo $per.'@@'.$criteriaPer.'##';
+
+          if($scheme->is_capital !=1){
+                 if($indicator->respond_to_criteria == 1){
+                     if($per > $criteriaPer){
+                    $indicator->status = 2;
+                  }else{
+                    $indicator->status = 3;
+                  }
+                 }else{
+                     if($per > $criteriaPer){
+                      $indicator->status = 3;
+                    }else{
+                      $indicator->status = 2;
+                    }
+                 }
+                   
+                  $indicator->update();
+              }else{
+                $targetEndDate = $target->end_date;
+                
+
+                   if($indicator->respond_to_criteria == 1){
+                     if($per >$criteriaPer && $targetEndDate < $today){
+                        $indicator->status = 2;
+                      }else{
+                        $indicator->status = 3;
+                      }
+                 }else{
+                     if($per >$criteriaPer && $targetEndDate < $today){
+                    $indicator->status = 3;
+                  }else{
+                    $indicator->status = 2;
+                  }
+                 }
+                  $indicator->update();
+              }
+            /*$indicator_id = $target->outcomeindicator_id;
+            $indicator = Outcomeindicator::find($indicator_id);
+            //$indicator->status = 4;
+            $indicator->status = 1;
+            $indicator->update();*/
           }
         }
     }
 
-    public function outputStatus($target_id)
+    public function outputStatus($target_id,$start_date,$end_date)
     {
         # code...
         if(empty($target_id)){
             return;
         }
-        $target = Outputtarget::find($target_id);
+        
+        //$target = Outputtarget::find($target_id);
+        $target = Outputtarget::where([['id', '=', $target_id],['start_date','>=', $start_date],['end_date', '<=', $end_date]])->first();
+        // //dd($target);
+        // print_r($target);die();
         $targetVal = $target->value;
         if (strpos($targetVal, '%') !== false) {
             $targetValNew = str_replace("%", "",$targetVal);
@@ -454,8 +560,9 @@ class EvaluationCriteriaController extends Controller
         else{
             $targetValNew = $targetVal;
         }
+        
         $per = 0;
-        if(isset($target) && is_numeric($targetValNew) && $targetValNew >0 )
+        if(isset($target) && is_numeric($targetValNew) && $targetValNew > 0)
         {
             //return $target->id ;exit;
              
@@ -468,9 +575,13 @@ class EvaluationCriteriaController extends Controller
                 foreach ($achivements as $achievementItem) {
 
                 $desc =$achievementItem->description;
+                
                 $descNew = str_replace("%", "",$desc );
-                if(is_numeric($descNew))
+                if(is_numeric($descNew)){
                   $cummulativeAchieve += $descNew;
+                }
+
+                  
               }
             }
             
@@ -480,7 +591,7 @@ class EvaluationCriteriaController extends Controller
             else{
                 $per = 0;
             }
-
+            
             $output = $indicator->output()->first();
             $objective = $output->objective()->first();
             $scheme = $objective->scheme()->first();
@@ -492,6 +603,7 @@ class EvaluationCriteriaController extends Controller
             else{
                 $criteriaPer = 0;
             }
+            //echo $per.'@@'.$criteriaPer.'##';
              if($scheme->is_capital !=1){
                  if($indicator->respond_to_criteria == 1){
                      if($per > $criteriaPer){
@@ -532,8 +644,82 @@ class EvaluationCriteriaController extends Controller
           if($targetValNew == 'NA'){
             $indicator_id = $target->outputindicator_id;
             $indicator = Outputindicator::find($indicator_id);
-            $indicator->status = 4;
-            $indicator->update();
+            $achivements =$target->achievements()->get();
+            $cummulativeAchieve = 0 ;
+            if(isset($achivements) && count($achivements)>0){
+
+                foreach ($achivements as $achievementItem) {
+                  if($achievementItem->description!='NA' || $achievementItem->description!='NR'){
+                      $desc =$achievementItem->description;
+                
+                      $descNew = str_replace("%", "",$desc );
+                      if(is_numeric($descNew)){
+                        $cummulativeAchieve += $descNew;
+                      }
+                  }
+                  
+              }
+            }
+            
+            if($cummulativeAchieve > 0){
+                $per = ($cummulativeAchieve)*100;
+            }
+            else{
+                $per = 0;
+            }
+            
+            $output = $indicator->output()->first();
+            $objective = $output->objective()->first();
+            $scheme = $objective->scheme()->first();
+            $today = date('Y-m-d');
+            $evalcriteria = EvaluationCriteria::where('end_date','>=',$today)->first();
+            if(!empty($evalcriteria)){
+                $criteriaPer = $evalcriteria->percentage;
+            }
+            else{
+                $criteriaPer = 0;
+            }
+            //echo $per.'@@'.$criteriaPer.'##';
+             if($scheme->is_capital !=1){
+                 if($indicator->respond_to_criteria == 1){
+                     if($per > $criteriaPer){
+                    $indicator->status = 2;
+                  }else{
+                    $indicator->status = 3;
+                  }
+                 }else{
+                     if($per > $criteriaPer){
+                      $indicator->status = 3;
+                    }else{
+                      $indicator->status = 2;
+                    }
+                 }
+                   
+                  $indicator->update();
+              }else{
+                $targetEndDate = $target->end_date;
+                
+
+                   if($indicator->respond_to_criteria == 1){
+                     if($per >$criteriaPer && $targetEndDate < $today){
+                        $indicator->status = 2;
+                      }else{
+                        $indicator->status = 3;
+                      }
+                 }else{
+                     if($per >$criteriaPer && $targetEndDate < $today){
+                    $indicator->status = 3;
+                  }else{
+                    $indicator->status = 2;
+                  }
+                 }
+                  $indicator->update();
+              }
+            /*$indicator_id = $target->outputindicator_id;
+            $indicator = Outputindicator::find($indicator_id);
+            //$indicator->status = 4;
+            $indicator->status = 1;
+            $indicator->update();*/
           }
         }
     }

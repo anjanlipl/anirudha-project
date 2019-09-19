@@ -64,25 +64,25 @@ $(document).ready(function(){
 
 
 function drawPieChart(target, data){
-	var ctx = document.getElementById(target).getContext('2d');
-	var myPieChart = new Chart(ctx,{
-	    type: 'pie',
-	    data: data,
-	    options: {
-	    	legend: {
-	    		position: 'bottom'
-	    	},
-        	pieceLabel: {
-			    render: 'percentage',
-			    fontColor: '#444',
-			    position: 'outside',
-			    textMargin: 10,
-			    fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-			    fontSize: 17,
-			    precision: 2
-		  	},
-			showTooltips: true,
-	    	cutoutPercentage: 10
-	    }
-	});
+    var ctx = document.getElementById(target).getContext('2d');
+    var myPieChart = new Chart(ctx,{
+        type: 'pie',
+        data: data,
+        options: {
+            legend: {
+                position: 'bottom'
+            },
+            pieceLabel: {
+                render: 'percentage',
+                fontColor: '#444',
+                position: 'outside',
+                textMargin: 10,
+                fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+                fontSize: 17,
+                precision: 2
+            },
+            showTooltips: true,
+            cutoutPercentage: 10
+        }
+    });
 }

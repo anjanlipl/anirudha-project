@@ -38,6 +38,7 @@ $( document ).ready(function() {
     var email = encryp($('input[name="email"').val());
     var password = encryp($('input[name="password"').val());
     var guest = encryp($(this).find('input[name="guest"]').val());
+    var captcha = $('input[name="captcha"').val();
 
     $.ajax({
       async: true,
@@ -46,7 +47,7 @@ $( document ).ready(function() {
       headers: {
         'Accept': 'application/json',
       },
-      data: {email: email, password: password, guest: guest},
+      data: {email: email, password: password, guest: guest ,captcha:captcha},
       success: function(result){
         // setCookie('planning_sess_pass', result.success.token, 10);
         localStorage.token = result.success.token;
@@ -99,6 +100,7 @@ $( document ).ready(function() {
       },
       error:function (error) {
         $('#login-form').find('button[type=submit]').removeClass('loading');
+        //alert(error.status);
         if(error.status == 401){
           $('.error-content').html('');
           var errorMsg = '<div class="alert alert-danger">Unauthorized Access. Please re-try</div>'
@@ -108,6 +110,12 @@ $( document ).ready(function() {
           var errorMsg = '<div class="alert alert-danger">Something went wrong.</div>'
           $('.error-content').append(error);
         }
+        else if (error.status == 403) {
+          $('.error-content').html('');
+          var errorMsg = '<div class="alert alert-danger">Incorrect captcha.</div>'
+          $('.error-content').append(errorMsg);
+        }
+
       }
     });
   });

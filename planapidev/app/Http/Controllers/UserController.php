@@ -77,6 +77,9 @@ class UserController extends Controller
      */ 
     public function apiLogin(Request $request){ 
         // $k = $request->input('k');
+         $captcha = $request->input('captcha');
+         $sessiondigit = $_SESSION['digit'];
+
         $guest_enc = $request->input('guest');
         $guest = $this->decodeString($guest_enc);
         // echo $guest; die;
@@ -86,11 +89,17 @@ class UserController extends Controller
             $password = "Password@123";
         }
         else{
+            if($captcha == $sessiondigit){
             $email_enc = $request->input('email');
             $pw_enc = $request->input('password');
             $email = $this->decodeString($email_enc);
             $password = $this->decodeString($pw_enc);
         }
+        else{
+            return response()->json(['error'=>'Unauthorised'], 403);
+        }
+       
+    }
         
         if(Auth::attempt(['email' => $email, 'password' => $password])){ 
             $user = Auth::user(); 

@@ -113,7 +113,8 @@ $(document).ready(function(){
 							success: function(result){
 								console.log(result);
 								alert("schemes uploaded successfully");
-								document.location.href = 'all-schemes.html',true;
+								location.reload();
+								//document.location.href = 'all-schemes.html',true;
 							},
 							error:function (error) {
 								if(error.status == 401){

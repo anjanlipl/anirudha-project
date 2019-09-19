@@ -175,20 +175,41 @@ class DashboardController extends Controller
 	}
 
 	
-	public function getDashboardFinancials()
+	public function getDashboardFinancials(Request $request)
 	{
 		$schemes= Scheme::all();
+		$finYear = $request->input('finYear');
+		$getYear=explode('-',$finYear);
+		//print_r($getYear);
+		
+		$current_begin_date = $getYear[0].'-04-01';
+	    $current_end_date ="20".$getYear[1].'-03-31';
+	    $na =0;
+		$ontrack=0;
+		$offtrack=0;
+		$inProgess=0;
+		$nr=0;
+		$schemesCount=0;
+		$allOfftrackOutputIndicators =array();
+		$allOfftrackOutcomeIndicators = array();
 
-		$current_month = date('m');
-		$current_year = date('Y');
 		$current_month_exp =0;
+
+		/*$current_month = date('m');
+		$current_year = date('Y');
+		
+
 		if($current_month < 4){
 			$est_end_year = date('Y');
 			$current_year = date('Y', strtotime('-1 year'));
 
 		}else{
 			$est_end_year = date('Y', strtotime('+1 year'));
-		}
+		}*/
+
+		$current_year = date('Y',strtotime($current_begin_date));
+		$est_end_year = date('Y',strtotime($current_end_date));
+
 		$totalEst = 0;
 		$totalExp =0;
 		$current_month_exp_new=0;
@@ -789,24 +810,33 @@ public function getDashboardCounts(Request $request)
 {
 	//return $request;die();
 	$finYear = $request->input('finYear');
+	$getYear=explode('-',$finYear);
+	//print_r($getYear);
+	$current_begin_date = $getYear[0].'-04-01';
+    $current_end_date ="20".$getYear[1].'-03-31';
+    $na =0;
+	$ontrack=0;
+	$offtrack=0;
+	$inProgess=0;
+	$nr=0;
+	$instatus=0;
+	$schemesCount=0;
+
+	$allOfftrackOutputIndicators =array();
+	$allOfftrackOutcomeIndicators = array();
+
 	if(auth()->user()->department_id){
 
 		$dept_id = auth()->user()->department_id;
 		$department =  Department::find($dept_id) ;
-		$na =0;
-		$ontrack=0;
-		$offtrack=0;
-		$inProgess=0;
-		$nr=0;
-		$schemesCount=0;
-		$allOfftrackOutputIndicators =array();
-		$allOfftrackOutcomeIndicators = array();
+		
 		$units = $department->units()->get();
 		
 
 		//return 
 		foreach ($units as $unit) {
 			$schemes = $unit->schemes()->get();
+			//$estimates = $scheme->estimates()->get();
 			foreach ($schemes as $scheme) {
 				$objectives = $scheme->objectives()->get();
 				$schemesCount += 1;
@@ -863,22 +893,86 @@ public function getDashboardCounts(Request $request)
 	
 	}
 	else{
+//$schemesCount
+	   //$schemes = Scheme::where([['start_date', '>=', $current_begin_date],['start_date', '<=', $current_end_date]])->get();//count(Scheme::all());
+		$schemes = Scheme::where([['start_date', '<=', $current_end_date]])->get();
+	   //return $schemes;die();
+	   //////////////////////////////////////////////////////////////////////
 
-	   $schemesCount = count(Scheme::all());
-	   $outputIndicators =  Outputindicator::where('name', '!=', '.')->get();
-	   $outcomeIndicators =  Outcomeindicator::where('name', '!=', '.')->get();
+	   foreach ($schemes as $scheme) {
+				$objectives = $scheme->objectives()->get();
+				$schemesCount += 1;
+				foreach ($objectives as $objective) {
+					$outputs = $objective->outputs()->get();
+					foreach ($outputs as $output) {
+						$outputIndicators = $output->outputIndicators()->where('name', '!=', '.')->get();
+						//print_r($outputIndicators);die();
+						$offtrackOutput =  $output->outputIndicators()->where([ ['status',3], ['name', '!=', '.'] ])->get();
+						if(count($offtrackOutput)>0){
+							array_push($allOfftrackOutputIndicators, $offtrackOutput);
+						}
+						foreach ($outputIndicators as $outputIndicator) {
+							if($outputIndicator->status == 1){
+								$na += 1;
+								
+							}else if($outputIndicator->status == 2){
+							   $ontrack += 1;
+
+						   }else if($outputIndicator->status == 3){
+							  $offtrack += 1;
+							  
+
+						  }else if($outputIndicator->status == 4){
+							$inProgess += 1;
+						}else if($outputIndicator->status == 0){
+							$instatus += 1;
+							}
+					}
+					$outcomes = $output->outcomes()->get();
+					foreach ($outcomes as $outcome) {
+						$outcomeIndicators = $outcome->outcomeIndicators()->where('name', '!=', '.')->get();
+						$offtrackOutput = $outcome->outcomeIndicators()->where([ ['status',3], ['name', '!=', '.'] ])->get();
+						if(count($offtrackOutput)>0){
+							array_push($allOfftrackOutcomeIndicators, $offtrackOutput);
+						}
+						foreach ($outcomeIndicators as $outcomeIndicator) {
+						   	if($outcomeIndicator->status == 1){
+								$na += 1;
+							}
+							else if($outcomeIndicator->status == 2){
+						  		$ontrack += 1;
+					  		}
+					  		else if($outcomeIndicator->status == 3){
+								$offtrack += 1;
+							}
+							else if($outcomeIndicator->status == 4){
+								$inProgess += 1;
+							}else if($outcomeIndicator->status == 0){
+							$instatus += 1;
+							}
+						}
+					}
+				}
+			}
+		}
+		$totalIndicators = $na + $ontrack + $offtrack + $inProgess+$instatus;
+	   //////////////////////////////////////////////////////////////////////
+
+
+	   //$outputIndicators =  Outputindicator::where('name', '!=', '.')->get();
+	   //$outcomeIndicators =  Outcomeindicator::where('name', '!=', '.')->get();
 	   $allOfftrackInds = array();
-	   $totalIndicators = count($outputIndicators) + count($outcomeIndicators);
+	   //$totalIndicators = count($outputIndicators) + count($outcomeIndicators);
 	   $allOfftrackOutputIndicators = Outputindicator::where([ ['status',3], ['name', '!=', '.'] ])->get();
 	   $allOfftrackOutcomeIndicators = Outcomeindicator::where([ ['status',3], ['name', '!=', '.'] ])->get();
 	   
 	   //print_r($outputIndicators);die();
 
-	   $na = count(Outputindicator::where([ ['status',1], ['name', '!=', '.'] ])->get()) + count(Outcomeindicator::where([ ['status',1], ['name', '!=', '.'] ])->get()) ;
+	   /*$na = count(Outputindicator::where([ ['status',1], ['name', '!=', '.'] ])->get()) + count(Outcomeindicator::where([ ['status',1], ['name', '!=', '.'] ])->get()) ;
 	   $ontrack = count(Outputindicator::where([ ['status',2], ['name', '!=', '.'] ])->get()) + count(Outcomeindicator::where([ ['status',2], ['name', '!=', '.'] ])->get()) ;
 
 	   $offtrack = count(Outputindicator::where([ ['status',3], ['name', '!=', '.'] ])->get()) + count(Outcomeindicator::where([ ['status',3], ['name', '!=', '.'] ])->get()) ;
-	   $inProgess = count(Outputindicator::where([ ['status',4], ['name', '!=', '.'] ])->get()) + count(Outcomeindicator::where([ ['status',4], ['name', '!=', '.'] ])->get()) ;
+	   $inProgess = count(Outputindicator::where([ ['status',4], ['name', '!=', '.'] ])->get()) + count(Outcomeindicator::where([ ['status',4], ['name', '!=', '.'] ])->get()) ;*/
    	}
 
    return response()->json(['schemesCount'=>$schemesCount,'indicatorsCount'=>$totalIndicators,'na'=>$na,'ontrack'=>$ontrack,'offtrack'=>$offtrack,'inProgess'=>$inProgess,'allOfftrackOutputIndicators'=>$allOfftrackOutputIndicators,'allOfftrackOutcomeIndicators'=>$allOfftrackOutcomeIndicators]);
@@ -1041,9 +1135,86 @@ public function getIndicatorDataMain(Request $request)
 
 }
 
-public function getDashboardCountsCritical($value='')
+public function getDashboardCountsCritical(Request $request)
 {
 	  # code...
+	$na =0;
+	$ontrack=0;
+	$offtrack=0;
+	$inProgess=0;
+	$nr=0;
+	$schemesCount=0;
+
+	$allOfftrackOutputIndicators =array();
+	$allOfftrackOutcomeIndicators = array();
+
+	$finYear = $request->input('finYear');
+	$getYear=explode('-',$finYear);
+	//print_r($getYear);
+	$current_begin_date = $getYear[0].'-04-01';
+	$current_end_date ="20".$getYear[1].'-03-31';
+	$schemes = Scheme::where([['start_date', '<=', $current_end_date]])->get();
+
+	foreach ($schemes as $scheme) {
+				$objectives = $scheme->objectives()->get();
+				$schemesCount += 1;
+				foreach ($objectives as $objective) {
+					$outputs = $objective->outputs()->get();
+					//return $outputs;die();
+					foreach ($outputs as $output) {
+						$outputIndicators = $output->outputIndicators()->where([['is_critical', 1], ['name', '!=', '.']] )->get();
+						
+						$offtrackOutput =  $output->outputIndicators()->where([ ['status',3], ['is_critical', 1], ['name', '!=', '.'] ] )->get();
+						if(count($offtrackOutput)>0){
+							array_push($allOfftrackOutputIndicators, $offtrackOutput);
+						}
+						if(count($outputIndicators)>0){
+							foreach ($outputIndicators as $outputIndicator) {
+									if($outputIndicator->status == 1){
+										$na += 1;
+										
+									}else if($outputIndicator->status == 2){
+									   $ontrack += 1;
+
+								   }else if($outputIndicator->status == 3){
+									  $offtrack += 1;
+									  
+
+								  }else if($outputIndicator->status == 4){
+									$inProgess += 1;
+								}
+							}
+						}
+						
+					$outcomes = $output->outcomes()->get();
+					foreach ($outcomes as $outcome) {
+						$outcomeIndicators = $outcome->outcomeIndicators()->where([ ['is_critical', 1], ['name', '!=', '.'] ])->get();
+						$offtrackOutput = $outcome->outcomeIndicators()->where([ ['status',3], ['is_critical', 1], ['name', '!=', '.'] ])->get();
+						if(count($offtrackOutput)>0){
+							array_push($allOfftrackOutcomeIndicators, $offtrackOutput);
+						}
+						if(count($outcomeIndicators)>0){
+							foreach ($outcomeIndicators as $outcomeIndicator) {
+							   	if($outcomeIndicator->status == 1){
+									$na += 1;
+								}
+								else if($outcomeIndicator->status == 2){
+							  		$ontrack += 1;
+						  		}
+						  		else if($outcomeIndicator->status == 3){
+									$offtrack += 1;
+								}
+								else if($outcomeIndicator->status == 4){
+									$inProgess += 1;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		$totalIndicators = $na + $ontrack + $offtrack + $inProgess;
+/*
   $schemesCount = count(Scheme::all());
   $outputIndicators =  Outputindicator::where( [ ['is_critical', 1], ['name', '!=', '.'] ] )->get();
   $outcomeIndicators =  Outcomeindicator::where([ ['is_critical', 1], ['name', '!=', '.'] ])->get();
@@ -1058,7 +1229,8 @@ public function getDashboardCountsCritical($value='')
   $ontrack = count(Outputindicator::where( [ ['status',2], ['is_critical', 1], ['name', '!=', '.'] ] )->get()) + count(Outcomeindicator::where( [ ['status',2], ['is_critical', 1], ['name', '!=', '.'] ] )->get()) ;
   
   $offtrack = count(Outputindicator::where( [ ['status',3], ['is_critical', 1], ['name', '!=', '.'] ] )->get()) + count(Outcomeindicator::where( [ ['status',3], ['is_critical', 1], ['name', '!=', '.'] ] )->get()) ;
-  $inProgess = count(Outputindicator::where( [ ['status',4], ['is_critical', 1], ['name', '!=', '.'] ] )->get()) + count(Outcomeindicator::where( [ ['status',4], ['is_critical', 1], ['name', '!=', '.'] ] )->get()) ;
+  $inProgess = count(Outputindicator::where( [ ['status',4], ['is_critical', 1], ['name', '!=', '.'] ] )->get()) + count(Outcomeindicator::where( [ ['status',4], ['is_critical', 1], ['name', '!=', '.'] ] )->get()) ;*/
+
   return response()->json(['schemesCount'=>$schemesCount,'indicatorsCount'=>$totalIndicators,'na'=>$na,'ontrack'=>$ontrack,'offtrack'=>$offtrack,'inProgess'=>$inProgess,'allOfftrackOutputIndicators'=>$allOfftrackOutputIndicators,'allOfftrackOutcomeIndicators'=>$allOfftrackOutcomeIndicators]);
 
 }

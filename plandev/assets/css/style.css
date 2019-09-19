@@ -1300,7 +1300,8 @@ td:last-child, th:last-child{
 }
 /*Below code added by Anjan Barik*/
 #DataTables_Table_2_wrapper tr td:last-child {
-  text-align: right !important;
+  text-align: left !important;
+  padding-left: 18% !important;
 }
 table thead tr th:nth-child(2){
   text-align: center !important;
@@ -1440,6 +1441,9 @@ table thead tr th:nth-child(2){
 	float: none;
 	text-align: center;
 	margin-top: 20px;
+}
+#actionPointsTab_paginate a {
+	padding:0 50px !important;
 }
 .plain-table .dataTables_wrapper .dataTables_paginate, .plain-table .dataTables_wrapper .dataTables_info{
 	display: none;
@@ -2389,7 +2393,7 @@ table {
 #cri_ind .section-scroll {
 	height: 500px;
 }
-#DataTables_Table_1_wrapper tr td:last-child{text-align: right !important;}
+#DataTables_Table_1_wrapper tr td:last-child{text-align: left !important; padding-left: 18% !important;}
 #allDepCi #indicatorsScrollOfftrack {height: 503px !important;}
 #myChartEst {
 	height: 479px;

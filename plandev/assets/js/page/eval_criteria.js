@@ -134,7 +134,7 @@ $( document ).ready(function() {
                 success: function(result) {
                     $('#addSectorModal').modal('toggle');
                     $('.notifyjs-wrapper').trigger('notify-hide');
-                    location.reload();
+                    //location.reload();
                 },
                 error:function (error) {
                   console.log(error.status);
@@ -168,7 +168,7 @@ $( document ).ready(function() {
                 	  $('.notifyjs-wrapper').trigger('notify-hide');
                     console.log(result);
                     $('#editSectorModal').modal('toggle');
-                    location.reload();
+                    //location.reload();
                 },
                 error:function (error) {
                   console.log(error.status);

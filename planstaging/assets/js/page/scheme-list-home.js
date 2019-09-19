@@ -41,13 +41,13 @@ $(document).ready(function(){
 						data = {
 						    datasets: [{
 						        data: [result.xontrack[sector.id],result.xofftrack[sector.id],result.xinprogress[sector.id],result.xtotalNa[sector.id]],
-						        backgroundColor:['#37942c', '#FF8300', '#FFFF00','#9b9bde']
+						        backgroundColor:['#37942c', '#b70000', '#999999','#ffff00']
 						    }],
 
 						    labels: [
 						        'on track',
 						        'off track',
-						        'in progress',
+						        'NR',
 						        'NA'
 						    ]
 						};

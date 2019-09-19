@@ -18,8 +18,8 @@ window.onload = function () {
     //     };
     // }
 };
-var frontUrl = "http://103.92.47.157/plandev/";
-var siteUrl = "http://103.92.47.157/planapidev/public";
+var frontUrl = "http://103.92.47.157/planstaging/";
+var siteUrl = "http://103.92.47.157/planapistaging/public";
 if (null == localStorage.token) {
     // 
     // alert('You do not have access to this page. Click ok to login again');

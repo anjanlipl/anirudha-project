@@ -23,17 +23,17 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-        Schema::connection('mysql2')->create('users', function($table)
-			{
-    			$table->increments('id'):
-    			$table->increments('id');
-                $table->string('name');
-                $table->string('email')->unique();
-                $table->integer('department_id')->nullable();
-                $table->string('password');
-               $table->rememberToken();
-               $table->timestamps();
-			});
+   //      Schema::connection('mysql2')->create('users', function($table)
+			// {
+   //  			$table->increments('id'):
+   //  			$table->increments('id');
+   //              $table->string('name');
+   //              $table->string('email')->unique();
+   //              $table->integer('department_id')->nullable();
+   //              $table->string('password');
+   //             $table->rememberToken();
+   //             $table->timestamps();
+			// });
     }
 
     /**
