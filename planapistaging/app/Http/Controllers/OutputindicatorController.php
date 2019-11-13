@@ -29,17 +29,21 @@ class OutputindicatorController extends Controller
      */
     public function index(Request $request)
     {
+        //return $request;
         //$output_id =  request()->get('output_id');
         $output_id = $request->input('output_id');
-
+        //echo $output_id;
         $output = Output::find($output_id);
+        
         $result = array();
         if(isset($output)){
             $begin_date = date('Y-04-01');
             $end_date = date('Y-03-31', strtotime('+1 years'));
-            
+            //echo $begin_date.'@@'.$end_date;
             $outputIndicators = $output->outputIndicators()->where('name', '!=', '.')->get();
+
                  foreach ($outputIndicators as $indicator) {
+                    //echo "$$".$indicator->id;
                     $sum1=0; $sum2=0;$sum5=0; $sum8=0; $sum10 = 0;
 
                     $sum1 = DB::table('achievements as a')
@@ -52,10 +56,13 @@ class OutputindicatorController extends Controller
                                 ])
                                 ->select('a.*')
                                 ->get();
+                    //dd($sum1);
+                    //echo count($sum1);die();
                     if(count($sum1) > 0){
                         if(count($sum1) > 1){
                             $sum1_new = 0;
                             foreach ($sum1 as $key => $value) {
+                                
                                 # code...
                                 $sum1_new = $sum1[0]->description;
                             }
@@ -68,7 +75,6 @@ class OutputindicatorController extends Controller
                         $sum1_new = "";
                     }
 
-
                     $sum2 = DB::table('outputtargets')
                                 ->where([
                                     ['outputindicator_id', $indicator->id],
@@ -77,6 +83,7 @@ class OutputindicatorController extends Controller
                                 ])
                                 ->select('*')
                                 ->get();
+                    //print_r($sum2);
                     if(count($sum2) > 0){
                         if(count($sum2) > 1){
                             $sum2_new = 0;
@@ -94,7 +101,7 @@ class OutputindicatorController extends Controller
                     }
 
 
-
+                    
 
                     $actionBtn = '<a href="output-target-baseline.html?indicator_id='.$indicator->id.'" class="btn btn-sm btn-green">
                                                 <span class="text">Targets &amp; Baseline</span>
@@ -110,6 +117,7 @@ class OutputindicatorController extends Controller
                                             <a class="btn btn-sm btn-red indicatorObj" data-id="'.$indicator->id .'">
                                                 <span class="text">Indicator Objects</span>
                                             </a>';
+
                     $user = Auth::user(); 
                     $roles = $user->getRoleNames();
                     if($indicator->is_critical == 1 ){
@@ -119,6 +127,7 @@ class OutputindicatorController extends Controller
                         $is_critical = 'No';
                         $criticBtnText = "Mark Critical";
                     }
+
                     foreach ($roles as $role) {
                             if($role =='super-admin'){
                                 $actionBtn .= '<a class="btn btn-sm btn-primary markCritical" data-id="'.$indicator->id .'">
@@ -146,11 +155,12 @@ class OutputindicatorController extends Controller
                             $sum1_new = ($sum1_new * 100).'%';
                         }
                     }
+                    $status=isset($status->name)?$status->name:'';
             array_push($result, [
                     $indicator->id,
                     $indicator->name,
                     $unitname,
-                    $status->name,
+                    $status,
                     $is_critical,
                     $sum2_new,
                     $sum1_new,

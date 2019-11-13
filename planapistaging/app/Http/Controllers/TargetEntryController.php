@@ -402,6 +402,7 @@ class TargetEntryController extends Controller
             $reader->ignoreEmpty();
             $reader->noHeading();
             $results = $reader->get();
+
             foreach($results as $sheet){
             // }
             // $reader->each(function($sheet){
@@ -410,6 +411,7 @@ class TargetEntryController extends Controller
             		$targ_data = explode('-', $sheet[0]);
             		if($targ_data[0] == 'output'){
 						$target = Outputtarget::find($targ_data[1]);
+						//print_r($target);die();
 						if(!empty($sheet[4])){
 							$remark = $sheet[4];
 						}
@@ -437,7 +439,7 @@ class TargetEntryController extends Controller
 						}
 						if(!empty($sheet[3])){
 							$achieveValue = $sheet[3];
-							$achievement = $target->achievements()->create([
+							$achievement = $target->outcomeAchievements()->create([
 							  	'description' => $achieveValue,
 							  	'start_date' => $start_dates,
 							  	'end_date' => $end_dates,

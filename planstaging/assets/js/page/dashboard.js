@@ -335,6 +335,8 @@ $.ajax({
 		];
 		drawPieChartNew('myPieChart2', data);
 		drawBarChart('myChart2', data, 100);
+		drawPolarChart('myPolarChart2', data);
+		drawDonutChart('myDoughnutChart2', data);
 
 	},
 	error:function (error) {
@@ -449,14 +451,14 @@ $.ajax({
 		    labels: [
 		        'On track ('+result.ontrack+')',
 		        'Off track ('+result.offtrack+')',
-		        'Not  Respondent ('+result.inProgess+')',
+		        'Not  Reported ('+result.inProgess+')',
 		        'Not Available ('+result.na+')'
 		    ]
 		};
 		var data = [
 			{ label: "On track", y: result.ontrack, color: "#37942c" },
 			{ label: "Off track", y: result.offtrack, color: '#b70000' },
-			{ label: "Not  Respondent", y: result.inProgess, color: '#999999' },
+			{ label: "Not  Reported", y: result.inProgess, color: '#999999' },
 			{ label: "Not Available", y: result.na, color: '#ffff00' }
 		];
 		drawPieChartNew('myPieChart', data);
@@ -491,7 +493,7 @@ $.ajax({
 				data: [result.offtrack]
 			},
 			{
-				label: 'Not Applicable ('+result.inProgess+')',
+				label: 'Not Available ('+result.inProgess+')',
 				backgroundColor: '#FFFF00',
 				stack: 'Stack 4',
 				data: [result.inProgess]
@@ -626,8 +628,8 @@ $.ajax({
 				var data = [
 					{ label: "On track", y: result.xontrack[sector.id], color: "#5cb85c" },
 					{ label: "Off track", y: result.xofftrack[sector.id], color: '#b70000' },
-					{ label: "NA", y: result.xinprogress[sector.id], color: '#FFFF00' },
-					{ label: "NR", y: result.xtotalNa[sector.id], color: '#999' }
+					{ label: "NA", y: result.xtotalNa[sector.id], color: '#FFFF00' },
+					{ label: "NR", y: result.xinprogress[sector.id], color: '#999' }
 				];
 				if(!isNaN(sector.id)){
 					drawPieChartNew('chartCan_'+sector.id, data);
@@ -681,7 +683,7 @@ $.ajax({
 				var data = [
 					{ label: "On track", y: result.ontrack, color: "#5cb85c" },
 					{ label: "Off track", y: result.offtrack, color: '#b70000' },
-					{ label: "Not Applicable", y: result.inProgess, color: '#FFFF00' },
+					{ label: "Not Available", y: result.inProgess, color: '#FFFF00' },
 					{ label: "Not Reported", y: result.na, color: '#999' }
 				];
 				drawPieChartNew('myPieChart5', data);
@@ -715,7 +717,7 @@ $.ajax({
 						data: [result.offtrack]
 					},
 					{
-						label: 'Not Applicable',
+						label: 'Not Available',
 						backgroundColor: '#FFFF00',
 						stack: 'Stack 4',
 						data: [result.inProgess]
@@ -800,7 +802,7 @@ $.ajax({
 						data: offtrack
 					},
 					{
-						label: 'Not Applicable',
+						label: 'Not Available',
 						backgroundColor: '#FFFF00',
 						stack: 'Stack 0',
 						data: inprogress
@@ -851,7 +853,7 @@ $.ajax({
 						    labels: [
 						        'On track',
 						        'Off track',
-						        'Not Applicable',
+						        'Not Available',
 						        'Not Reported'
 						    ]
 						};
@@ -859,7 +861,7 @@ $.ajax({
 						var data = [
 							{ label: "On track", y: result.xontrack[sector.id], color: "#5cb85c" },
 							{ label: "Off track", y: result.xofftrack[sector.id], color: '#b70000' },
-							{ label: "Not Applicable", y: result.xinprogress[sector.id], color: '#FFFF00' },
+							{ label: "Not Available", y: result.xinprogress[sector.id], color: '#FFFF00' },
 							{ label: "Not Reported", y: result.xtotalNa[sector.id], color: '#999' }
 						];
 							drawPieChartNew('chartCan5_'+sector.id, data);

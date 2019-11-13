@@ -456,7 +456,7 @@ class EvaluationCriteriaController extends Controller
             $cummulativeAchieve = 0;
             if(isset($achivements) && count($achivements)>0){
                 foreach ($achivements as $achievementItem) {
-                  if($achievementItem->description!='NA' || $achievementItem->description!='NR'){
+                  if(!in_array($achievementItem->description, array('NA','NR','NIL'))){
                       $desc =$achievementItem->description;
                 
                       $descNew = str_replace("%", "",$desc );

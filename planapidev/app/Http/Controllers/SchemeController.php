@@ -552,7 +552,7 @@ class SchemeController extends Controller
                             }
 
                             if($indName != null && $indName != ''){
-                                if($oneEntry[6] == 'NA' || $oneEntry[6] == 'na'){
+                                if($oneEntry[6] == 'NA' || $oneEntry[6] == 'na' || $oneEntry[6] == 'NIL'){
                                   // || $oneEntry[6] == 'NIL'
                                       $status = 1;
                                       //continue;
@@ -603,7 +603,7 @@ class SchemeController extends Controller
                                 }
                             }
                             if($outcomeIndName != null && $outcomeIndName != ''){
-                                if($oneEntry[11] == 'NA' || $oneEntry[11] == 'na'){
+                                if($oneEntry[11] == 'NA' || $oneEntry[11] == 'na' || $oneEntry[11] == 'NIL'){
                                     $status = 1;
                                     //continue;
                                 }

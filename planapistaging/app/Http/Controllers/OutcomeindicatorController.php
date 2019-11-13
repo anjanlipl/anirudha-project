@@ -155,13 +155,13 @@ class OutcomeindicatorController extends Controller
                             $sum3_new = ($sum3_new * 100).'%';
                         }
                     }
-
+                    $status=isset($status->name)?$status->name:'';
             array_push($result, [
                     $outcomeIndicator->id,
                     $outcomeIndicator->name,
                     $outname,
                     $unitname,
-                    $status->name,
+                    $status,
                     $is_critical,
                     $sum3_new,
                     $sum_new,

@@ -54,6 +54,7 @@ $(document).ready(function(){
 		data: {'output_id': output_id},
 		type: 'GET',
 		success: function(result){
+			console.log(result);
 			$('#outputIndTab').DataTable({
 				data: result.indicators,
 				"columnDefs": [

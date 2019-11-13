@@ -138,27 +138,35 @@ class EstablishmentController extends Controller
     
      public function getChartDataEstablishment(Request $request){
         $department = Department::all();
-        
+        $finYear = $request->input('finYear');
             $totalBe = 0;
             $totalRe = 0;
             $totalExp = 0;
             $year_exp = array();
-
-          $current_month = date('m');
+          $finyearnew=explode('-',$finYear);//2018-19/2019-20
+          $current_month_exp =0;
+          $current_year=$finyearnew[0];
+          $est_end_year=$finyearnew[0]+1;
+          
+         /* $current_month = date('m');
             $current_year = date('Y');
-            $current_month_exp =0;
+            
          if($current_month <4){
             $est_end_year = date('Y');
             $current_year = date('Y', strtotime('-1 year'));
          }else{
             $est_end_year = date('Y', strtotime('+1 year'));
-         }
+         }*/
         foreach ($department as $dept) {
             $xtotalRe = 0;
             $xtotalBe = 0;
             $xtotalExp = 0;
+
             $estab = $dept->establishmentExpenditure()->get();
+            //$estab = $dept->establishment()->get();
+            
             foreach ($estab as $estabishment) {
+              //print_r($estabishment);
             $be = $estabishment->establishmentBe()->get();
             $re = $estabishment->establishmentRe()->get();
             $exp = $estabishment->establishmentExp()->get();
@@ -189,7 +197,8 @@ class EstablishmentController extends Controller
                     if($concerned_month < 4){
                             if($concerned_year == $est_end_year){
                             $xtotalExp = $value->sal + $value->benefits + $value->wages + $value->machinery + $value->office_exp ;
-                        }
+
+                            }
                     }else{
                            if($concerned_year == $current_year ){
                             $xtotalExp = $value->sal + $value->benefits + $value->wages + $value->machinery + $value->office_exp ;
@@ -203,7 +212,7 @@ class EstablishmentController extends Controller
              $totalBe +=  $xtotalBe;
              $totalRe +=  $xtotalRe;
              $totalExp +=  $xtotalExp;
-
+             //echo $totalExp;
            
             }
         }
@@ -234,29 +243,33 @@ class EstablishmentController extends Controller
                 }
 
                 $expenditures = $scheme->expenditures()->get();
+                //print_r($expenditures);
                 foreach ($expenditures as $exp) {
+
                     $year_exp =  explode('-',$exp->exp_year);
-                    // print_r($year_exp);
+                     
                     $concerned_year = $year_exp[1];
                     $concerned_month =  $year_exp[0];
-                    if($current_year == $concerned_year){
-                        $totalSchemeExp += $exp->revenue + $exp->capital + $exp->loan;
-                        if($concerned_month < 4){
+                    //**if($current_year == $concerned_year){
+                        //$totalSchemeExp += $exp->revenue + $exp->capital + $exp->loan;
+                        if($concerned_month < 4){//print_r($exp);
                             if($concerned_year == $est_end_year){
-                            $xtotalExp = $exp->sal + $exp->benefits + $exp->wages + $exp->machinery + $exp->office_exp ;
+                            //$xtotalExp = $exp->sal + $exp->benefits + $exp->wages + $exp->machinery + $exp->office_exp ;
+                              $totalSchemeExp += $exp->revenue + $exp->capital + $exp->loan;
                             }
                         }else{
                                    if($concerned_year == $current_year ){
-                                    $xtotalExp = $exp->sal + $exp->benefits + $exp->wages + $exp->machinery + $exp->office_exp ;
-                                }
+                                    //$xtotalExp = $exp->sal + $exp->benefits + $exp->wages + $exp->machinery + $exp->office_exp ;
+                                    $totalSchemeExp += $exp->revenue + $exp->capital + $exp->loan;
+                              }
                         }
-                    }
+                   //** }
                      
                 }
                 }
             
         }
-
+        
         return response()->json(['current_year'=>$est_end_year,'current_month_exp'=>$current_month_exp,'totalExp'=>$totalExp,'totalBe'=>$totalBe,'totalestablishRe'=>$totalRe,'totalSchemeExp'=>$totalSchemeExp,'totalSchmeEst'=>$totalScehmeEst,'year_exp'=>$year_exp]);
         
         
@@ -265,9 +278,17 @@ class EstablishmentController extends Controller
       public function getChartDataDepartEstablishment(Request $request){
         $dept_id = $request->input('dept_id');
         $department = Department::find($dept_id);
-
-        
+        $finYear = $request->input('finYear');
             $totalBe = 0;
+            $totalRe = 0;
+            $totalExp = 0;
+            $year_exp = array();
+          $finyearnew=explode('-',$finYear);//2018-19/2019-20
+          $current_month_exp =0;
+          $current_year=$finyearnew[0];
+          $est_end_year=$finyearnew[0]+1;
+        
+          /*  $totalBe = 0;
             $totalRe = 0;
             $totalExp = 0;
 
@@ -279,12 +300,13 @@ class EstablishmentController extends Controller
             $current_year = date('Y', strtotime('-1 year'));
          }else{
             $est_end_year = date('Y', strtotime('+1 year'));
-         }
+         }*/
         
             $xtotalRe = 0;
             $xtotalBe = 0;
             $xtotalExp = 0;
             $estab = $department->establishmentExpenditure()->get();
+            //print_r($estab);
             foreach ($estab as $estabishment) {
             $be = $estabishment->establishmentBe()->get();
             $re = $estabishment->establishmentRe()->get();
@@ -308,13 +330,25 @@ class EstablishmentController extends Controller
              if(isset($exp) && count($exp)>0){
                  foreach ($exp as $value) {
                     $year_exp =  explode('-',$value->exp_year);
-                 if($year_exp == $est_end_year){
+                    $concerned_year = $year_exp[1];
+                    $concerned_month =  $year_exp[0];
+                    if($concerned_month < 4){
+                            if($concerned_year == $est_end_year){
+                            $xtotalExp = $value->sal + $value->benefits + $value->wages + $value->machinery + $value->office_exp ;
+
+                            }
+                    }else{
+                           if($concerned_year == $current_year ){
+                            $xtotalExp = $value->sal + $value->benefits + $value->wages + $value->machinery + $value->office_exp ;
+                        }
+                    }
+                /* if($year_exp == $est_end_year){
                     $xtotalExp = $value->sal + $value->benefits + $value->wages + $value->machinery + $value->office_exp ;
-                 }
+                 }*/
                 }
              }
 
-
+             //echo $xtotalExp;
              $totalBe +=  $xtotalBe;
              $totalRe +=  $xtotalRe;
              $totalExp +=  $xtotalExp;
@@ -361,18 +395,20 @@ class EstablishmentController extends Controller
                     // print_r($year_exp);
                     $concerned_year = $year_exp[1];
                     $concerned_month =  $year_exp[0];
-                    if($current_year == $concerned_year){
+                    //** if($current_year == $concerned_year){
                         $totalSchemeExp += $exp->revenue + $exp->capital + $exp->loan;
                         if($concerned_month < 4){
                             if($concerned_year == $est_end_year){
-                            $xtotalExp = $value->sal + $value->benefits + $value->wages + $value->machinery + $value->office_exp ;
+                              $totalSchemeExp += $exp->revenue + $exp->capital + $exp->loan;
+                            //$xtotalExp = $value->sal + $value->benefits + $value->wages + $value->machinery + $value->office_exp ;
                             }
                         }else{
                                    if($concerned_year == $current_year ){
-                                    $xtotalExp = $value->sal + $value->benefits + $value->wages + $value->machinery + $value->office_exp ;
+                                    $totalSchemeExp += $exp->revenue + $exp->capital + $exp->loan;
+                                    //$xtotalExp = $value->sal + $value->benefits + $value->wages + $value->machinery + $value->office_exp ;
                                 }
                         }
-                    }
+                    //** }
                      
                 }
                 }

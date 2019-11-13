@@ -189,6 +189,7 @@ class DashboardController extends Controller
 		}else{
 			$est_end_year = date('Y', strtotime('+1 year'));
 		}
+		//echo $est_end_year.'##'.$current_year;
 		$totalEst = 0;
 		$totalExp =0;
 		$current_month_exp_new=0;
@@ -230,18 +231,18 @@ class DashboardController extends Controller
 		 }
 
 		 $expenditures = $scheme->expenditures()->get();
-		 
-		 if(isset($expenditures) && count($expenditures)>1){
+			//echo count($expenditures);
+		 if(isset($expenditures) && count($expenditures)>0){
 		 	//print_r($expenditures);
 		 	foreach ($expenditures as $exp) {
 			 	//print_r($exp);
 			 	$exp_date = date('Y-m', strtotime($exp->exp_year));
 				$year_exp =  explode('-',$exp->exp_year);
 
-						// print_r($year_exp);
+				// print_r($year_exp);
 				$concerned_year = $year_exp[1];
 				$concerned_month =  $year_exp[0];
-				//echo $concerned_year;die();
+				//echo $concerned_month;die();
 				if((int)date('m') < 4){
 
 					if(((int)$concerned_month > 3 && (int)$concerned_year == date('Y', strtotime('-1 years'))) || ((int)$concerned_month < 4 && (int)$concerned_year == date('Y'))) {
@@ -650,11 +651,13 @@ public function getDeptFinancials(Request $request)
 		$est_end_year = date('Y', strtotime('+1 year'));
 
 	}
+
 	$totalEst = 0;
 	$totalExp =0;
 	foreach ($schemes as $scheme) {
 	   
 		$estimate =$scheme->estimates()->where('end_date',$est_end_year)->first();
+		//print_r($estimate);
 		if(isset($estimate)){
 			$revisedEstimate = $estimate->revisedEstimates()->get();
 			if(count($revisedEstimate)){

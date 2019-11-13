@@ -654,6 +654,7 @@ return response()->json(['schemes'=>$allSchemes,'current_year'=>$current_year,'c
 }
 public function getDeptFinancials(Request $request)
 {
+
 	$dept_id = $request->input('dept_id');
 	$department =  Department::find($dept_id) ;
 	$units = $department->units()->get();
@@ -674,7 +675,6 @@ public function getDeptFinancials(Request $request)
 	$totalEst = 0;
 	$totalExp =0;
 	foreach ($schemes as $scheme) {
-	   
 		$estimate =$scheme->estimates()->where('end_date',$est_end_year)->first();
 		if(isset($estimate)){
 			$revisedEstimate = $estimate->revisedEstimates()->get();
@@ -692,6 +692,7 @@ public function getDeptFinancials(Request $request)
 	 }
 
 	 $expenditures = $scheme->expenditures()->get();
+	//dd($expenditures);
 	 foreach ($expenditures as $exp) {
 		$year_exp =  explode('-',$exp->exp_year);
 		$concerned_year = $year_exp[1];
@@ -707,9 +708,9 @@ public function getDeptFinancials(Request $request)
 		else{
 			if(($concerned_month > 3 && $concerned_year == date('Y')) || ($concerned_month < 4 && $concerned_year == date('Y', strtotime('+1 years')))) {
 				$totalExp += $exp->revenue + $exp->capital + $exp->loan;
-				if($current_month ==$concerned_month ){
+				//if($current_month ==$concerned_month ){
 					$current_month_exp = $exp->revenue + $exp->capital + $exp->loan;
-				}
+				//}
 			}
 		}
 		// if($current_year == $concerned_year){
@@ -723,6 +724,8 @@ public function getDeptFinancials(Request $request)
 }
 
 }
+//echo $current_month_exp;
+//die();
 return response()->json(['deptName'=> $department->name,'current_year'=>$current_year,'current_month_exp'=>$current_month_exp/100,'totalExp'=>$totalExp/100,'totalEst'=>$totalEst/100]);
 }
 public function getSectorFinancials(Request $request)

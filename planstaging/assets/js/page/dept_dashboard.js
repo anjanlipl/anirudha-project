@@ -213,6 +213,7 @@ $(document).ready(function(){
 				]
 
 			};
+			//alert(barChartData);
 			drawBarChart('myChart2', barChartData, 100000);
 		}
 	});
@@ -224,7 +225,7 @@ $(document).ready(function(){
 			'Authorization': 'Bearer ' + localStorage.token
 		},
 		type: 'get',
-		data:{'dept_id':dept_id},
+		data:{'dept_id':dept_id,'finYear': window.localStorage.finYear},
 		success: function(result){
 			data = {
 			    datasets: [{
@@ -258,7 +259,7 @@ $(document).ready(function(){
 			'Accept': 'application/json',
 			'Authorization': 'Bearer ' + localStorage.token
 		},
-		data:{'dept_id':dept_id},
+		data:{'dept_id':dept_id,'finYear': window.localStorage.finYear},
 		type: 'get',
 		success: function(result){
 			console.log(result);
@@ -314,7 +315,8 @@ $(document).ready(function(){
 	    $.ajax({async: true,
 	      url: siteUrl + '/api/getCustomSchemeDetails',
 	      data: {
-	        'scheme_id': scheme_id
+	        'scheme_id': scheme_id,
+	        'finYear': window.localStorage.finYear
 	      },
 	      headers: {
 	        'Accept': 'application/json',
@@ -334,7 +336,7 @@ $(document).ready(function(){
 				'Accept': 'application/json',
 				'Authorization': 'Bearer ' + localStorage.token
 			},
-			data:{'dept_id':dept_id},
+			data:{'dept_id':dept_id,'finYear': window.localStorage.finYear},
 			type: 'get',
 			success: function(result){
 				console.log(result);
@@ -379,7 +381,7 @@ $(document).ready(function(){
 			'Accept': 'application/json',
 			'Authorization': 'Bearer ' + localStorage.token
 		},
-		data:{'dept_id':dept_id},
+		data:{'dept_id':dept_id,'finYear': window.localStorage.finYear},
 		type: 'get',
 		success: function(result){
 			console.log(result);
@@ -534,7 +536,7 @@ $(document).ready(function(){
 			'Accept': 'application/json',
 			'Authorization': 'Bearer ' + localStorage.token
 		},
-		data:{'dept_id':dept_id},
+		data:{'dept_id':dept_id,'finYear': window.localStorage.finYear},
 		type: 'get',
 		success: function(result){
 			console.log(result);
@@ -713,11 +715,11 @@ function drawBarChart(target, barChartData, yGap){
 	                    color: "#AAA",
 	                    borderDash: [2,2],
 	                },
-			      	ticks: {
-			        	stepSize: yGap,
-			        	beginAtZero: true,
-      					padding: 25,
-			      	},
+			      	// ticks: {
+			       //  	stepSize: yGap,
+			       //  	beginAtZero: true,
+      				// 	padding: 25,
+			      	// },
 		            scaleLabel: {
 				        display: true,
 				        fontSize: 12,

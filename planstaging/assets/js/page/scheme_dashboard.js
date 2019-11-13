@@ -130,7 +130,7 @@ $.ajax({async: true,
 		'Accept': 'application/json',
 		'Authorization': 'Bearer ' + localStorage.token
 	},
-	data:{'scheme_id':scheme_id},
+	data:{'scheme_id':scheme_id,'finYear': window.localStorage.finYear},
 	type: 'get',
 	success: function(result){
 		console.log(result);
@@ -184,7 +184,7 @@ $.ajax({async: true,
 			]
 
 		};
-		drawBarChart('myChart2', barChartData, 100000);
+		drawBarChart('myChart2', barChartData);//, 100000
 	}
 });
 
